@@ -1,3 +1,4 @@
+import { Nav } from "@/features/portfolio/components";
 import { getAllProjectsMeta } from "@/features/portfolio/utils/projects";
 import { getExperience } from "@/features/portfolio/utils/experience";
 
@@ -12,9 +13,19 @@ export default async function Home({ params }: HomeProps) {
 
   return (
     <main id="top">
-      <p style={{ padding: 40 }}>
-        {projects.length} projects, {experience.length} experience entries loaded for locale &quot;{locale}&quot;.
-      </p>
+      <Nav />
+      <section id="about" style={{ height: "60vh" }}>
+        <p>About ({projects.length} projects, {experience.length} experience)</p>
+      </section>
+      <section id="projects" style={{ height: "60vh" }}>
+        <p>Projects</p>
+      </section>
+      <section id="experience" style={{ height: "60vh" }}>
+        <p>Experience</p>
+      </section>
+      <section id="contact" style={{ height: "60vh" }}>
+        <p>Contact</p>
+      </section>
     </main>
   );
 }
