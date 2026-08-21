@@ -2,13 +2,14 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the bilingual (EN/VI), light/dark, animated Next.js portfolio site described in the design spec — a single scrolling home page plus per-project case-study pages — matching the finalized HTML prototype pixel-for-pixel.
+**Goal:** Build the bilingual (EN/VI), light/dark, animated Next.js portfolio site described in the design spec — a single scrolling home page plus per-project case-study pages — matching the finalized HTML prototype pixel-for-pixel, and following this repo's `CLAUDE.md` coding conventions.
 
-**Architecture:** Next.js App Router with all routes under `src/app/[locale]/`, localized via `next-intl` middleware (default `en`, `/vi` secondary). Content is file-based: project case studies as bilingual MDX with frontmatter (parsed with `gray-matter`, rendered with `next-mdx-remote/rsc`), experience entries as bilingual JSON, everything else as UI strings in `next-intl` message files. The prototype's hand-written CSS (custom properties for theming, keyframe animations for the background/marquee/card hover, `clamp()` type scale) is ported almost verbatim into `globals.css` — it's already theme-aware and accessible, and re-deriving it as Tailwind utility soup would just be slower and risk drifting from the approved design. Tailwind v4 supplies the reset layer and is available for any incidental utility use, but is not the primary styling mechanism for this design.
+**Architecture:** Next.js App Router with all routes under `src/app/[locale]/`, localized via `next-intl` middleware (default `en`, `/vi` secondary). Route files (`page.tsx`) stay thin — they unwrap `params` and render one component from `src/features/portfolio/pages/`, per `.claude/skills/nextjs-app-router/SKILL.md`; all real UI lives in the `portfolio` feature (this project has exactly one feature, so almost everything is feature-scoped — see `CLAUDE.md`'s Project Structure section). Content is file-based: project case studies as bilingual MDX with frontmatter (parsed with `gray-matter`, rendered with `next-mdx-remote/rsc`), experience entries as bilingual JSON, everything else as UI strings in `next-intl` message files. The prototype's hand-written CSS (custom properties for theming, keyframe animations for the background/marquee/card hover, `clamp()` type scale) is ported almost verbatim into `globals.css` — it's already theme-aware and accessible, and re-deriving it as Tailwind utility soup would just be slower and risk drifting from the approved design. Tailwind v4 supplies the reset layer and is available for any incidental utility use, but is not the primary styling mechanism for this design.
 
-**Tech Stack:** Next.js 15 (App Router, TypeScript) · Tailwind CSS v4 · next-intl · next-themes · Framer Motion · gray-matter + next-mdx-remote/rsc
+**Tech Stack:** Next.js 15 (App Router, TypeScript) · Tailwind CSS v4 · next-intl · next-themes · Framer Motion · gray-matter + next-mdx-remote/rsc · clsx (for `cn()`)
 
 **Spec:** `docs/superpowers/specs/2026-08-21-portfolio-design.md`
+**Project rules:** `CLAUDE.md` (this repo's coding conventions — feature-based structure, kebab-case, interface-over-type, `cn()`, raw `<button>`, custom icons, `next-intl` `Link`)
 
 ## Global Constraints
 
@@ -22,12 +23,26 @@
   `C:\Users\yuhah202\AppData\Local\Temp\claude\D--Code-Project-Portfolio\14426542-b76c-4dfc-a59a-058f3daea4e4\scratchpad\portfolio-prototype.html`
   (also published at https://claude.ai/code/artifact/79876efc-599a-4204-b02c-4e6cfb7bf516). Every task below carries forward its exact CSS values, class names, and animation timings unless the task says otherwise.
 - Placeholder content (name "Alex Tran", the three example projects, the three example experience entries) is carried over from the approved prototype as real, structurally-complete sample content — not lorem ipsum. The user replaces it with their real bio/projects/experience later by editing the data files; no task should leave a field empty or a "TODO" in content.
+- **Coding conventions (from `CLAUDE.md`, binding on every task):**
+  - Feature-based structure: all portfolio UI/logic lives under `src/features/portfolio/{pages,components,hooks,utils,constants,types,content}`. Only routing infra (`src/app`, `src/i18n`, `src/messages`, `src/middleware.ts`) and the two genuinely-shared utilities (`src/components/icons/`, `src/utils/cn.ts`) live outside it.
+  - Filenames: kebab-case for every `.ts`/`.tsx` file.
+  - Object-shape types are `interface`, never `type X = {...}`.
+  - Component props are typed via a declared `interface <ComponentName>Props`, never inline in the function signature.
+  - Conditional class names go through `cn()` from `@/utils/cn` — never a raw ternary joined into a template string.
+  - Buttons are raw `<button>` with the design's existing CSS classes (`.btn`, `.chip-btn`, ...) — no shared `Button` component.
+  - Icons are named components under `src/components/icons/` (`IconSun`, `IconMoon`) — never an inline `<svg>` elsewhere in a `.tsx` file.
+  - Internal navigation uses `Link` from `@/i18n/navigation`. Plain `<a>` stays only for same-page hash anchors (`#about`, `#top`, ...) and truly external URLs (`mailto:`, `github.com`, `linkedin.com`, `facebook.com`, `target="_blank"`).
+  - A `components/`, `hooks/`, or `utils/` folder gets an `index.ts` barrel (named re-exports only, never `export *`) once it holds 3+ files.
+  - Blank line between logic and `return` in every function that has logic above it.
 
 ---
 
 ## File Structure
 
 ```
+CLAUDE.md
+audit-rules.sh
+.claude/skills/nextjs-app-router/SKILL.md
 package.json
 next.config.ts
 tsconfig.json
@@ -44,50 +59,58 @@ src/
     en.json
     vi.json
   app/
+    globals.css
     [locale]/
       layout.tsx
       page.tsx
       projects/
         [slug]/
           page.tsx
-    globals.css
   components/
-    theme/
-      ThemeProvider.tsx
-      ThemeToggle.tsx
-    background/
-      AnimatedBackground.tsx
-    motion/
-      Reveal.tsx
-    nav/
-      Nav.tsx
-      LocaleSwitcher.tsx
-      useScrollSpy.ts
-    sections/
-      Hero.tsx
-      About.tsx
-      TechStack.tsx
-      FocusMarquee.tsx
-      Projects.tsx
-      ProjectCard.tsx
-      Experience.tsx
-      Contact.tsx
-    Footer.tsx
-  data/
-    techStack.ts
-    keywords.ts
-  content/
-    projects/
-      en/{realtime-order-dashboard,api-mock-cli,ecommerce-migration}.mdx
-      vi/{realtime-order-dashboard,api-mock-cli,ecommerce-migration}.mdx
-    experience/
-      en.json
-      vi.json
-  lib/
-    projects.ts
-    experience.ts
-  types/
-    content.ts
+    icons/
+      icon-sun.tsx
+      icon-moon.tsx
+  utils/
+    cn.ts
+  features/
+    portfolio/
+      pages/
+        home-page.tsx
+        project-case-study-page.tsx
+      components/
+        index.ts
+        theme-provider.tsx
+        theme-toggle.tsx
+        animated-background.tsx
+        reveal.tsx
+        nav.tsx
+        locale-switcher.tsx
+        hero.tsx
+        about.tsx
+        tech-stack.tsx
+        focus-marquee.tsx
+        projects.tsx
+        project-card.tsx
+        experience.tsx
+        contact.tsx
+        footer.tsx
+      hooks/
+        use-scroll-spy.ts
+      utils/
+        projects.ts
+        experience.ts
+      constants/
+        tech-stack.ts
+        keywords.ts
+      types/
+        content.ts
+      content/
+        projects/
+          en/{realtime-order-dashboard,api-mock-cli,ecommerce-migration}.mdx
+          vi/{realtime-order-dashboard,api-mock-cli,ecommerce-migration}.mdx
+        experience/
+          en.json
+          vi.json
 ```
 
 ---
@@ -129,7 +152,8 @@ src/
     "next-themes": "^0.4.4",
     "framer-motion": "^11.15.0",
     "gray-matter": "^4.0.3",
-    "next-mdx-remote": "^5.0.0"
+    "next-mdx-remote": "^5.0.0",
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
     "typescript": "^5.7.2",
@@ -237,7 +261,11 @@ body {
 import "./globals.css";
 import type { ReactNode } from "react";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>{children}</body>
@@ -279,7 +307,7 @@ git commit -m "chore: scaffold Next.js + TypeScript + Tailwind v4 project"
 - Modify: `src/app/globals.css`
 
 **Interfaces:**
-- Produces: CSS custom properties (`--bg`, `--bg-raised`, `--bg-raised-2`, `--fg`, `--fg-muted`, `--line`, `--accent`, `--accent-2`, `--blob-1..4`, `--blob-opacity`, `--blob-blend`, `--shadow`, `--radius`, `--mono`, `--sans`) and shared base classes (`.shell`, `.eyebrow`, `.lede`, `.btn`, `.btn-primary`, `.btn-ghost`, `.pill`) that every later component/section task consumes by class name.
+- Produces: CSS custom properties (`--bg`, `--bg-raised`, `--bg-raised-2`, `--fg`, `--fg-muted`, `--line`, `--accent`, `--accent-2`, `--blob-1..4`, `--blob-opacity`, `--blob-blend`, `--shadow`, `--radius`, `--mono`, `--sans`) and shared base classes (`.shell`, `.eyebrow`, `.lede`, `.btn`, `.btn-primary`, `.btn-ghost`, `.pill`) that every later component/section task consumes by class name. (These CSS custom properties are the project's design tokens per `CLAUDE.md`'s accessibility section — component code reads them via `var(--...)`, never a hardcoded hex value.)
 
 - [ ] **Step 1: Replace `src/app/globals.css` with the full token set and base rules**
 
@@ -755,18 +783,18 @@ export const metadata: Metadata = {
   description: "Full-stack engineer building fast, quiet software.",
 };
 
+interface LocaleLayoutProps {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
+
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -830,31 +858,28 @@ git commit -m "feat: add next-intl locale routing"
 
 ---
 
-### Task 4: Theme system
+### Task 4: Shared `cn()` helper and theme system
 
 **Files:**
-- Create: `src/components/theme/ThemeProvider.tsx`
-- Create: `src/components/theme/ThemeToggle.tsx`
+- Create: `src/utils/cn.ts`
+- Create: `src/features/portfolio/components/theme-provider.tsx`
+- Create: `src/features/portfolio/components/theme-toggle.tsx`
+- Create: `src/components/icons/icon-sun.tsx`
+- Create: `src/components/icons/icon-moon.tsx`
+- Create: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/[locale]/layout.tsx`
 
 **Interfaces:**
 - Consumes: `.chip-btn`, `.chip-btn:focus-visible` from Task 2 globals.
-- Produces: `<ThemeProvider>` (wraps children, sets `data-theme` on `<html>`); `<ThemeToggle />` (self-contained button, no props) — both imported by the Nav component in Task 8.
+- Produces: `cn(...classes: Array<string | false | null | undefined>): string` from `@/utils/cn` — the shared styling helper every later conditional-className task uses. `<ThemeProvider>` (wraps children, sets `data-theme` on `<html>`); `<ThemeToggle />` (self-contained button, no props) — both re-exported from `@/features/portfolio/components` and imported by the Nav component in Task 8. `IconSun`, `IconMoon` from `@/components/icons/icon-sun` / `icon-moon` (`ComponentProps<"svg">` props, per `CLAUDE.md`'s icon convention).
 
-- [ ] **Step 1: Create `src/components/theme/ThemeProvider.tsx`**
+- [ ] **Step 1: Create `src/utils/cn.ts`**
 
-```tsx
-"use client";
+```ts
+import clsx, { type ClassValue } from "clsx";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import type { ReactNode } from "react";
-
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  return (
-    <NextThemesProvider attribute="data-theme" defaultTheme="system" enableSystem>
-      {children}
-    </NextThemesProvider>
-  );
+export function cn(...inputs: ClassValue[]): string {
+  return clsx(inputs);
 }
 ```
 
@@ -867,43 +892,84 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 }
 ```
 
-- [ ] **Step 3: Create `src/components/theme/ThemeToggle.tsx`**
+- [ ] **Step 3: Create `src/components/icons/icon-sun.tsx`**
+
+```tsx
+import type { ComponentProps } from "react";
+
+export function IconSun(props: ComponentProps<"svg">) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} {...props}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </svg>
+  );
+}
+```
+
+- [ ] **Step 4: Create `src/components/icons/icon-moon.tsx`**
+
+```tsx
+import type { ComponentProps } from "react";
+
+export function IconMoon(props: ComponentProps<"svg">) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} {...props}>
+      <path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z" />
+    </svg>
+  );
+}
+```
+
+- [ ] **Step 5: Create `src/features/portfolio/components/theme-provider.tsx`**
+
+```tsx
+"use client";
+
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import type { ReactNode } from "react";
+
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  return (
+    <NextThemesProvider attribute="data-theme" defaultTheme="system" enableSystem>
+      {children}
+    </NextThemesProvider>
+  );
+}
+```
+
+- [ ] **Step 6: Create `src/features/portfolio/components/theme-toggle.tsx`**
 
 ```tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { IconSun } from "@/components/icons/icon-sun";
+import { IconMoon } from "@/components/icons/icon-moon";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setIsMounted(true);
   }, []);
 
-  const isDark = mounted && resolvedTheme === "dark";
+  const isDark = isMounted && resolvedTheme === "dark";
+
+  function handleToggleTheme() {
+    setTheme(isDark ? "light" : "dark");
+  }
 
   return (
-    <button
-      type="button"
-      className="chip-btn"
-      aria-pressed={isDark}
-      aria-label="Toggle dark mode"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-    >
-      {mounted ? (
-        isDark ? (
-          <svg className="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z" />
-          </svg>
-        ) : (
-          <svg className="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-          </svg>
-        )
+    <button type="button" className="chip-btn" aria-pressed={isDark} aria-label="Toggle dark mode" onClick={handleToggleTheme}>
+      {isMounted ? (
+        isDark ? <IconMoon className="theme-icon" /> : <IconSun className="theme-icon" />
       ) : (
         <span className="theme-icon" aria-hidden="true" />
       )}
@@ -912,14 +978,23 @@ export function ThemeToggle() {
 }
 ```
 
-(The `mounted` guard avoids a server/client markup mismatch, since the resolved theme is only known in the browser.)
+(The `isMounted` guard avoids a server/client markup mismatch, since the resolved theme is only known in the browser.)
 
-- [ ] **Step 4: Wire `ThemeProvider` into the locale layout**
+- [ ] **Step 7: Create `src/features/portfolio/components/index.ts`**
+
+```ts
+export { ThemeProvider } from "./theme-provider";
+export { ThemeToggle } from "./theme-toggle";
+```
+
+(This barrel gains one line per component in every task from here on — Tasks 5, 7, 8, 9, 10, 11, 12, 14, 15.)
+
+- [ ] **Step 8: Wire `ThemeProvider` into the locale layout**
 
 In `src/app/[locale]/layout.tsx`, import and wrap:
 
 ```tsx
-import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { ThemeProvider } from "@/features/portfolio/components";
 ```
 
 Change the body contents to:
@@ -934,12 +1009,12 @@ Change the body contents to:
 </body>
 ```
 
-- [ ] **Step 5: Temporarily render `<ThemeToggle />` on the placeholder home page to verify it**
+- [ ] **Step 9: Temporarily render `<ThemeToggle />` on the placeholder home page to verify it**
 
 In `src/app/[locale]/page.tsx`, add the import and render it under the existing text:
 
 ```tsx
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { ThemeToggle } from "@/features/portfolio/components";
 
 export default function Home() {
   return (
@@ -953,20 +1028,20 @@ export default function Home() {
 }
 ```
 
-- [ ] **Step 6: Verify theme toggling**
+- [ ] **Step 10: Verify theme toggling**
 
 Run: `npm run dev`, visit `/en`.
 Expected: clicking the toggle flips the page background between the light paper color and the dark ink color, and the icon swaps between sun and moon. Reload the page — the chosen theme persists. Clear `localStorage` and set the OS to dark mode — the page loads dark without clicking anything.
 
-- [ ] **Step 7: Revert the temporary `ThemeToggle` render on the home page**
+- [ ] **Step 11: Revert the temporary `ThemeToggle` render on the home page**
 
-Remove the `<ThemeToggle />` block added in Step 5 (it moves into `Nav` in Task 8) — `src/app/[locale]/page.tsx` goes back to just the "Locale routing OK" paragraph.
+Remove the `<ThemeToggle />` block added in Step 9 (it moves into `Nav` in Task 8) — `src/app/[locale]/page.tsx` goes back to just the "Locale routing OK" paragraph.
 
-- [ ] **Step 8: Commit**
+- [ ] **Step 12: Commit**
 
 ```bash
-git add src/components/theme src/app/globals.css src/app/[locale]/layout.tsx
-git commit -m "feat: add light/dark theme system"
+git add src/utils/cn.ts src/components/icons src/features/portfolio/components src/app/globals.css src/app/[locale]/layout.tsx src/app/[locale]/page.tsx
+git commit -m "feat: add cn() helper and light/dark theme system"
 ```
 
 ---
@@ -974,7 +1049,8 @@ git commit -m "feat: add light/dark theme system"
 ### Task 5: Animated background
 
 **Files:**
-- Create: `src/components/background/AnimatedBackground.tsx`
+- Create: `src/features/portfolio/components/animated-background.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/layout.tsx`
 
@@ -1066,7 +1142,7 @@ git commit -m "feat: add light/dark theme system"
 }
 ```
 
-- [ ] **Step 2: Create `src/components/background/AnimatedBackground.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/animated-background.tsx`**
 
 ```tsx
 export function AnimatedBackground() {
@@ -1083,12 +1159,20 @@ export function AnimatedBackground() {
 
 (Plain CSS keyframes, not Framer Motion: the animation is a fire-and-forget infinite loop with no interaction or React state involved, so CSS is the simpler and cheaper tool — Framer Motion is reserved for scroll-driven and hover-driven motion in later tasks.)
 
-- [ ] **Step 3: Render it in the locale layout**
+- [ ] **Step 3: Add the export to the components barrel**
 
-In `src/app/[locale]/layout.tsx`:
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { AnimatedBackground } from "./animated-background";
+```
+
+- [ ] **Step 4: Render it in the locale layout**
+
+In `src/app/[locale]/layout.tsx`, add `AnimatedBackground` to the existing `@/features/portfolio/components` import:
 
 ```tsx
-import { AnimatedBackground } from "@/components/background/AnimatedBackground";
+import { ThemeProvider, AnimatedBackground } from "@/features/portfolio/components";
 ```
 
 ```tsx
@@ -1102,15 +1186,15 @@ import { AnimatedBackground } from "@/components/background/AnimatedBackground";
 </body>
 ```
 
-- [ ] **Step 4: Verify**
+- [ ] **Step 5: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: four soft, blurred colored blobs drift slowly behind the page content in both light and dark mode (toggle to confirm both), crossing paths periodically. In OS/browser reduced-motion mode, the blobs are static (no animation) but still visible.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/components/background src/app/globals.css src/app/[locale]/layout.tsx
+git add src/features/portfolio/components src/app/globals.css src/app/[locale]/layout.tsx
 git commit -m "feat: add animated gradient background"
 ```
 
@@ -1119,34 +1203,34 @@ git commit -m "feat: add animated gradient background"
 ### Task 6: Content data layer
 
 **Files:**
-- Create: `src/types/content.ts`
-- Create: `src/data/techStack.ts`
-- Create: `src/data/keywords.ts`
-- Create: `src/content/experience/en.json`
-- Create: `src/content/experience/vi.json`
-- Create: `src/lib/experience.ts`
-- Create: `src/content/projects/en/realtime-order-dashboard.mdx`
-- Create: `src/content/projects/en/api-mock-cli.mdx`
-- Create: `src/content/projects/en/ecommerce-migration.mdx`
-- Create: `src/content/projects/vi/realtime-order-dashboard.mdx`
-- Create: `src/content/projects/vi/api-mock-cli.mdx`
-- Create: `src/content/projects/vi/ecommerce-migration.mdx`
-- Create: `src/lib/projects.ts`
+- Create: `src/features/portfolio/types/content.ts`
+- Create: `src/features/portfolio/constants/tech-stack.ts`
+- Create: `src/features/portfolio/constants/keywords.ts`
+- Create: `src/features/portfolio/content/experience/en.json`
+- Create: `src/features/portfolio/content/experience/vi.json`
+- Create: `src/features/portfolio/utils/experience.ts`
+- Create: `src/features/portfolio/content/projects/en/realtime-order-dashboard.mdx`
+- Create: `src/features/portfolio/content/projects/en/api-mock-cli.mdx`
+- Create: `src/features/portfolio/content/projects/en/ecommerce-migration.mdx`
+- Create: `src/features/portfolio/content/projects/vi/realtime-order-dashboard.mdx`
+- Create: `src/features/portfolio/content/projects/vi/api-mock-cli.mdx`
+- Create: `src/features/portfolio/content/projects/vi/ecommerce-migration.mdx`
+- Create: `src/features/portfolio/utils/projects.ts`
 
 **Interfaces:**
 - Produces:
-  - `techStack: TechBadge[]` where `TechBadge = { name: string; short: string; bg: string; fg: string }`
-  - `keywords: Record<"en" | "vi", string[]>`
-  - `getExperience(locale: string): ExperienceEntry[]` where `ExperienceEntry = { company: string; role: string; period: string; bullets: string[] }`
-  - `getAllProjectsMeta(locale: string): ProjectMeta[]` where `ProjectMeta = ProjectFrontmatter & { slug: string }`
+  - `techStack: TechBadge[]` where `TechBadge` is an `interface { name: string; short: string; bg: string; fg: string }`
+  - `focusKeywords: Record<"en" | "vi", string[]>`
+  - `getExperience(locale: string): ExperienceEntry[]` where `ExperienceEntry` is an `interface { company: string; role: string; period: string; bullets: string[] }`
+  - `getAllProjectsMeta(locale: string): ProjectMeta[]` where `ProjectMeta extends ProjectFrontmatter` and adds `{ slug: string }`
   - `getProjectSlugs(locale: string): string[]`
   - `getProjectSource(locale: string, slug: string): string` (raw MDX file contents including frontmatter, for `compileMDX` in Task 13)
-  - `ProjectFrontmatter = { title: string; summary: string; tech: string[]; githubUrl?: string; demoUrl?: string; image?: string; periods: string[]; country: { flag: string; name: string }; role: string; stack: string; hasPhoto: boolean }`
+  - `ProjectFrontmatter` is an `interface { title: string; summary: string; tech: string[]; githubUrl?: string; demoUrl?: string; image?: string; periods: string[]; country: { flag: string; name: string }; role: string; stack: string; hasPhoto: boolean }`
 
-- [ ] **Step 1: Create `src/types/content.ts`**
+- [ ] **Step 1: Create `src/features/portfolio/types/content.ts`**
 
 ```ts
-export type ProjectFrontmatter = {
+export interface ProjectFrontmatter {
   title: string;
   summary: string;
   tech: string[];
@@ -1158,29 +1242,31 @@ export type ProjectFrontmatter = {
   role: string;
   stack: string;
   hasPhoto: boolean;
-};
+}
 
-export type ProjectMeta = ProjectFrontmatter & { slug: string };
+export interface ProjectMeta extends ProjectFrontmatter {
+  slug: string;
+}
 
-export type ExperienceEntry = {
+export interface ExperienceEntry {
   company: string;
   role: string;
   period: string;
   bullets: string[];
-};
+}
 
-export type TechBadge = {
+export interface TechBadge {
   name: string;
   short: string;
   bg: string;
   fg: string;
-};
+}
 ```
 
-- [ ] **Step 2: Create `src/data/techStack.ts`**
+- [ ] **Step 2: Create `src/features/portfolio/constants/tech-stack.ts`**
 
 ```ts
-import type { TechBadge } from "@/types/content";
+import type { TechBadge } from "@/features/portfolio/types/content";
 
 export const techStack: TechBadge[] = [
   { name: "Next.js", short: "N", bg: "#12141a", fg: "#ffffff" },
@@ -1194,16 +1280,16 @@ export const techStack: TechBadge[] = [
 ];
 ```
 
-- [ ] **Step 3: Create `src/data/keywords.ts`**
+- [ ] **Step 3: Create `src/features/portfolio/constants/keywords.ts`**
 
 ```ts
-export const keywords: Record<"en" | "vi", string[]> = {
+export const focusKeywords: Record<"en" | "vi", string[]> = {
   en: ["Accessibility", "Performance", "Interface", "Frontend", "Backend", "Security", "Scalability", "Design Systems"],
   vi: ["Khả năng tiếp cận", "Hiệu năng", "Giao diện", "Frontend", "Backend", "Bảo mật", "Khả năng mở rộng", "Design System"],
 };
 ```
 
-- [ ] **Step 4: Create `src/content/experience/en.json`**
+- [ ] **Step 4: Create `src/features/portfolio/content/experience/en.json`**
 
 ```json
 [
@@ -1239,7 +1325,7 @@ export const keywords: Record<"en" | "vi", string[]> = {
 ]
 ```
 
-- [ ] **Step 5: Create `src/content/experience/vi.json`**
+- [ ] **Step 5: Create `src/features/portfolio/content/experience/vi.json`**
 
 ```json
 [
@@ -1275,12 +1361,12 @@ export const keywords: Record<"en" | "vi", string[]> = {
 ]
 ```
 
-- [ ] **Step 6: Create `src/lib/experience.ts`**
+- [ ] **Step 6: Create `src/features/portfolio/utils/experience.ts`**
 
 ```ts
-import experienceEn from "@/content/experience/en.json";
-import experienceVi from "@/content/experience/vi.json";
-import type { ExperienceEntry } from "@/types/content";
+import experienceEn from "@/features/portfolio/content/experience/en.json";
+import experienceVi from "@/features/portfolio/content/experience/vi.json";
+import type { ExperienceEntry } from "@/features/portfolio/types/content";
 
 const experienceByLocale: Record<string, ExperienceEntry[]> = {
   en: experienceEn,
@@ -1294,7 +1380,7 @@ export function getExperience(locale: string): ExperienceEntry[] {
 
 - [ ] **Step 7: Create the three English project MDX files**
 
-`src/content/projects/en/realtime-order-dashboard.mdx`:
+`src/features/portfolio/content/projects/en/realtime-order-dashboard.mdx`:
 
 ```
 ---
@@ -1324,7 +1410,7 @@ Built a WebSocket layer over the existing order service and a dashboard that str
 Average time-to-fulfillment dropped by 34%, and the manual refresh workaround was retired entirely.
 ```
 
-`src/content/projects/en/api-mock-cli.mdx`:
+`src/features/portfolio/content/projects/en/api-mock-cli.mdx`:
 
 ```
 ---
@@ -1354,7 +1440,7 @@ Wrote a single-binary Go CLI that reads an OpenAPI spec and serves realistic moc
 Adopted by several teams outside my own company; now sits at 1.2k GitHub stars and a small but active contributor base.
 ```
 
-`src/content/projects/en/ecommerce-migration.mdx`:
+`src/features/portfolio/content/projects/en/ecommerce-migration.mdx`:
 
 ```
 ---
@@ -1386,7 +1472,7 @@ Page load times fell by roughly half and the team shipped storefront experiments
 
 - [ ] **Step 8: Create the three Vietnamese project MDX files**
 
-`src/content/projects/vi/realtime-order-dashboard.mdx`:
+`src/features/portfolio/content/projects/vi/realtime-order-dashboard.mdx`:
 
 ```
 ---
@@ -1416,7 +1502,7 @@ Xây lớp WebSocket trên order service hiện có và dashboard stream trực 
 Thời gian xử lý đơn trung bình giảm 34%, và cách refresh thủ công được loại bỏ hoàn toàn.
 ```
 
-`src/content/projects/vi/api-mock-cli.mdx`:
+`src/features/portfolio/content/projects/vi/api-mock-cli.mdx`:
 
 ```
 ---
@@ -1446,7 +1532,7 @@ Viết CLI Go dạng single-binary đọc OpenAPI spec và trả response mock h
 Được vài đội ngoài công ty tôi sử dụng; hiện đạt 1.2k sao GitHub và một nhóm contributor nhỏ nhưng tích cực.
 ```
 
-`src/content/projects/vi/ecommerce-migration.mdx`:
+`src/features/portfolio/content/projects/vi/ecommerce-migration.mdx`:
 
 ```
 ---
@@ -1476,18 +1562,19 @@ Monolith PHP cũ làm chậm mọi tính năng mới và khó chạy thử nghi�
 Thời gian tải trang giảm khoảng một nửa, và đội có thể chạy thử nghiệm từng storefront độc lập lần đầu tiên.
 ```
 
-- [ ] **Step 9: Create `src/lib/projects.ts`**
+- [ ] **Step 9: Create `src/features/portfolio/utils/projects.ts`**
 
 ```ts
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { ProjectFrontmatter, ProjectMeta } from "@/types/content";
+import type { ProjectFrontmatter, ProjectMeta } from "@/features/portfolio/types/content";
 
-const PROJECTS_DIR = path.join(process.cwd(), "src/content/projects");
+const PROJECTS_DIR = path.join(process.cwd(), "src/features/portfolio/content/projects");
 
 export function getProjectSlugs(locale: string): string[] {
   const dir = path.join(PROJECTS_DIR, locale);
+
   return fs
     .readdirSync(dir)
     .filter((file) => file.endsWith(".mdx"))
@@ -1496,6 +1583,7 @@ export function getProjectSlugs(locale: string): string[] {
 
 export function getProjectSource(locale: string, slug: string): string {
   const filePath = path.join(PROJECTS_DIR, locale, `${slug}.mdx`);
+
   return fs.readFileSync(filePath, "utf8");
 }
 
@@ -1503,6 +1591,7 @@ export function getAllProjectsMeta(locale: string): ProjectMeta[] {
   return getProjectSlugs(locale).map((slug) => {
     const source = getProjectSource(locale, slug);
     const { data } = matter(source);
+
     return { slug, ...(data as ProjectFrontmatter) };
   });
 }
@@ -1513,10 +1602,14 @@ export function getAllProjectsMeta(locale: string): ProjectMeta[] {
 Temporarily add this to `src/app/[locale]/page.tsx` (removed again in Task 9 when `Hero`/`Projects` take over the page):
 
 ```tsx
-import { getAllProjectsMeta } from "@/lib/projects";
-import { getExperience } from "@/lib/experience";
+import { getAllProjectsMeta } from "@/features/portfolio/utils/projects";
+import { getExperience } from "@/features/portfolio/utils/experience";
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+interface HomeProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Home({ params }: HomeProps) {
   const { locale } = await params;
   const projects = getAllProjectsMeta(locale);
   const experience = getExperience(locale);
@@ -1537,7 +1630,7 @@ Expected: both show "3 projects, 3 experience entries loaded for locale ...". No
 - [ ] **Step 11: Commit**
 
 ```bash
-git add src/types src/data src/content src/lib src/app/[locale]/page.tsx
+git add src/features/portfolio/types src/features/portfolio/constants src/features/portfolio/content src/features/portfolio/utils src/app/[locale]/page.tsx
 git commit -m "feat: add project MDX and experience content with typed loaders"
 ```
 
@@ -1546,12 +1639,13 @@ git commit -m "feat: add project MDX and experience content with typed loaders"
 ### Task 7: Reveal (scroll-reveal wrapper)
 
 **Files:**
-- Create: `src/components/motion/Reveal.tsx`
+- Create: `src/features/portfolio/components/reveal.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 
 **Interfaces:**
-- Produces: `<Reveal>{children}</Reveal>` (optional `className?: string`, `delay?: number`) — a client component used by About, Projects, Experience, and Contact sections in Tasks 10–15 to fade/slide content in as it scrolls into view.
+- Produces: `<Reveal>{children}</Reveal>` (`RevealProps = { children: ReactNode; className?: string; delay?: number }`) — a client component used by About, Projects, Experience, and Contact sections in Tasks 10–15 to fade/slide content in as it scrolls into view.
 
-- [ ] **Step 1: Create `src/components/motion/Reveal.tsx`**
+- [ ] **Step 1: Create `src/features/portfolio/components/reveal.tsx`**
 
 ```tsx
 "use client";
@@ -1559,15 +1653,13 @@ git commit -m "feat: add project MDX and experience content with typed loaders"
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-export function Reveal({
-  children,
-  className,
-  delay = 0,
-}: {
+interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-}) {
+}
+
+export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -1584,12 +1676,20 @@ export function Reveal({
 }
 ```
 
-- [ ] **Step 2: Verify in isolation**
+- [ ] **Step 2: Add the export to the components barrel**
+
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { Reveal } from "./reveal";
+```
+
+- [ ] **Step 3: Verify in isolation**
 
 Temporarily render three stacked `<Reveal>` blocks with tall spacer `<div>`s between them in `src/app/[locale]/page.tsx`:
 
 ```tsx
-import { Reveal } from "@/components/motion/Reveal";
+import { Reveal } from "@/features/portfolio/components";
 
 export default function Home() {
   return (
@@ -1607,14 +1707,14 @@ export default function Home() {
 Run: `npm run dev`, visit `/en`, scroll down.
 Expected: "Reveal test" fades and slides up into view as it crosses into the viewport, and stays visible when scrolling back up. With OS reduced-motion enabled, it's visible immediately with no animation.
 
-- [ ] **Step 3: Revert the temporary render**
+- [ ] **Step 4: Revert the temporary render**
 
 `src/app/[locale]/page.tsx` goes back to the Task 6 Step 10 version (project/experience count check) — `Reveal` gets its real usage starting in Task 10.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
-git add src/components/motion
+git add src/features/portfolio/components
 git commit -m "feat: add Reveal scroll-in-view animation wrapper"
 ```
 
@@ -1623,14 +1723,15 @@ git commit -m "feat: add Reveal scroll-in-view animation wrapper"
 ### Task 8: Nav
 
 **Files:**
-- Create: `src/components/nav/useScrollSpy.ts`
-- Create: `src/components/nav/LocaleSwitcher.tsx`
-- Create: `src/components/nav/Nav.tsx`
+- Create: `src/features/portfolio/hooks/use-scroll-spy.ts`
+- Create: `src/features/portfolio/components/locale-switcher.tsx`
+- Create: `src/features/portfolio/components/nav.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx` (render `<Nav />` for real verification)
 
 **Interfaces:**
-- Consumes: `<ThemeToggle />` (Task 4), `.chip-btn` (Task 2).
+- Consumes: `<ThemeToggle />` (Task 4), `.chip-btn` (Task 2), `cn()` (Task 4).
 - Produces: `<Nav />` (no props) — rendered once at the top of the home page in Task 9 onward. `useScrollSpy(sectionIds: string[], navSelector: string): string | null`.
 
 - [ ] **Step 1: Add nav CSS to `src/app/globals.css`**
@@ -1755,7 +1856,7 @@ header.nav {
 }
 ```
 
-- [ ] **Step 2: Create `src/components/nav/useScrollSpy.ts`**
+- [ ] **Step 2: Create `src/features/portfolio/hooks/use-scroll-spy.ts`**
 
 ```ts
 "use client";
@@ -1766,8 +1867,8 @@ export function useScrollSpy(sectionIds: string[], navSelector: string): string 
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const navEl = document.querySelector<HTMLElement>(navSelector);
-    const navHeight = navEl?.offsetHeight ?? 64;
+    const navElement = document.querySelector<HTMLElement>(navSelector);
+    const navHeight = navElement?.offsetHeight ?? 64;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -1780,13 +1881,15 @@ export function useScrollSpy(sectionIds: string[], navSelector: string): string 
       { rootMargin: `-${navHeight}px 0px -50% 0px`, threshold: 0 }
     );
 
-    const elements = sectionIds
+    const sectionElements = sectionIds
       .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+      .filter((element): element is HTMLElement => element !== null);
 
-    elements.forEach((el) => observer.observe(el));
+    sectionElements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
+    // sectionIds is a module-level constant array in every caller; re-running
+    // this effect per render would just re-observe the same elements.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navSelector, sectionIds.join(",")]);
 
@@ -1794,7 +1897,7 @@ export function useScrollSpy(sectionIds: string[], navSelector: string): string 
 }
 ```
 
-- [ ] **Step 3: Create `src/components/nav/LocaleSwitcher.tsx`**
+- [ ] **Step 3: Create `src/features/portfolio/components/locale-switcher.tsx`**
 
 ```tsx
 "use client";
@@ -1806,14 +1909,18 @@ export function LocaleSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  const next = locale === "en" ? "vi" : "en";
+  const nextLocale = locale === "en" ? "vi" : "en";
+
+  function handleSwitchLocale() {
+    router.replace(pathname, { locale: nextLocale });
+  }
 
   return (
     <button
       type="button"
       className="chip-btn"
       aria-label={locale === "en" ? "Switch to Vietnamese" : "Switch to English"}
-      onClick={() => router.replace(pathname, { locale: next })}
+      onClick={handleSwitchLocale}
     >
       {locale.toUpperCase()}
     </button>
@@ -1821,23 +1928,32 @@ export function LocaleSwitcher() {
 }
 ```
 
-- [ ] **Step 4: Create `src/components/nav/Nav.tsx`**
+- [ ] **Step 4: Create `src/features/portfolio/components/nav.tsx`**
 
 ```tsx
 "use client";
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
-import { LocaleSwitcher } from "@/components/nav/LocaleSwitcher";
-import { useScrollSpy } from "@/components/nav/useScrollSpy";
+import { cn } from "@/utils/cn";
+import { ThemeToggle } from "@/features/portfolio/components/theme-toggle";
+import { LocaleSwitcher } from "@/features/portfolio/components/locale-switcher";
+import { useScrollSpy } from "@/features/portfolio/hooks/use-scroll-spy";
 
 const SECTION_IDS = ["about", "projects", "experience", "contact"];
 
 export function Nav() {
   const t = useTranslations("nav");
-  const [open, setOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const activeId = useScrollSpy(SECTION_IDS, "header.nav");
+
+  function handleCloseMenu() {
+    setIsMenuOpen(false);
+  }
+
+  function handleToggleMenu() {
+    setIsMenuOpen((value) => !value);
+  }
 
   return (
     <header className="nav">
@@ -1847,10 +1963,10 @@ export function Nav() {
           <span>alex.dev</span>
         </a>
         <nav aria-label="Primary">
-          <ul className={open ? "nav-links open" : "nav-links"} id="navLinks">
+          <ul className={cn("nav-links", isMenuOpen && "open")} id="navLinks">
             {SECTION_IDS.map((id) => (
               <li key={id}>
-                <a href={`#${id}`} className={activeId === id ? "active" : undefined} onClick={() => setOpen(false)}>
+                <a href={`#${id}`} className={cn(activeId === id && "active")} onClick={handleCloseMenu}>
                   {t(id)}
                 </a>
               </li>
@@ -1863,10 +1979,10 @@ export function Nav() {
           <button
             type="button"
             className="chip-btn hamburger"
-            aria-expanded={open}
+            aria-expanded={isMenuOpen}
             aria-controls="navLinks"
             aria-label="Toggle menu"
-            onClick={() => setOpen((value) => !value)}
+            onClick={handleToggleMenu}
           >
             ≡
           </button>
@@ -1877,16 +1993,31 @@ export function Nav() {
 }
 ```
 
-- [ ] **Step 5: Render `<Nav />` for verification**
+(The `#about`/`#projects`/`#experience`/`#contact`/`#top` links stay plain `<a>` — they are same-page hash anchors, not route navigation, so `next-intl`'s `Link` doesn't apply; see `CLAUDE.md`'s Internal links convention.)
+
+- [ ] **Step 5: Add the exports to the components barrel**
+
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { LocaleSwitcher } from "./locale-switcher";
+export { Nav } from "./nav";
+```
+
+- [ ] **Step 6: Render `<Nav />` for verification**
 
 Replace `src/app/[locale]/page.tsx` with:
 
 ```tsx
-import { Nav } from "@/components/nav/Nav";
-import { getAllProjectsMeta } from "@/lib/projects";
-import { getExperience } from "@/lib/experience";
+import { Nav } from "@/features/portfolio/components";
+import { getAllProjectsMeta } from "@/features/portfolio/utils/projects";
+import { getExperience } from "@/features/portfolio/utils/experience";
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+interface HomeProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Home({ params }: HomeProps) {
   const { locale } = await params;
   const projects = getAllProjectsMeta(locale);
   const experience = getExperience(locale);
@@ -1911,15 +2042,15 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 }
 ```
 
-- [ ] **Step 6: Verify**
+- [ ] **Step 7: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: sticky nav with logo, four links, EN/VI toggle, theme toggle. Clicking EN/VI navigates between `/en` and `/vi` and swaps nav label language. Scrolling down highlights each nav link as its section's top clears the nav (per the offset logic from the spec). Resize below 760px width — links collapse behind a hamburger button that opens/closes a dropdown.
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 8: Commit**
 
 ```bash
-git add src/components/nav src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/hooks src/features/portfolio/components src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add sticky nav with scrollspy, locale switcher, theme toggle"
 ```
 
@@ -1928,7 +2059,8 @@ git commit -m "feat: add sticky nav with scrollspy, locale switcher, theme toggl
 ### Task 9: Hero section
 
 **Files:**
-- Create: `src/components/sections/Hero.tsx`
+- Create: `src/features/portfolio/components/hero.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx`
 
@@ -2013,7 +2145,7 @@ git commit -m "feat: add sticky nav with scrollspy, locale switcher, theme toggl
 }
 ```
 
-- [ ] **Step 2: Create `src/components/sections/Hero.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/hero.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
@@ -2056,19 +2188,30 @@ export function Hero() {
 }
 ```
 
-(Server component — `useTranslations` from `next-intl` works in both server and client components; this one has no interactivity so it stays a server component for a smaller client bundle.)
+(Server component — `useTranslations` from `next-intl` works in both server and client components; this one has no interactivity so it stays a server component for a smaller client bundle. The `#projects`/`#contact` CTAs are same-page hash anchors, so plain `<a>` per `CLAUDE.md`'s Internal links convention.)
 
-- [ ] **Step 3: Render it on the home page**
+- [ ] **Step 3: Add the export to the components barrel**
 
-In `src/app/[locale]/page.tsx`, replace the `<main>` contents:
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { Hero } from "./hero";
+```
+
+- [ ] **Step 4: Render it on the home page**
+
+In `src/app/[locale]/page.tsx`, add `Hero` to the existing barrel import and replace the `<main>` contents:
 
 ```tsx
-import { Nav } from "@/components/nav/Nav";
-import { Hero } from "@/components/sections/Hero";
-import { getAllProjectsMeta } from "@/lib/projects";
-import { getExperience } from "@/lib/experience";
+import { Nav, Hero } from "@/features/portfolio/components";
+import { getAllProjectsMeta } from "@/features/portfolio/utils/projects";
+import { getExperience } from "@/features/portfolio/utils/experience";
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+interface HomeProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Home({ params }: HomeProps) {
   const { locale } = await params;
   const projects = getAllProjectsMeta(locale);
   const experience = getExperience(locale);
@@ -2094,15 +2237,15 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 }
 ```
 
-- [ ] **Step 4: Verify**
+- [ ] **Step 5: Verify**
 
 Run: `npm run dev`, visit `/en` and `/vi`.
 Expected: hero renders name/tagline/pitch/CTAs/stats in the correct language. At a mobile width (< 600px), the two CTA buttons sit side by side at equal width, and the three stats sit in one equal-width row.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/components/sections/Hero.tsx src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/components src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add hero section"
 ```
 
@@ -2111,8 +2254,9 @@ git commit -m "feat: add hero section"
 ### Task 10: About + Tech stack
 
 **Files:**
-- Create: `src/components/sections/TechStack.tsx`
-- Create: `src/components/sections/About.tsx`
+- Create: `src/features/portfolio/components/tech-stack.tsx`
+- Create: `src/features/portfolio/components/about.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx`
 
@@ -2175,10 +2319,10 @@ git commit -m "feat: add hero section"
 }
 ```
 
-- [ ] **Step 2: Create `src/components/sections/TechStack.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/tech-stack.tsx`**
 
 ```tsx
-import { techStack } from "@/data/techStack";
+import { techStack } from "@/features/portfolio/constants/tech-stack";
 
 export function TechStack() {
   return (
@@ -2196,12 +2340,14 @@ export function TechStack() {
 }
 ```
 
-- [ ] **Step 3: Create `src/components/sections/About.tsx`**
+(`tech.bg`/`tech.fg` are per-badge brand colors sourced from the `techStack` constant, not hardcoded in the component — the same "one source" principle as the design tokens in `globals.css`, just data-driven instead of CSS-variable-driven because each badge needs its own brand color.)
+
+- [ ] **Step 3: Create `src/features/portfolio/components/about.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/Reveal";
-import { TechStack } from "@/components/sections/TechStack";
+import { Reveal } from "@/features/portfolio/components/reveal";
+import { TechStack } from "@/features/portfolio/components/tech-stack";
 
 export function About() {
   const t = useTranslations("about");
@@ -2227,12 +2373,21 @@ export function About() {
 }
 ```
 
-- [ ] **Step 4: Render it on the home page**
+- [ ] **Step 4: Add the exports to the components barrel**
 
-In `src/app/[locale]/page.tsx`, import `About` and replace the placeholder `#about` `<section>`:
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { TechStack } from "./tech-stack";
+export { About } from "./about";
+```
+
+- [ ] **Step 5: Render it on the home page**
+
+In `src/app/[locale]/page.tsx`, add `About` to the barrel import and replace the placeholder `#about` `<section>`:
 
 ```tsx
-import { About } from "@/components/sections/About";
+import { Nav, Hero, About } from "@/features/portfolio/components";
 ```
 
 ```tsx
@@ -2243,15 +2398,15 @@ import { About } from "@/components/sections/About";
 </section>
 ```
 
-- [ ] **Step 5: Verify**
+- [ ] **Step 6: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: About section shows two bio paragraphs, then a "Tech stack" label and an 8-badge grid (4 columns desktop, 2 columns under 760px width), each badge showing a colored glyph + uppercase tech name. Scrolling the section into view fades/slides it in once. Switch to `/vi` — bio text and "Công nghệ" label are in Vietnamese; tech names stay in English (they're proper nouns, not translated — matches the content model).
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add src/components/sections/About.tsx src/components/sections/TechStack.tsx src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/components src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add about section with tech stack grid"
 ```
 
@@ -2260,12 +2415,13 @@ git commit -m "feat: add about section with tech stack grid"
 ### Task 11: Focus-areas marquee
 
 **Files:**
-- Create: `src/components/sections/FocusMarquee.tsx`
+- Create: `src/features/portfolio/components/focus-marquee.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx`
 
 **Interfaces:**
-- Consumes: `<Reveal>` (Task 7), `keywords` (Task 6).
+- Consumes: `<Reveal>` (Task 7), `focusKeywords` (Task 6).
 - Produces: `<FocusMarquee />` (no props), rendered between About and Projects on the home page. Renders its own `id="focus"` section (not part of the nav's scrollspy `SECTION_IDS` list — matches the spec, which doesn't give this section a nav link).
 
 - [ ] **Step 1: Add marquee CSS to `src/app/globals.css`**
@@ -2322,18 +2478,18 @@ git commit -m "feat: add about section with tech stack grid"
 }
 ```
 
-- [ ] **Step 2: Create `src/components/sections/FocusMarquee.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/focus-marquee.tsx`**
 
 ```tsx
 import { useLocale, useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/Reveal";
-import { keywords } from "@/data/keywords";
+import { Reveal } from "@/features/portfolio/components/reveal";
+import { focusKeywords } from "@/features/portfolio/constants/keywords";
 
 export function FocusMarquee() {
   const t = useTranslations("focus");
   const locale = useLocale() as "en" | "vi";
-  const words = keywords[locale] ?? keywords.en;
-  const track = [...words, ...words];
+  const words = focusKeywords[locale] ?? focusKeywords.en;
+  const trackWords = [...words, ...words];
 
   return (
     <section id="focus" className="focus-section">
@@ -2345,7 +2501,7 @@ export function FocusMarquee() {
       </div>
       <div className="marquee">
         <div className="marquee-track">
-          {track.map((word, index) => (
+          {trackWords.map((word, index) => (
             <span className="marquee-item" key={`${word}-${index}`}>
               {word} <span className="dash">/</span>
             </span>
@@ -2359,12 +2515,20 @@ export function FocusMarquee() {
 
 (The marquee track sits outside the `.shell` div — same structural trick as the prototype — so it bleeds full viewport width instead of being capped at 1100px.)
 
-- [ ] **Step 3: Render it on the home page**
+- [ ] **Step 3: Add the export to the components barrel**
 
-In `src/app/[locale]/page.tsx`:
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { FocusMarquee } from "./focus-marquee";
+```
+
+- [ ] **Step 4: Render it on the home page**
+
+In `src/app/[locale]/page.tsx`, add `FocusMarquee` to the barrel import:
 
 ```tsx
-import { FocusMarquee } from "@/components/sections/FocusMarquee";
+import { Nav, Hero, About, FocusMarquee } from "@/features/portfolio/components";
 ```
 
 ```tsx
@@ -2375,15 +2539,15 @@ import { FocusMarquee } from "@/components/sections/FocusMarquee";
 </section>
 ```
 
-- [ ] **Step 4: Verify**
+- [ ] **Step 5: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: a full-bleed (edge-to-edge, not capped at the 1100px container) row of large mono keywords scrolling continuously leftward, looping seamlessly. Switch to `/vi` — words are the Vietnamese translations. With OS reduced-motion on, the track is static and horizontally scrollable instead of animating.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/components/sections/FocusMarquee.tsx src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/components src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add focus-areas marquee section"
 ```
 
@@ -2392,14 +2556,15 @@ git commit -m "feat: add focus-areas marquee section"
 ### Task 12: Project cards + Projects section
 
 **Files:**
-- Create: `src/components/sections/ProjectCard.tsx`
-- Create: `src/components/sections/Projects.tsx`
+- Create: `src/features/portfolio/components/project-card.tsx`
+- Create: `src/features/portfolio/components/projects.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx`
 
 **Interfaces:**
-- Consumes: `<Reveal>` (Task 7), `getAllProjectsMeta(locale)` → `ProjectMeta[]` (Task 6), `Link` from `@/i18n/navigation` (Task 3).
-- Produces: `<ProjectCard project={ProjectMeta} />`, `<Projects projects={ProjectMeta[]} />` — `Projects` rendered on the home page with the same `projects` array already loaded in `page.tsx`.
+- Consumes: `<Reveal>` (Task 7), `getAllProjectsMeta(locale)` → `ProjectMeta[]` (Task 6), `Link` from `@/i18n/navigation` (Task 3), `cn()` (Task 4).
+- Produces: `<ProjectCard project={ProjectMeta} />` (`ProjectCardProps = { project: ProjectMeta }`), `<Projects projects={ProjectMeta[]} />` (`ProjectsProps = { projects: ProjectMeta[] }`) — `Projects` rendered on the home page with the same `projects` array already loaded in `page.tsx`.
 
 - [ ] **Step 1: Add project-grid/card CSS to `src/app/globals.css`**
 
@@ -2610,14 +2775,19 @@ git commit -m "feat: add focus-areas marquee section"
 }
 ```
 
-- [ ] **Step 2: Create `src/components/sections/ProjectCard.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/project-card.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import type { ProjectMeta } from "@/types/content";
+import { cn } from "@/utils/cn";
+import type { ProjectMeta } from "@/features/portfolio/types/content";
 
-export function ProjectCard({ project }: { project: ProjectMeta }) {
+interface ProjectCardProps {
+  project: ProjectMeta;
+}
+
+export function ProjectCard({ project }: ProjectCardProps) {
   const t = useTranslations("projects");
 
   return (
@@ -2627,13 +2797,9 @@ export function ProjectCard({ project }: { project: ProjectMeta }) {
         href={`/projects/${project.slug}`}
         aria-label={`${t("viewCaseStudy")}: ${project.title}`}
       >
-        {project.hasPhoto ? (
-          <div className="card-image has-photo" aria-hidden="true" />
-        ) : (
-          <div className="card-image fallback" aria-hidden="true">
-            <span>{project.title}</span>
-          </div>
-        )}
+        <div className={cn("card-image", project.hasPhoto ? "has-photo" : "fallback")} aria-hidden="true">
+          {!project.hasPhoto && <span>{project.title}</span>}
+        </div>
         <div className="period-badges">
           {project.periods.map((period) => (
             <span className="period-pill" key={period}>
@@ -2675,17 +2841,21 @@ export function ProjectCard({ project }: { project: ProjectMeta }) {
 }
 ```
 
-(The whole media area is now a real link to `/projects/[slug]` rather than a modal trigger — Task 13 builds that destination page.)
+(The whole media area is now a real link to `/projects/[slug]` rather than a modal trigger — Task 13 builds that destination page. The GitHub link is a plain `<a target="_blank">`, which is exactly the external-link exception in `CLAUDE.md`'s Internal links convention.)
 
-- [ ] **Step 3: Create `src/components/sections/Projects.tsx`**
+- [ ] **Step 3: Create `src/features/portfolio/components/projects.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/Reveal";
-import { ProjectCard } from "@/components/sections/ProjectCard";
-import type { ProjectMeta } from "@/types/content";
+import { Reveal } from "@/features/portfolio/components/reveal";
+import { ProjectCard } from "@/features/portfolio/components/project-card";
+import type { ProjectMeta } from "@/features/portfolio/types/content";
 
-export function Projects({ projects }: { projects: ProjectMeta[] }) {
+interface ProjectsProps {
+  projects: ProjectMeta[];
+}
+
+export function Projects({ projects }: ProjectsProps) {
   const t = useTranslations("projects");
 
   return (
@@ -2707,12 +2877,21 @@ export function Projects({ projects }: { projects: ProjectMeta[] }) {
 }
 ```
 
-- [ ] **Step 4: Render it on the home page**
+- [ ] **Step 4: Add the exports to the components barrel**
 
-In `src/app/[locale]/page.tsx`:
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { ProjectCard } from "./project-card";
+export { Projects } from "./projects";
+```
+
+- [ ] **Step 5: Render it on the home page**
+
+In `src/app/[locale]/page.tsx`, add `Projects` to the barrel import:
 
 ```tsx
-import { Projects } from "@/components/sections/Projects";
+import { Nav, Hero, About, FocusMarquee, Projects } from "@/features/portfolio/components";
 ```
 
 ```tsx
@@ -2724,15 +2903,15 @@ import { Projects } from "@/components/sections/Projects";
 </section>
 ```
 
-- [ ] **Step 5: Verify**
+- [ ] **Step 6: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: a 2-column grid (1 column under 720px) of 3 project cards. Each card shows an image area (gradient tile for the realtime-dashboard project since it's `hasPhoto: true`, large title-as-image tile for the other two), a period badge top-right (two stacked pills for the CLI project's `["2023","2024"]`), a hidden "View case study" badge that fades in bottom-right on hover/focus, a title that turns accent-colored and an image that zooms slightly on hover, a 3-line-clamped description, tech pills, country, and a GitHub icon link that opens in a new tab. Clicking the image or badge navigates to `/en/projects/realtime-order-dashboard` (a 404 until Task 13 exists — that's expected at this point).
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add src/components/sections/ProjectCard.tsx src/components/sections/Projects.tsx src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/components src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add project cards and projects grid section"
 ```
 
@@ -2741,12 +2920,13 @@ git commit -m "feat: add project cards and projects grid section"
 ### Task 13: Case-study detail page
 
 **Files:**
+- Create: `src/features/portfolio/pages/project-case-study-page.tsx`
 - Create: `src/app/[locale]/projects/[slug]/page.tsx`
 - Modify: `src/app/globals.css`
 
 **Interfaces:**
-- Consumes: `getProjectSlugs`, `getProjectSource` (Task 6), `routing.locales` (Task 3).
-- Produces: static pages at `/en/projects/<slug>` and `/vi/projects/<slug>` for every MDX file in `src/content/projects/{locale}/`.
+- Consumes: `getProjectSlugs`, `getProjectSource` (Task 6), `routing.locales` (Task 3), `Nav` (Task 8).
+- Produces: static pages at `/en/projects/<slug>` and `/vi/projects/<slug>` for every MDX file in `src/features/portfolio/content/projects/{locale}/`. The route file (`src/app/[locale]/projects/[slug]/page.tsx`) stays a thin wrapper per `.claude/skills/nextjs-app-router/SKILL.md` — all real work lives in `ProjectCaseStudyPage`.
 
 - [ ] **Step 1: Add case-study CSS to `src/app/globals.css`**
 
@@ -2822,31 +3002,28 @@ git commit -m "feat: add project cards and projects grid section"
 }
 ```
 
-- [ ] **Step 2: Create `src/app/[locale]/projects/[slug]/page.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/pages/project-case-study-page.tsx`**
 
 ```tsx
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { Nav } from "@/components/nav/Nav";
+import { Nav } from "@/features/portfolio/components/nav";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { getProjectSlugs, getProjectSource } from "@/lib/projects";
-import type { ProjectFrontmatter } from "@/types/content";
+import { getProjectSlugs, getProjectSource } from "@/features/portfolio/utils/projects";
+import type { ProjectFrontmatter } from "@/features/portfolio/types/content";
 
-export function generateStaticParams() {
-  return routing.locales.flatMap((locale) =>
-    getProjectSlugs(locale).map((slug) => ({ locale, slug }))
-  );
+interface ProjectCaseStudyPageProps {
+  locale: string;
+  slug: string;
 }
 
-export default async function ProjectPage({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>;
-}) {
-  const { locale, slug } = await params;
+export function generateProjectStaticParams() {
+  return routing.locales.flatMap((locale) => getProjectSlugs(locale).map((slug) => ({ locale, slug })));
+}
 
+export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPageProps) {
   if (!getProjectSlugs(locale).includes(slug)) {
     notFound();
   }
@@ -2891,15 +3068,33 @@ export default async function ProjectPage({
 
 (`compileMDX` parses the frontmatter itself here — `getProjectSource` returns the raw file including the `---` block, and `parseFrontmatter: true` strips and types it, so this page doesn't need `gray-matter` directly; `gray-matter` is only used in `getAllProjectsMeta`, Task 6, for the card-listing metadata.)
 
-- [ ] **Step 3: Verify**
+- [ ] **Step 3: Create `src/app/[locale]/projects/[slug]/page.tsx`**
+
+```tsx
+import { ProjectCaseStudyPage, generateProjectStaticParams } from "@/features/portfolio/pages/project-case-study-page";
+
+interface PageProps {
+  params: Promise<{ locale: string; slug: string }>;
+}
+
+export const generateStaticParams = generateProjectStaticParams;
+
+export default async function Page({ params }: PageProps) {
+  const { locale, slug } = await params;
+
+  return <ProjectCaseStudyPage locale={locale} slug={slug} />;
+}
+```
+
+- [ ] **Step 4: Verify**
 
 Run: `npm run dev`, visit `/en/projects/realtime-order-dashboard`.
 Expected: back link, title, a Role/Period/Stack meta row (Period shows just "2025"), then the rendered MDX body with "Problem" / "Approach" / "Result" as headings and their paragraph content. Visit `/en/projects/api-mock-cli` — Period shows "2023 · 2024" (both phases). Visit `/vi/projects/realtime-order-dashboard` — everything in Vietnamese, including the MDX headings ("Vấn đề" / "Cách tiếp cận" / "Kết quả"). Visit `/en/projects/does-not-exist` — 404. From the home page, click a project card — it navigates here; click "← Back to projects" — it returns to `/en/#projects`.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
-git add src/app/[locale]/projects src/app/globals.css
+git add src/features/portfolio/pages src/app/[locale]/projects src/app/globals.css
 git commit -m "feat: add project case-study detail page"
 ```
 
@@ -2908,13 +3103,14 @@ git commit -m "feat: add project case-study detail page"
 ### Task 14: Experience section
 
 **Files:**
-- Create: `src/components/sections/Experience.tsx`
+- Create: `src/features/portfolio/components/experience.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx`
 
 **Interfaces:**
 - Consumes: `<Reveal>` (Task 7), `getExperience(locale)` → `ExperienceEntry[]` (Task 6, already loaded in `page.tsx`).
-- Produces: `<Experience entries={ExperienceEntry[]} />`.
+- Produces: `<Experience entries={ExperienceEntry[]} />` (`ExperienceProps = { entries: ExperienceEntry[] }`).
 
 - [ ] **Step 1: Add timeline CSS to `src/app/globals.css`**
 
@@ -2966,14 +3162,18 @@ git commit -m "feat: add project case-study detail page"
 }
 ```
 
-- [ ] **Step 2: Create `src/components/sections/Experience.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/experience.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/Reveal";
-import type { ExperienceEntry } from "@/types/content";
+import { Reveal } from "@/features/portfolio/components/reveal";
+import type { ExperienceEntry } from "@/features/portfolio/types/content";
 
-export function Experience({ entries }: { entries: ExperienceEntry[] }) {
+interface ExperienceProps {
+  entries: ExperienceEntry[];
+}
+
+export function Experience({ entries }: ExperienceProps) {
   const t = useTranslations("experience");
 
   return (
@@ -3003,12 +3203,20 @@ export function Experience({ entries }: { entries: ExperienceEntry[] }) {
 }
 ```
 
-- [ ] **Step 3: Render it on the home page**
+- [ ] **Step 3: Add the export to the components barrel**
 
-In `src/app/[locale]/page.tsx`:
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { Experience } from "./experience";
+```
+
+- [ ] **Step 4: Render it on the home page**
+
+In `src/app/[locale]/page.tsx`, add `Experience` to the barrel import:
 
 ```tsx
-import { Experience } from "@/components/sections/Experience";
+import { Nav, Hero, About, FocusMarquee, Projects, Experience } from "@/features/portfolio/components";
 ```
 
 ```tsx
@@ -3019,15 +3227,15 @@ import { Experience } from "@/components/sections/Experience";
 </section>
 ```
 
-- [ ] **Step 4: Verify**
+- [ ] **Step 5: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: three timeline rows (period column, then role/company/bullets), most recent first. Under 600px width, each row stacks to a single column. Switch to `/vi` — everything translated.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/components/sections/Experience.tsx src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/components src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add work experience timeline section"
 ```
 
@@ -3036,8 +3244,9 @@ git commit -m "feat: add work experience timeline section"
 ### Task 15: Contact + Footer
 
 **Files:**
-- Create: `src/components/sections/Contact.tsx`
-- Create: `src/components/Footer.tsx`
+- Create: `src/features/portfolio/components/contact.tsx`
+- Create: `src/features/portfolio/components/footer.tsx`
+- Modify: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/globals.css`
 - Modify: `src/app/[locale]/page.tsx`
 
@@ -3132,11 +3341,11 @@ footer {
 }
 ```
 
-- [ ] **Step 2: Create `src/components/sections/Contact.tsx`**
+- [ ] **Step 2: Create `src/features/portfolio/components/contact.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/Reveal";
+import { Reveal } from "@/features/portfolio/components/reveal";
 
 export function Contact() {
   const t = useTranslations("contact");
@@ -3160,7 +3369,9 @@ export function Contact() {
 }
 ```
 
-- [ ] **Step 3: Create `src/components/Footer.tsx`**
+(`mailto:` is a plain `<a>` per `CLAUDE.md`'s external-URL exception.)
+
+- [ ] **Step 3: Create `src/features/portfolio/components/footer.tsx`**
 
 ```tsx
 import { useTranslations } from "next-intl";
@@ -3194,24 +3405,31 @@ export function Footer() {
 }
 ```
 
-- [ ] **Step 4: Assemble the final home page**
+(Social links are external URLs with `target="_blank"`; "back to top" is a same-page hash anchor — both stay plain `<a>` per `CLAUDE.md`'s Internal links convention.)
 
-Replace `src/app/[locale]/page.tsx` entirely:
+- [ ] **Step 4: Add the exports to the components barrel**
+
+In `src/features/portfolio/components/index.ts`, add:
+
+```ts
+export { Contact } from "./contact";
+export { Footer } from "./footer";
+```
+
+- [ ] **Step 5: Assemble the final home page**
+
+Create `src/features/portfolio/pages/home-page.tsx`:
 
 ```tsx
-import { Nav } from "@/components/nav/Nav";
-import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { FocusMarquee } from "@/components/sections/FocusMarquee";
-import { Projects } from "@/components/sections/Projects";
-import { Experience } from "@/components/sections/Experience";
-import { Contact } from "@/components/sections/Contact";
-import { Footer } from "@/components/Footer";
-import { getAllProjectsMeta } from "@/lib/projects";
-import { getExperience } from "@/lib/experience";
+import { Nav, Hero, About, FocusMarquee, Projects, Experience, Contact, Footer } from "@/features/portfolio/components";
+import { getAllProjectsMeta } from "@/features/portfolio/utils/projects";
+import { getExperience } from "@/features/portfolio/utils/experience";
 
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+interface HomePageProps {
+  locale: string;
+}
+
+export async function HomePage({ locale }: HomePageProps) {
   const projects = getAllProjectsMeta(locale);
   const experience = getExperience(locale);
 
@@ -3230,24 +3448,42 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 }
 ```
 
-- [ ] **Step 5: Verify**
+Replace `src/app/[locale]/page.tsx` entirely:
+
+```tsx
+import { HomePage } from "@/features/portfolio/pages/home-page";
+
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Page({ params }: PageProps) {
+  const { locale } = await params;
+
+  return <HomePage locale={locale} />;
+}
+```
+
+(This is the same thin-route-page pattern as Task 13's case-study page: `src/app/[locale]/page.tsx` only unwraps `params` and renders the feature page.)
+
+- [ ] **Step 6: Verify**
 
 Run: `npm run dev`, visit `/en`.
 Expected: Contact section shows the blurb spanning the full width of the box, above a single email button (no GitHub/LinkedIn buttons here anymore). Footer shows the copyright line on the left and, on the right, three small circular GitHub/LinkedIn/Facebook icon links plus "back to top" — clicking it scrolls to the hero. Switch to `/vi` — footer/contact text translated, social links unchanged (they're not language-dependent).
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add src/components/sections/Contact.tsx src/components/Footer.tsx src/app/globals.css src/app/[locale]/page.tsx
+git add src/features/portfolio/components src/features/portfolio/pages/home-page.tsx src/app/globals.css src/app/[locale]/page.tsx
 git commit -m "feat: add contact section, footer, and assemble full home page"
 ```
 
 ---
 
-### Task 16: Final build and manual verification pass
+### Task 16: Final build, rules audit, and manual verification pass
 
 **Files:**
-- None created — this task verifies the assembled app against the spec's "Testing / verification" checklist.
+- None created — this task verifies the assembled app against the spec's "Testing / verification" checklist and this repo's `CLAUDE.md` conventions.
 
 **Interfaces:**
 - None (verification-only task).
@@ -3262,7 +3498,12 @@ Expected: build succeeds with no TypeScript or ESLint errors; output lists stati
 Run: `npm run start`, visit `http://localhost:3000`.
 Expected: same behavior as `npm run dev`, served from the production build.
 
-- [ ] **Step 3: Walk the spec's verification checklist**
+- [ ] **Step 3: Run the dev-rules audit**
+
+Run: `bash audit-rules.sh src`
+Expected: mostly `OK` sections. Section 6 (`<svg>` outside `src/components/icons/`) and section 7 (`<a>` for internal links) are expected to report zero *unjustified* hits — every remaining `<a>` in the codebase is either a same-page hash anchor or a `target="_blank"`/`mailto:`/external-domain link, which is the documented exception in `CLAUDE.md`. If the audit finds anything else (a stray inline `<svg>`, a `<button>` where a link was meant, a missing `index.ts` barrel), fix it directly — this is a report, not a gate, but its hits are still real signal on a fresh codebase.
+
+- [ ] **Step 4: Walk the spec's verification checklist**
 
 With the production server running, confirm each item from `docs/superpowers/specs/2026-08-21-portfolio-design.md`:
 
@@ -3274,15 +3515,15 @@ With the production server running, confirm each item from `docs/superpowers/spe
 - [ ] Responsive check at a sub-600px width: hamburger nav opens/closes, hero CTAs and stats are equal-width, project grid is 1 column, tech-stack grid is 2 columns.
 - [ ] Keyboard-only pass: Tab through the nav, toggles, project cards (media link + GitHub link), and case-study back link — every interactive element is reachable and shows a visible focus ring, and Enter activates each one.
 
-- [ ] **Step 4: Fix any issues found during Step 3**
+- [ ] **Step 5: Fix any issues found during Steps 3-4**
 
 If a check fails, fix the responsible component/CSS file directly (no separate task needed — this is a verification pass, not new scope) and re-run the affected checks.
 
-- [ ] **Step 5: Final commit**
+- [ ] **Step 6: Final commit**
 
 ```bash
 git add -A
-git commit -m "chore: verify production build against spec checklist"
+git commit -m "chore: verify production build against spec checklist and dev-rules audit"
 ```
 
-(Skip this commit if Step 4 required no fixes and nothing is staged.)
+(Skip this commit if Step 5 required no fixes and nothing is staged.)
