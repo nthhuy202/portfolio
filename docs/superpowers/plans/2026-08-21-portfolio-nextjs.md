@@ -4,9 +4,9 @@
 
 **Goal:** Build the bilingual (EN/VI), light/dark, animated Next.js portfolio site described in the design spec — a single scrolling home page plus per-project case-study pages — matching the finalized HTML prototype pixel-for-pixel, and following this repo's `CLAUDE.md` coding conventions.
 
-**Architecture:** Next.js App Router with all routes under `src/app/[locale]/`, localized via `next-intl` middleware (default `en`, `/vi` secondary). Route files (`page.tsx`) stay thin — they unwrap `params` and render one component from `src/features/portfolio/pages/`, per `.claude/skills/nextjs-app-router/SKILL.md`; all real UI lives in the `portfolio` feature (this project has exactly one feature, so almost everything is feature-scoped — see `CLAUDE.md`'s Project Structure section). Content is file-based: project case studies as bilingual MDX with frontmatter (parsed with `gray-matter`, rendered with `next-mdx-remote/rsc`), experience entries as bilingual JSON, everything else as UI strings in `next-intl` message files. The prototype's hand-written CSS (custom properties for theming, keyframe animations for the background/marquee/card hover, `clamp()` type scale) is ported almost verbatim into `globals.css` — it's already theme-aware and accessible, and re-deriving it as Tailwind utility soup would just be slower and risk drifting from the approved design. Tailwind v4 supplies the reset layer and is available for any incidental utility use, but is not the primary styling mechanism for this design.
+**Architecture:** Next.js App Router with all routes under `src/app/[locale]/`, localized via `next-intl` middleware (default `en`, `/vi` secondary). Route files (`page.tsx`) stay thin — they unwrap `params` and render one component from `src/features/portfolio/pages/`, per `.claude/skills/nextjs-app-router/SKILL.md`; all real UI lives in the `portfolio` feature (this project has exactly one feature, so almost everything is feature-scoped — see `CLAUDE.md`'s Project Structure section). Content is file-based: project case studies as bilingual MDX with frontmatter (parsed with `gray-matter`, rendered with `next-mdx-remote-client/rsc` — see the note on Task 13/16), experience entries as bilingual JSON, everything else as UI strings in `next-intl` message files. The prototype's hand-written CSS (custom properties for theming, keyframe animations for the background/marquee/card hover, `clamp()` type scale) is ported almost verbatim into `globals.css` — it's already theme-aware and accessible, and re-deriving it as Tailwind utility soup would just be slower and risk drifting from the approved design. Tailwind v4 supplies the reset layer and is available for any incidental utility use, but is not the primary styling mechanism for this design.
 
-**Tech Stack:** Next.js 15 (App Router, TypeScript) · Tailwind CSS v4 · next-intl · next-themes · Framer Motion · gray-matter + next-mdx-remote/rsc · clsx (for `cn()`)
+**Tech Stack:** Next.js 15 (App Router, TypeScript) · Tailwind CSS v4 · next-intl · next-themes · Framer Motion · gray-matter + next-mdx-remote-client/rsc (Task 16 swapped this from `next-mdx-remote/rsc`: the original package's RSC jsx-runtime resolution crashes under Next.js 15 + React 19 in production — see Task 13/16 notes) · clsx (for `cn()`)
 
 **Spec:** `docs/superpowers/specs/2026-08-21-portfolio-design.md`
 **Project rules:** `CLAUDE.md` (this repo's coding conventions — feature-based structure, kebab-case, interface-over-type, `cn()`, raw `<button>`, custom icons, `next-intl` `Link`)
@@ -152,7 +152,7 @@ src/
     "next-themes": "^0.4.4",
     "framer-motion": "^11.15.0",
     "gray-matter": "^4.0.3",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote-client": "^2.1.12",
     "clsx": "^2.1.1"
   },
   "devDependencies": {
@@ -167,6 +167,8 @@ src/
   }
 }
 ```
+
+(`next-mdx-remote-client` — not `next-mdx-remote` — from the start: the original package's RSC jsx-runtime resolution crashes under Next.js 15 + React 19 in production. In this plan's actual execution the swap only surfaced at Task 16, because Task 13's own verification only ran `npm run dev`, not a production `npm run start` — the bug is invisible in dev mode. Installing the correct package here avoids that whole detour on a fresh run.)
 
 - [ ] **Step 2: Create `tsconfig.json`**
 
@@ -1234,7 +1236,7 @@ git commit -m "feat: add animated gradient background"
   - `getExperience(locale: string): ExperienceEntry[]` where `ExperienceEntry` is an `interface { company: string; role: string; period: string; bullets: string[] }`
   - `getAllProjectsMeta(locale: string): ProjectMeta[]` where `ProjectMeta extends ProjectFrontmatter` and adds `{ slug: string }`
   - `getProjectSlugs(locale: string): string[]`
-  - `getProjectSource(locale: string, slug: string): string` (raw MDX file contents including frontmatter, for `compileMDX` in Task 13)
+  - `getProjectSource(locale: string, slug: string): string` (raw MDX file contents including frontmatter, for `evaluate` in Task 13)
   - `ProjectFrontmatter` is an `interface { title: string; summary: string; tech: string[]; githubUrl?: string; demoUrl?: string; image?: string; periods: string[]; country: { flag: string; name: string }; role: string; stack: string; hasPhoto: boolean }`
 
 - [ ] **Step 1: Create `src/features/portfolio/types/content.ts`**
@@ -3017,7 +3019,7 @@ git commit -m "feat: add project cards and projects grid section"
 ```tsx
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { compileMDX } from "next-mdx-remote/rsc";
+import { evaluate } from "next-mdx-remote-client/rsc";
 import { Nav } from "@/features/portfolio/components/nav";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
@@ -3039,10 +3041,20 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   }
 
   const source = getProjectSource(locale, slug);
-  const { content, frontmatter } = await compileMDX<ProjectFrontmatter>({
+  // next-mdx-remote/rsc's compileMDX crashes in Next.js 15 + React 19 RSC rendering
+  // ("Attempted to render ... without development properties") because its jsx-runtime
+  // pick relies on a runtime process.env.NODE_ENV check instead of a bundler-resolved
+  // import; next-mdx-remote-client is the maintained fork that fixes this. Same shape,
+  // renamed export (evaluate instead of compileMDX).
+  // evaluate()'s generic requires `extends Record<string, unknown>`, which an
+  // `interface` (this project's convention over `type`) never structurally satisfies
+  // even when its shape matches — cast after the call instead of adding an index
+  // signature to ProjectFrontmatter just to please this one call site.
+  const { content, frontmatter: rawFrontmatter } = await evaluate({
     source,
     options: { parseFrontmatter: true },
   });
+  const frontmatter = rawFrontmatter as unknown as ProjectFrontmatter;
 
   const t = await getTranslations({ locale, namespace: "caseStudy" });
   const tProjects = await getTranslations({ locale, namespace: "projects" });
@@ -3076,7 +3088,7 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
 }
 ```
 
-(`compileMDX` parses the frontmatter itself here — `getProjectSource` returns the raw file including the `---` block, and `parseFrontmatter: true` strips and types it, so this page doesn't need `gray-matter` directly; `gray-matter` is only used in `getAllProjectsMeta`, Task 6, for the card-listing metadata.)
+(`evaluate` parses the frontmatter itself here — `getProjectSource` returns the raw file including the `---` block, and `parseFrontmatter: true` strips and types it, so this page doesn't need `gray-matter` directly; `gray-matter` is only used in `getAllProjectsMeta`, Task 6, for the card-listing metadata.)
 
 - [ ] **Step 3: Create `src/app/[locale]/projects/[slug]/page.tsx`**
 
