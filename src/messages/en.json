@@ -51,5 +51,17 @@
     "role": "Role",
     "period": "Period",
     "stack": "Stack"
+  },
+  "meta": {
+    "title": "Alex Tran — Portfolio",
+    "description": "Full-stack engineer building fast, quiet software."
+  },
+  "a11y": {
+    "primaryNav": "Primary",
+    "toggleMenu": "Toggle menu",
+    "toggleDarkMode": "Toggle dark mode",
+    "switchToVietnamese": "Switch to Vietnamese",
+    "switchToEnglish": "Switch to English",
+    "viewSourceOnGithub": "View source on GitHub"
   }
 }

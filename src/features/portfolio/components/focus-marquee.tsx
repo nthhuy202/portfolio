@@ -1,11 +1,13 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Reveal } from "@/features/portfolio/components/reveal";
 import { focusKeywords } from "@/features/portfolio/constants/keywords";
+import { isSupportedLocale } from "@/i18n/routing";
 
 export function FocusMarquee() {
   const t = useTranslations("focus");
-  const locale = useLocale() as "en" | "vi";
-  const words = focusKeywords[locale] ?? focusKeywords.en;
+  const rawLocale = useLocale();
+  const locale = isSupportedLocale(rawLocale) ? rawLocale : "en";
+  const words = focusKeywords[locale];
   const trackWords = [...words, ...words];
 
   return (

@@ -51,5 +51,17 @@
     "role": "Vai trò",
     "period": "Thời gian",
     "stack": "Công nghệ"
+  },
+  "meta": {
+    "title": "Alex Tran — Portfolio",
+    "description": "Kỹ sư full-stack, xây phần mềm nhanh và gọn."
+  },
+  "a11y": {
+    "primaryNav": "Điều hướng chính",
+    "toggleMenu": "Bật/tắt menu",
+    "toggleDarkMode": "Bật/tắt chế độ tối",
+    "switchToVietnamese": "Chuyển sang tiếng Việt",
+    "switchToEnglish": "Chuyển sang tiếng Anh",
+    "viewSourceOnGithub": "Xem mã nguồn trên GitHub"
   }
 }

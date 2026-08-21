@@ -102,6 +102,7 @@ src/
       constants/
         tech-stack.ts
         keywords.ts
+        nav-sections.ts
       types/
         content.ts
       content/
@@ -1951,13 +1952,12 @@ import { cn } from "@/utils/cn";
 import { ThemeToggle } from "@/features/portfolio/components/theme-toggle";
 import { LocaleSwitcher } from "@/features/portfolio/components/locale-switcher";
 import { useScrollSpy } from "@/features/portfolio/hooks/use-scroll-spy";
-
-const SECTION_IDS = ["about", "projects", "experience", "contact"];
+import { navSectionIds } from "@/features/portfolio/constants/nav-sections";
 
 export function Nav() {
   const t = useTranslations("nav");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const activeId = useScrollSpy(SECTION_IDS, "header.nav");
+  const activeId = useScrollSpy(navSectionIds, "header.nav");
 
   function handleCloseMenu() {
     setIsMenuOpen(false);
@@ -1976,7 +1976,7 @@ export function Nav() {
         </a>
         <nav aria-label="Primary">
           <ul className={cn("nav-links", isMenuOpen && "open")} id="navLinks">
-            {SECTION_IDS.map((id) => (
+            {navSectionIds.map((id) => (
               <li key={id}>
                 <a href={`#${id}`} className={cn(activeId === id && "active")} onClick={handleCloseMenu}>
                   {t(id)}
@@ -2006,6 +2006,8 @@ export function Nav() {
 ```
 
 (The `#about`/`#projects`/`#experience`/`#contact`/`#top` links stay plain `<a>` — they are same-page hash anchors, not route navigation, so `next-intl`'s `Link` doesn't apply; see `CLAUDE.md`'s Internal links convention.)
+
+(`SECTION_IDS` is shown declared inline above for how this task originally shipped it, but it didn't stay that way: Task 16's dev-rules audit (`bash audit-rules.sh src`, section 19 — pure constants belong in `constants/`, not the component file) flagged it, so it was extracted into `src/features/portfolio/constants/nav-sections.ts` as `navSectionIds: string[]` and imported here instead — the code block above already reflects that end state; backfilled into this step for anyone re-reading the plan. A later whole-branch review also found that `Nav` doesn't work correctly when reused outside the home page — see the "Post-review fixes" note after Task 16.)
 
 - [ ] **Step 5: Add the exports to the components barrel**
 
@@ -3050,10 +3052,13 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   // `interface` (this project's convention over `type`) never structurally satisfies
   // even when its shape matches — cast after the call instead of adding an index
   // signature to ProjectFrontmatter just to please this one call site.
-  const { content, frontmatter: rawFrontmatter } = await evaluate({
+  const { content, frontmatter: rawFrontmatter, error } = await evaluate({
     source,
     options: { parseFrontmatter: true },
   });
+  // evaluate() returns compile errors instead of throwing (unlike compileMDX) — an
+  // empty `content` fallback would otherwise ship silently on a malformed .mdx file.
+  if (error) throw error;
   const frontmatter = rawFrontmatter as unknown as ProjectFrontmatter;
 
   const t = await getTranslations({ locale, namespace: "caseStudy" });
@@ -3089,6 +3094,8 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
 ```
 
 (`evaluate` parses the frontmatter itself here — `getProjectSource` returns the raw file including the `---` block, and `parseFrontmatter: true` strips and types it, so this page doesn't need `gray-matter` directly; `gray-matter` is only used in `getAllProjectsMeta`, Task 6, for the card-listing metadata.)
+
+(The `if (error) throw error;` guard shown above is not how this task originally shipped: `evaluate` returns compile errors on its result object instead of throwing them the way `compileMDX` did, and the first version of this file discarded that `error` field — meaning a malformed `.mdx` file would have rendered a 200 with a silently empty case-study body instead of failing loudly. Commit `1aebbe5` added the guard during Task 16's review-fix loop; backfilled into this step for anyone re-reading the plan.)
 
 - [ ] **Step 3: Create `src/app/[locale]/projects/[slug]/page.tsx`**
 
@@ -3549,3 +3556,13 @@ git commit -m "chore: verify production build against spec checklist and dev-rul
 ```
 
 (Skip this commit if Step 5 required no fixes and nothing is staged.)
+
+---
+
+### Post-review fixes (backfilled, not a numbered task)
+
+A final whole-branch code review after Task 16 found three more issues, fixed in a single combined commit (`fix: address final whole-branch review findings`) rather than as new numbered tasks, since the plan itself was already complete:
+
+- **`Nav` was dead on all 6 case-study routes.** `nav.tsx` (Task 8) was written assuming it only ever renders on the home page, where `#about`/`#projects`/etc. resolve against real sections. `project-case-study-page.tsx` (Task 13) reuses the same `<Nav />` unchanged, but that page has no matching section ids — so every nav link, and the `alex.dev` logo mark, silently did nothing on `/en/projects/*` and `/vi/projects/*`. Fix: `Nav` now checks `usePathname() === "/"` and renders `<Link href={`/#${id}`}>` off the home page instead of the plain `<a href="#${id}">`, the same `/#id` pattern Task 13's own "back to projects" link already used.
+- **Hardcoded English `aria-label`s** on `Nav`, `ThemeToggle`, `LocaleSwitcher`, and `ProjectCard`'s GitHub link never switched with the EN/VI toggle, despite the spec requiring "all UI strings" to swap. Fix: added an `a11y` message namespace (Task 3's message files) and wired each component to `useTranslations("a11y")`.
+- **Page `<title>`/description were English-only and generic** for every route, including all 6 case-study pages sharing one non-project-specific title. Fix: `src/app/[locale]/layout.tsx` (Task 3) now exports `generateMetadata` reading a new `meta` namespace instead of a static `metadata` object, and `project-case-study-page.tsx` (Task 13) exports a `generateProjectMetadata` (re-exported from the route file, same delegation pattern as `generateProjectStaticParams`) that returns the project's own title/summary via the existing `getAllProjectsMeta` loader.

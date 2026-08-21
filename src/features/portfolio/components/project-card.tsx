@@ -9,6 +9,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const t = useTranslations("projects");
+  const tA11y = useTranslations("a11y");
 
   return (
     <article className="card">
@@ -49,7 +50,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
-              aria-label="View source on GitHub"
+              aria-label={tA11y("viewSourceOnGithub")}
             >
               GH
             </a>

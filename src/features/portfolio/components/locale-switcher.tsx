@@ -1,9 +1,10 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
 export function LocaleSwitcher() {
+  const t = useTranslations("a11y");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -17,7 +18,7 @@ export function LocaleSwitcher() {
     <button
       type="button"
       className="chip-btn"
-      aria-label={locale === "en" ? "Switch to Vietnamese" : "Switch to English"}
+      aria-label={locale === "en" ? t("switchToVietnamese") : t("switchToEnglish")}
       onClick={handleSwitchLocale}
     >
       {locale.toUpperCase()}

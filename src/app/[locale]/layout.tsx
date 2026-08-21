@@ -1,19 +1,18 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { isSupportedLocale, routing } from "@/i18n/routing";
 import { ThemeProvider, AnimatedBackground } from "@/features/portfolio/components";
 import "../globals.css";
 
-export const metadata: Metadata = {
-  title: "Alex Tran — Portfolio",
-  description: "Full-stack engineer building fast, quiet software.",
-};
-
 interface LocaleLayoutProps {
   children: ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
+interface GenerateMetadataProps {
   params: Promise<{ locale: string }>;
 }
 
@@ -21,10 +20,20 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
+
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
 
-  if (!(routing.locales as readonly string[]).includes(locale)) {
+  if (!isSupportedLocale(locale)) {
     notFound();
   }
 

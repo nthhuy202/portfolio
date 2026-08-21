@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { evaluate } from "next-mdx-remote-client/rsc";
 import { Nav } from "@/features/portfolio/components/nav";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { getProjectSlugs, getProjectSource } from "@/features/portfolio/utils/projects";
+import { getAllProjectsMeta, getProjectSlugs, getProjectSource } from "@/features/portfolio/utils/projects";
 import type { ProjectFrontmatter } from "@/features/portfolio/types/content";
 
 interface ProjectCaseStudyPageProps {
@@ -12,8 +13,26 @@ interface ProjectCaseStudyPageProps {
   slug: string;
 }
 
+interface GenerateProjectMetadataProps {
+  params: Promise<{ locale: string; slug: string }>;
+}
+
 export function generateProjectStaticParams() {
   return routing.locales.flatMap((locale) => getProjectSlugs(locale).map((slug) => ({ locale, slug })));
+}
+
+export async function generateProjectMetadata({ params }: GenerateProjectMetadataProps): Promise<Metadata> {
+  const { locale, slug } = await params;
+  // Reuses the gray-matter-based frontmatter loader (already used for the projects
+  // grid) instead of running the MDX `evaluate()` compile a second time just for
+  // title/summary — cheaper and avoids double-compiling the same file.
+  const project = getAllProjectsMeta(locale).find((meta) => meta.slug === slug);
+
+  if (!project) {
+    return {};
+  }
+
+  return { title: project.title, description: project.summary };
 }
 
 export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPageProps) {
