@@ -31,10 +31,13 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   // `interface` (this project's convention over `type`) never structurally satisfies
   // even when its shape matches — cast after the call instead of adding an index
   // signature to ProjectFrontmatter just to please this one call site.
-  const { content, frontmatter: rawFrontmatter } = await evaluate({
+  const { content, frontmatter: rawFrontmatter, error } = await evaluate({
     source,
     options: { parseFrontmatter: true },
   });
+  // evaluate() returns compile errors instead of throwing (unlike compileMDX) — an
+  // empty `content` fallback would otherwise ship silently on a malformed .mdx file.
+  if (error) throw error;
   const frontmatter = rawFrontmatter as unknown as ProjectFrontmatter;
 
   const t = await getTranslations({ locale, namespace: "caseStudy" });

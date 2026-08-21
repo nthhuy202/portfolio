@@ -1,1 +1,1 @@
-export const navSectionIds = ["about", "projects", "experience", "contact"];
+export const navSectionIds: string[] = ["about", "projects", "experience", "contact"];
