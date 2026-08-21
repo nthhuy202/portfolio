@@ -28,9 +28,12 @@ what it demonstrates and how it maps to the real implementation.
 - **next-intl** for i18n routing.
 - **next-themes** for light/dark persistence.
 - **Framer Motion** for scroll-reveal and hover/entrance animation.
-- **gray-matter** + **next-mdx-remote/rsc** for parsing and rendering
+- **gray-matter** + **next-mdx-remote-client/rsc** for parsing and rendering
   project case-study MDX (no contentlayer — avoids its codegen step for a
-  site this small).
+  site this small; `next-mdx-remote-client` is a maintained fork of
+  `next-mdx-remote`, swapped in during Task 16 because `next-mdx-remote/rsc`'s
+  `compileMDX` crashes under Next.js 15 + React 19 RSC rendering — a known,
+  unfixed upstream issue on the archived original package).
 
 No backend, no database, no CMS, no contact-form API. Content lives in
 the repo as data/MDX files and is edited by hand.

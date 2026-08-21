@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { compileMDX } from "next-mdx-remote/rsc";
+import { evaluate } from "next-mdx-remote-client/rsc";
 import { Nav } from "@/features/portfolio/components/nav";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
@@ -22,10 +22,20 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   }
 
   const source = getProjectSource(locale, slug);
-  const { content, frontmatter } = await compileMDX<ProjectFrontmatter>({
+  // next-mdx-remote/rsc's compileMDX crashes in Next.js 15 + React 19 RSC rendering
+  // ("Attempted to render ... without development properties") because its jsx-runtime
+  // pick relies on a runtime process.env.NODE_ENV check instead of a bundler-resolved
+  // import; next-mdx-remote-client is the maintained fork that fixes this. Same shape,
+  // renamed export (evaluate instead of compileMDX).
+  // evaluate()'s generic requires `extends Record<string, unknown>`, which an
+  // `interface` (this project's convention over `type`) never structurally satisfies
+  // even when its shape matches — cast after the call instead of adding an index
+  // signature to ProjectFrontmatter just to please this one call site.
+  const { content, frontmatter: rawFrontmatter } = await evaluate({
     source,
     options: { parseFrontmatter: true },
   });
+  const frontmatter = rawFrontmatter as unknown as ProjectFrontmatter;
 
   const t = await getTranslations({ locale, namespace: "caseStudy" });
   const tProjects = await getTranslations({ locale, namespace: "projects" });

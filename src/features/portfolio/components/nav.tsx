@@ -6,13 +6,12 @@ import { cn } from "@/utils/cn";
 import { ThemeToggle } from "@/features/portfolio/components/theme-toggle";
 import { LocaleSwitcher } from "@/features/portfolio/components/locale-switcher";
 import { useScrollSpy } from "@/features/portfolio/hooks/use-scroll-spy";
-
-const SECTION_IDS = ["about", "projects", "experience", "contact"];
+import { navSectionIds } from "@/features/portfolio/constants/nav-sections";
 
 export function Nav() {
   const t = useTranslations("nav");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const activeId = useScrollSpy(SECTION_IDS, "header.nav");
+  const activeId = useScrollSpy(navSectionIds, "header.nav");
 
   function handleCloseMenu() {
     setIsMenuOpen(false);
@@ -31,7 +30,7 @@ export function Nav() {
         </a>
         <nav aria-label="Primary">
           <ul className={cn("nav-links", isMenuOpen && "open")} id="navLinks">
-            {SECTION_IDS.map((id) => (
+            {navSectionIds.map((id) => (
               <li key={id}>
                 <a href={`#${id}`} className={cn(activeId === id && "active")} onClick={handleCloseMenu}>
                   {t(id)}
