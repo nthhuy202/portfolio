@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { ThemeProvider } from "@/features/portfolio/components";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -29,9 +30,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <NextIntlClientProvider>
-          <div className="wrap">{children}</div>
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider>
+            <div className="wrap">{children}</div>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
