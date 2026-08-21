@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "Portfolio — 2026",
+    "hi": "Hi, I'm",
+    "role": "Full-stack engineer building fast, quiet software.",
+    "pitch": "I design and ship web products end to end — from database schema to the last pixel of the interface. Lately: developer tools, dashboards, and systems that stay fast under real load.",
+    "ctaProjects": "View projects",
+    "ctaContact": "Get in touch",
+    "statYears": "years shipping",
+    "statProjects": "projects launched",
+    "statTeams": "teams led"
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Background & approach",
+    "p1": "I started out fixing WordPress themes for friends and ended up leading platform teams at two Series-B startups. I care about systems that are boring in the right places — predictable deploys, readable code, dashboards nobody has to babysit.",
+    "p2": "Outside of work I write short technical notes on distributed systems and mentor junior engineers switching into backend roles.",
+    "stackLabel": "Tech stack"
+  },
+  "focus": {
+    "eyebrow": "Focus areas",
+    "title": "What I obsess over"
+  },
+  "projects": {
+    "eyebrow": "Selected work",
+    "title": "Projects",
+    "lede": "A few things I've built recently. Open a case study for the full story.",
+    "viewCaseStudy": "View case study",
+    "back": "← Back to projects"
+  },
+  "experience": {
+    "eyebrow": "Career",
+    "title": "Work experience"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk",
+    "blurb": "Open to full-time roles and select freelance work. Fastest way to reach me is email."
+  },
+  "footer": {
+    "built": "built with Next.js & Tailwind",
+    "top": "↑ back to top"
+  },
+  "caseStudy": {
+    "role": "Role",
+    "period": "Period",
+    "stack": "Stack"
+  }
+}

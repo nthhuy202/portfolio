@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "about": "Giới thiệu",
+    "projects": "Dự án",
+    "experience": "Kinh nghiệm",
+    "contact": "Liên hệ"
+  },
+  "hero": {
+    "eyebrow": "Portfolio — 2026",
+    "hi": "Xin chào, tôi là",
+    "role": "Kỹ sư full-stack, xây phần mềm nhanh và gọn.",
+    "pitch": "Tôi thiết kế và triển khai sản phẩm web trọn vẹn — từ schema cơ sở dữ liệu đến từng pixel giao diện. Gần đây: công cụ cho developer, dashboard, và các hệ thống chịu tải thật tốt.",
+    "ctaProjects": "Xem dự án",
+    "ctaContact": "Liên hệ ngay",
+    "statYears": "năm kinh nghiệm",
+    "statProjects": "dự án đã ra mắt",
+    "statTeams": "đội đã dẫn dắt"
+  },
+  "about": {
+    "eyebrow": "Giới thiệu",
+    "title": "Quá trình & cách tiếp cận",
+    "p1": "Tôi bắt đầu bằng việc sửa theme WordPress cho bạn bè, rồi dần dẫn dắt đội platform tại hai startup giai đoạn Series-B. Tôi quan tâm đến những hệ thống \"nhàm chán đúng chỗ\" — deploy dễ đoán, code dễ đọc, dashboard không cần ai canh chừng.",
+    "p2": "Ngoài công việc, tôi viết ghi chú kỹ thuật ngắn về hệ thống phân tán và mentor các kỹ sư trẻ chuyển sang backend.",
+    "stackLabel": "Công nghệ"
+  },
+  "focus": {
+    "eyebrow": "Trọng tâm",
+    "title": "Những điều tôi chú trọng"
+  },
+  "projects": {
+    "eyebrow": "Dự án tiêu biểu",
+    "title": "Dự án",
+    "lede": "Một vài sản phẩm tôi làm gần đây. Mở case study để xem đầy đủ.",
+    "viewCaseStudy": "Xem case study",
+    "back": "← Quay lại dự án"
+  },
+  "experience": {
+    "eyebrow": "Sự nghiệp",
+    "title": "Kinh nghiệm làm việc"
+  },
+  "contact": {
+    "eyebrow": "Liên hệ",
+    "title": "Cùng trao đổi nhé",
+    "blurb": "Sẵn sàng cho vị trí full-time và một số dự án freelance chọn lọc. Cách nhanh nhất để liên hệ là qua email."
+  },
+  "footer": {
+    "built": "xây dựng với Next.js & Tailwind",
+    "top": "↑ về đầu trang"
+  },
+  "caseStudy": {
+    "role": "Vai trò",
+    "period": "Thời gian",
+    "stack": "Công nghệ"
+  }
+}
