@@ -777,6 +777,7 @@ export const config = {
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -802,10 +803,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound();
   }
 
+  const messages = await getMessages();
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <div className="wrap">{children}</div>
         </NextIntlClientProvider>
       </body>
@@ -814,7 +817,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 }
 ```
 
-(`ThemeProvider` and `AnimatedBackground` are added to this layout in Tasks 4 and 5.)
+(`ThemeProvider` and `AnimatedBackground` are added to this layout in Tasks 4 and 5. The explicit `messages={await getMessages()}` is required here: the installed next-intl 3.26.5's Server-Component auto-inject wrapper only fills in `locale`/`now`/`timeZone` on `<NextIntlClientProvider>`, not `messages` — omitting it throws `MISSING_MESSAGE` the moment any client component calls `useTranslations`. This didn't surface until Task 8's `Nav`, the first client component in the tree to actually call it; fixed there and backfilled into this step for anyone re-reading the plan.)
 
 - [ ] **Step 8: Create `src/app/[locale]/page.tsx`**
 
@@ -1006,12 +1009,14 @@ Change the body contents to:
 ```tsx
 <body>
   <ThemeProvider>
-    <NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages}>
       <div className="wrap">{children}</div>
     </NextIntlClientProvider>
   </ThemeProvider>
 </body>
 ```
+
+(`messages` is the variable already assigned via `const messages = await getMessages();` in Task 3's Step 7 — keep that line, only the JSX below it changes here.)
 
 - [ ] **Step 9: Temporarily render `<ThemeToggle />` on the placeholder home page to verify it**
 
@@ -1182,7 +1187,7 @@ import { ThemeProvider, AnimatedBackground } from "@/features/portfolio/componen
 ```tsx
 <body>
   <ThemeProvider>
-    <NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages}>
       <AnimatedBackground />
       <div className="wrap">{children}</div>
     </NextIntlClientProvider>
