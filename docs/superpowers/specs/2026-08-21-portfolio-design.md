@@ -1,7 +1,7 @@
 # Personal Portfolio — Design Spec
 
 Date: 2026-08-21
-Status: Approved via brainstorming, pending final spec review
+Status: Approved via brainstorming; prototype finalized
 
 ## Purpose
 
@@ -68,12 +68,15 @@ the repo as data/MDX files and is edited by hand.
 ## Page sections (home)
 
 1. **Nav** — sticky, blurred background (7–8px backdrop blur, not the
-   heavier default). Logo mark `alex.dev` set in a monospace/typewriter
-   font stack with a blinking `_` cursor after it. Anchor links to
+   heavier default). Logo mark `alex.dev` set in the same system
+   monospace stack used for labels elsewhere. Anchor links to
    About / Projects / Experience / Contact; the active section's link
    highlights automatically via scroll position (IntersectionObserver
-   scrollspy). Locale switcher (EN/VI) and theme toggle (sun/moon) live
-   on the right; collapses to a hamburger menu on mobile.
+   scrollspy) — a section activates as soon as its top clears the sticky
+   nav, and stays active until less than half of it remains on screen,
+   using the nav's real rendered height (not a fixed percentage) as the
+   trigger offset. Locale switcher (EN/VI) and theme toggle (sun/moon)
+   live on the right; collapses to a hamburger menu on mobile.
 2. **Hero** — name, role tagline, short pitch, two CTA buttons (View
    projects / Get in touch — equal-width, stacked full-width on mobile),
    and three stats (years / projects / teams — also equal-width on
@@ -122,11 +125,11 @@ the repo as data/MDX files and is edited by hand.
   tokens so the effect holds up in both themes. All animation respects
   `prefers-reduced-motion`.
 - **Type**: system sans-serif stack for headings/body, system monospace
-  stack for labels/eyebrows/code-flavored UI, plus a typewriter-style
-  monospace (`Courier New` stack) reserved for the nav logo mark only.
-  Base sizes match the first prototype pass for medium/large text;
-  small utility text (eyebrows, chips, pills, badges, footer) runs
-  slightly larger (~1–2px) than that baseline for legibility.
+  stack for labels/eyebrows/code-flavored UI (including the nav logo
+  mark — no separate typewriter face). Base sizes match the first
+  prototype pass for medium/large text; small utility text (eyebrows,
+  chips, pills, badges, footer) runs slightly larger (~1–2px) than that
+  baseline for legibility.
 - **Theme tokens**: color, background, and blob-opacity/blend are all
   CSS custom properties, overridden both by `prefers-color-scheme` and
   by an explicit `data-theme` attribute (the toggle), so OS preference
