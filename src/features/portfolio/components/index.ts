@@ -11,3 +11,5 @@ export { FocusMarquee } from "./focus-marquee";
 export { ProjectCard } from "./project-card";
 export { Projects } from "./projects";
 export { Experience } from "./experience";
+export { Contact } from "./contact";
+export { Footer } from "./footer";
