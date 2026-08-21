@@ -10,3 +10,4 @@ export { About } from "./about";
 export { FocusMarquee } from "./focus-marquee";
 export { ProjectCard } from "./project-card";
 export { Projects } from "./projects";
+export { Experience } from "./experience";

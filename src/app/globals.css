@@ -902,3 +902,49 @@ header.nav {
 .case-study-body p {
   margin-bottom: 16px;
 }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 24px;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+}
+
+.tl-period {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--fg-muted);
+  padding-top: 3px;
+}
+
+.tl-role {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.tl-company {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.tl-bullets {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .tl-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
