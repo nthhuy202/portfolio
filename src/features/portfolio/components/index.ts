@@ -5,3 +5,5 @@ export { Reveal } from "./reveal";
 export { LocaleSwitcher } from "./locale-switcher";
 export { Nav } from "./nav";
 export { Hero } from "./hero";
+export { TechStack } from "./tech-stack";
+export { About } from "./about";
