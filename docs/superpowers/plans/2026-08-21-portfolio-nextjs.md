@@ -868,6 +868,7 @@ git commit -m "feat: add next-intl locale routing"
 - Create: `src/components/icons/icon-moon.tsx`
 - Create: `src/features/portfolio/components/index.ts`
 - Modify: `src/app/[locale]/layout.tsx`
+- Modify: `src/app/globals.css`
 
 **Interfaces:**
 - Consumes: `.chip-btn`, `.chip-btn:focus-visible` from Task 2 globals.
@@ -1216,6 +1217,7 @@ git commit -m "feat: add animated gradient background"
 - Create: `src/features/portfolio/content/projects/vi/api-mock-cli.mdx`
 - Create: `src/features/portfolio/content/projects/vi/ecommerce-migration.mdx`
 - Create: `src/features/portfolio/utils/projects.ts`
+- Modify: `src/app/[locale]/page.tsx` (temporary verification render — this task's version persists as the working `page.tsx` through Task 7 and is replaced in Task 8)
 
 **Interfaces:**
 - Produces:
