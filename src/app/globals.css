@@ -832,3 +832,73 @@ header.nav {
   color: var(--fg);
   border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
 }
+
+.case-study {
+  padding-top: 64px;
+}
+
+.case-study-back {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.case-study-back:hover {
+  color: var(--fg);
+}
+
+.case-study h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 20px;
+}
+
+.case-study-meta {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin: 24px 0 32px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.case-study-meta div .l {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+}
+
+.case-study-meta div .v {
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.case-study-body {
+  max-width: 68ch;
+  color: var(--fg-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.case-study-body h2 {
+  color: var(--fg);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 32px 0 10px;
+}
+
+.case-study-body h2:first-child {
+  margin-top: 0;
+}
+
+.case-study-body p {
+  margin-bottom: 16px;
+}
