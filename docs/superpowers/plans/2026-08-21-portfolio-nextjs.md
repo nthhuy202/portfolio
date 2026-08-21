@@ -621,12 +621,15 @@ export const { Link, redirect, usePathname, useRouter } = createNavigation(routi
 
 ```ts
 import { getRequestConfig } from "next-intl/server";
-import { hasLocale } from "next-intl";
 import { routing } from "./routing";
+
+function isSupportedLocale(value: string | undefined): boolean {
+  return value !== undefined && (routing.locales as readonly string[]).includes(value);
+}
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
-  const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
+  const locale = isSupportedLocale(requested) ? (requested as string) : routing.defaultLocale;
 
   return {
     locale,
@@ -773,7 +776,7 @@ export const config = {
 ```tsx
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -795,7 +798,7 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
 
-  if (!hasLocale(routing.locales, locale)) {
+  if (!(routing.locales as readonly string[]).includes(locale)) {
     notFound();
   }
 
