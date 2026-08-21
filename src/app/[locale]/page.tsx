@@ -1,4 +1,4 @@
-import { Nav, Hero, About } from "@/features/portfolio/components";
+import { Nav, Hero, About, FocusMarquee } from "@/features/portfolio/components";
 import { getAllProjectsMeta } from "@/features/portfolio/utils/projects";
 import { getExperience } from "@/features/portfolio/utils/experience";
 
@@ -16,6 +16,7 @@ export default async function Home({ params }: HomeProps) {
       <Nav />
       <Hero />
       <About />
+      <FocusMarquee />
       <section id="projects" style={{ height: "60vh" }}>
         <p>Projects</p>
       </section>

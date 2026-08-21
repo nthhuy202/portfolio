@@ -577,3 +577,53 @@ header.nav {
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+
+.focus-section {
+  overflow: hidden;
+}
+
+.marquee {
+  margin-top: 26px;
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-item {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4.4vw, 2.7rem);
+  letter-spacing: -0.01em;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  white-space: nowrap;
+  padding-right: 40px;
+}
+
+.marquee-item .dash {
+  color: var(--accent);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+
+  .marquee {
+    overflow-x: auto;
+  }
+}
