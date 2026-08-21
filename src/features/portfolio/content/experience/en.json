@@ -1,0 +1,31 @@
+[
+  {
+    "company": "Northlane",
+    "role": "Staff Software Engineer",
+    "period": "2023 — Present",
+    "bullets": [
+      "Lead a team of 5 across the checkout and fulfillment platform",
+      "Cut deploy time from 22min to 4min by rebuilding the CI pipeline",
+      "Set the technical direction for the realtime dashboard rewrite"
+    ]
+  },
+  {
+    "company": "Fernbridge",
+    "role": "Senior Backend Engineer",
+    "period": "2020 — 2023",
+    "bullets": [
+      "Owned the payments service processing ~$40M/year in volume",
+      "Migrated core services from monolith to a Go microservice split",
+      "Mentored 3 junior engineers, two promoted within a year"
+    ]
+  },
+  {
+    "company": "Loop Studio",
+    "role": "Full-stack Developer",
+    "period": "2018 — 2020",
+    "bullets": [
+      "Built and shipped 12+ client web apps end to end",
+      "Introduced automated testing, reducing production bugs by ~30%"
+    ]
+  }
+]

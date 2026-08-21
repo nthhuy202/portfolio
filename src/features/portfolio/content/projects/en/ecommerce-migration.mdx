@@ -1,0 +1,25 @@
+---
+title: "E-commerce platform migration"
+summary: "Migrated a legacy PHP storefront to a headless Next.js frontend without downtime, across three brand storefronts sharing one codebase."
+tech: ["Next.js", "GraphQL", "Docker"]
+githubUrl: "https://github.com/alextran/ecommerce-migration"
+periods: ["2024"]
+country:
+  flag: "🇻🇳"
+  name: "Vietnam"
+role: "Tech lead"
+stack: "Next.js, GraphQL, Docker, AWS"
+hasPhoto: false
+---
+
+## Problem
+
+An aging PHP monolith was slowing every new feature and made it hard to run experiments across three storefronts sharing one codebase.
+
+## Approach
+
+Introduced a headless commerce API and rebuilt the frontend in Next.js incrementally, storefront by storefront, behind a routing proxy so nothing went down.
+
+## Result
+
+Page load times fell by roughly half and the team shipped storefront experiments independently for the first time.

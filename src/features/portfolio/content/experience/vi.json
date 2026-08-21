@@ -1,0 +1,31 @@
+[
+  {
+    "company": "Northlane",
+    "role": "Staff Software Engineer",
+    "period": "2023 — Hiện tại",
+    "bullets": [
+      "Dẫn dắt đội 5 người phụ trách nền tảng checkout và xử lý đơn",
+      "Giảm thời gian deploy từ 22 phút xuống 4 phút nhờ xây lại CI pipeline",
+      "Định hướng kỹ thuật cho việc viết lại dashboard realtime"
+    ]
+  },
+  {
+    "company": "Fernbridge",
+    "role": "Senior Backend Engineer",
+    "period": "2020 — 2023",
+    "bullets": [
+      "Phụ trách payments service xử lý ~40 triệu USD/năm",
+      "Chuyển các service lõi từ monolith sang microservice bằng Go",
+      "Mentor 3 kỹ sư trẻ, hai người được thăng chức trong vòng một năm"
+    ]
+  },
+  {
+    "company": "Loop Studio",
+    "role": "Full-stack Developer",
+    "period": "2018 — 2020",
+    "bullets": [
+      "Xây và triển khai trọn vẹn hơn 12 web app cho khách hàng",
+      "Đưa automated testing vào quy trình, giảm ~30% lỗi production"
+    ]
+  }
+]

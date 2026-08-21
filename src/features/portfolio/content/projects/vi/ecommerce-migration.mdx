@@ -1,0 +1,25 @@
+---
+title: "Di chuyển nền tảng thương mại điện tử"
+summary: "Chuyển storefront PHP cũ sang frontend Next.js headless mà không downtime, trên ba storefront thương hiệu dùng chung codebase."
+tech: ["Next.js", "GraphQL", "Docker"]
+githubUrl: "https://github.com/alextran/ecommerce-migration"
+periods: ["2024"]
+country:
+  flag: "🇻🇳"
+  name: "Việt Nam"
+role: "Tech lead"
+stack: "Next.js, GraphQL, Docker, AWS"
+hasPhoto: false
+---
+
+## Vấn đề
+
+Monolith PHP cũ làm chậm mọi tính năng mới và khó chạy thử nghiệm trên ba storefront dùng chung một codebase.
+
+## Cách tiếp cận
+
+Đưa vào API commerce headless và xây lại frontend bằng Next.js dần dần, từng storefront một, sau một proxy định tuyến để không gây gián đoạn.
+
+## Kết quả
+
+Thời gian tải trang giảm khoảng một nửa, và đội có thể chạy thử nghiệm từng storefront độc lập lần đầu tiên.
