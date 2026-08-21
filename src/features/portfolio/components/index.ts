@@ -8,3 +8,5 @@ export { Hero } from "./hero";
 export { TechStack } from "./tech-stack";
 export { About } from "./about";
 export { FocusMarquee } from "./focus-marquee";
+export { ProjectCard } from "./project-card";
+export { Projects } from "./projects";
