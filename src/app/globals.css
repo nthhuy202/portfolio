@@ -452,3 +452,77 @@ header.nav {
     gap: 16px;
   }
 }
+
+.hero {
+  padding-top: 120px;
+  padding-bottom: 110px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-top: 18px;
+}
+
+.hero h1 .accent {
+  color: var(--accent);
+}
+
+.hero .pitch {
+  margin-top: 22px;
+  max-width: 58ch;
+  font-size: 1.06rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 56px;
+  flex-wrap: wrap;
+}
+
+.stat .n {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.stat .l {
+  font-size: 0.86rem;
+  color: var(--fg-muted);
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .hero-ctas {
+    flex-wrap: nowrap;
+  }
+
+  .hero-ctas .btn {
+    flex: 1 1 0;
+  }
+
+  .hero-stats {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .hero-stats .stat {
+    flex: 1 1 0;
+    text-align: center;
+  }
+}
