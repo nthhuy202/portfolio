@@ -65,26 +65,26 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   return (
     <main>
       <Nav />
-      <article className="case-study shell">
-        <Link className="case-study-back" href="/#projects">
+      <article className="pt-16 max-w-[1100px] mx-auto px-6">
+        <Link className="font-mono text-[0.86rem] text-fg-muted no-underline inline-flex items-center gap-1.5 hover:text-fg" href="/#projects">
           {tProjects("back")}
         </Link>
-        <h1>{frontmatter.title}</h1>
-        <div className="case-study-meta">
+        <h1 className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-[-0.02em] mt-5">{frontmatter.title}</h1>
+        <div className="flex gap-7 flex-wrap mt-6 mb-8 py-5 border-t border-b border-line">
           <div>
-            <div className="l">{t("role")}</div>
-            <div className="v">{frontmatter.role}</div>
+            <div className="font-mono text-[0.76rem] uppercase tracking-[0.1em] text-fg-muted">{t("role")}</div>
+            <div className="text-[0.95rem] mt-1">{frontmatter.role}</div>
           </div>
           <div>
-            <div className="l">{t("period")}</div>
-            <div className="v">{frontmatter.periods.join(" · ")}</div>
+            <div className="font-mono text-[0.76rem] uppercase tracking-[0.1em] text-fg-muted">{t("period")}</div>
+            <div className="text-[0.95rem] mt-1">{frontmatter.periods.join(" · ")}</div>
           </div>
           <div>
-            <div className="l">{t("stack")}</div>
-            <div className="v">{frontmatter.stack}</div>
+            <div className="font-mono text-[0.76rem] uppercase tracking-[0.1em] text-fg-muted">{t("stack")}</div>
+            <div className="text-[0.95rem] mt-1">{frontmatter.stack}</div>
           </div>
         </div>
-        <div className="case-study-body">{content}</div>
+        <div className="case-study-body max-w-[68ch] text-fg-muted text-base leading-[1.75]">{content}</div>
       </article>
     </main>
   );
