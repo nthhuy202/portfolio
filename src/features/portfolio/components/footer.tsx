@@ -10,7 +10,7 @@ export function Footer() {
         <div className="flex items-center gap-5">
           <div className="flex gap-2.5">
             <a
-              className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center font-mono text-[0.78rem] text-fg-muted no-underline transition-[color,border-color] duration-150 ease hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))]"
+              className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center font-mono text-[0.78rem] text-fg-muted no-underline transition-[color,border-color] duration-150 ease-[ease] hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))]"
               href="https://github.com/alextran"
               target="_blank"
               rel="noreferrer"
@@ -19,7 +19,7 @@ export function Footer() {
               GH
             </a>
             <a
-              className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center font-mono text-[0.78rem] text-fg-muted no-underline transition-[color,border-color] duration-150 ease hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))]"
+              className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center font-mono text-[0.78rem] text-fg-muted no-underline transition-[color,border-color] duration-150 ease-[ease] hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))]"
               href="https://linkedin.com/in/alextran"
               target="_blank"
               rel="noreferrer"
@@ -28,7 +28,7 @@ export function Footer() {
               in
             </a>
             <a
-              className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center font-mono text-[0.78rem] text-fg-muted no-underline transition-[color,border-color] duration-150 ease hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))]"
+              className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center font-mono text-[0.78rem] text-fg-muted no-underline transition-[color,border-color] duration-150 ease-[ease] hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))]"
               href="https://facebook.com/alextran"
               target="_blank"
               rel="noreferrer"

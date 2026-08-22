@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
 const CHIP_BUTTON_CLASSNAME =
-  "font-mono text-[0.82rem] tracking-[0.04em] uppercase bg-bg-raised border border-line text-fg-muted rounded-full py-[7px] px-3 flex items-center gap-1.5 transition-[border-color,color] duration-150 ease hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] cursor-pointer";
+  "font-mono text-[0.82rem] tracking-[0.04em] uppercase bg-bg-raised border border-line text-fg-muted rounded-full py-[7px] px-3 flex items-center gap-1.5 transition-[border-color,color] duration-150 ease-[ease] hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] cursor-pointer";
 
 export function LocaleSwitcher() {
   const t = useTranslations("a11y");

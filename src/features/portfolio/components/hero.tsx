@@ -13,13 +13,13 @@ export function Hero() {
       <p className="mt-[22px] max-w-[58ch] text-[1.06rem] leading-[1.7] text-fg-muted">{t("pitch")}</p>
       <div className="flex gap-3.5 mt-[34px] flex-wrap max-[600px]:flex-nowrap">
         <a
-          className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-transparent transition-[transform,background,border-color] duration-150 ease cursor-pointer no-underline bg-accent text-[#1a0a02] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-accent)_88%,white_12%)] max-[600px]:flex-1"
+          className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-transparent transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-accent text-[#1a0a02] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-accent)_88%,white_12%)] max-[600px]:flex-1"
           href="#projects"
         >
           {t("ctaProjects")}
         </a>
         <a
-          className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-line transition-[transform,background,border-color] duration-150 ease cursor-pointer no-underline bg-transparent text-fg hover:-translate-y-px hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] max-[600px]:flex-1"
+          className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-line transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-transparent text-fg hover:-translate-y-px hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] max-[600px]:flex-1"
           href="#contact"
         >
           {t("ctaContact")}
