@@ -45,7 +45,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             <AnimatedBackground />
-            <div className="wrap">{children}</div>
+            <div className="relative z-[1]">{children}</div>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

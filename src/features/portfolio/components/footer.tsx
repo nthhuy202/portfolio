@@ -6,26 +6,26 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="shell">
-      <div className="footer-row">
-        <p>© 2026 Nguyễn Thanh Hà Huy</p>
-        <div className="footer-right">
-          <div className="social-row">
+    <footer className="pt-8 pb-[60px] max-w-[1100px] mx-auto px-6">
+      <div className="flex justify-between items-center flex-wrap gap-4">
+        <p className="text-[0.86rem] text-fg-muted font-mono">© 2026 Nguyễn Thanh Hà Huy</p>
+        <div className="flex items-center gap-5">
+          <div className="flex gap-2.5">
             {socialLinks.map(({ Icon, href, label, brandColor }) => (
               <a
                 key={label}
-                className="social-icon inline-flex items-center justify-center w-8 h-8 text-fg-muted transition-colors duration-150 hover:text-[var(--brand-color)]"
+                className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center text-fg-muted no-underline transition-[color,border-color] duration-150 ease-[ease] hover:text-[var(--brand-color)] hover:border-[var(--brand-color)]"
                 style={{ "--brand-color": brandColor } as CSSProperties}
                 href={href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
               >
-                <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
+                <Icon className="w-4 h-4" aria-hidden="true" />
               </a>
             ))}
           </div>
-          <a className="to-top" href="#top">
+          <a className="font-mono text-[0.86rem] text-fg-muted no-underline hover:text-fg" href="#top">
             {t("top")}
           </a>
         </div>

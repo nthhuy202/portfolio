@@ -2,13 +2,16 @@ import { techStack } from "@/features/portfolio/constants/tech-stack";
 
 export function TechStack() {
   return (
-    <div className="tech-grid">
+    <div className="grid grid-cols-4 gap-3 mt-4 max-[760px]:grid-cols-2">
       {techStack.map((tech) => (
-        <div className="tech-badge" key={tech.name}>
-          <span className="tech-glyph" style={{ background: tech.bg, color: tech.fg }}>
-            <tech.Icon className="tech-icon" aria-hidden="true" />
+        <div className="flex items-center gap-2.5 py-3 px-3.5 border border-line rounded-lg bg-bg-raised" key={tech.name}>
+          <span
+            className="w-8 h-8 rounded-[7px] flex-none flex items-center justify-center"
+            style={{ background: tech.bg, color: tech.fg }}
+          >
+            <tech.Icon className="w-[18px] h-[18px]" aria-hidden="true" />
           </span>
-          <span className="tech-name">{tech.name}</span>
+          <span className="font-mono text-[0.86rem] tracking-[0.02em] uppercase">{tech.name}</span>
         </div>
       ))}
     </div>
