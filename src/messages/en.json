@@ -23,8 +23,21 @@
   "about": {
     "eyebrow": "About",
     "title": "Background & approach",
-    "p1": "Coming from an Electronics & Telecommunications Engineering background, I pivoted into software and have spent 4+ years specializing in frontend development — building React and Next.js applications for projects across Vietnam, France, Canada and the Netherlands. Beyond turning Figma designs into pixel-perfect interfaces, I focus on UI/UX thinking and contribute to design systems to keep the codebase consistent and easy to scale. Optimizing Core Web Vitals, applying lazy loading, code splitting and technical SEO are non-negotiable standards for getting the best performance.",
-    "p2": "Peer code review is a core part of how I work, not a formality — catching bugs and enforcing conventions across every team I've been on. Outside day-to-day frontend work, I've been using Claude Code to direct and review a NestJS/Prisma/PostgreSQL backend build — a structured way to grow into the backend side, without overclaiming skills I'm still building.",
+    "intro": "Coming from an Electronics & Telecommunications Engineering background, I pivoted early and have spent over 4 years specializing in frontend development. Building web apps for partners at home and abroad has shaped a way of working built around 3 focus areas:",
+    "highlights": [
+      {
+        "title": "Interface & Design Systems",
+        "description": "Going beyond turning Figma designs into pixel-perfect interfaces, I focus on UI/UX thinking, actively contribute to design systems, and write interactive documentation with Storybook to keep things consistent and easy to scale. I also use Jest and React Testing Library to test components and keep the system running reliably."
+      },
+      {
+        "title": "Performance & Optimization",
+        "description": "To me, speed isn't an afterthought bolted on at the end of a project. Hitting strong Core Web Vitals scores, applying lazy loading, code splitting and technical SEO are non-negotiable standards in every line of code, for the smoothest experience possible."
+      },
+      {
+        "title": "Code Quality & Transparency",
+        "description": "Peer code review is a core part of the culture, not a box-ticking formality — it keeps conventions consistent and minimizes risk. Alongside that, I actively bring AI agent tools into the development workflow to automate work, increase accuracy, and speed up delivery."
+      }
+    ],
     "stackLabel": "Tech stack"
   },
   "focus": {

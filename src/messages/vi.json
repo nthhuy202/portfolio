@@ -23,8 +23,21 @@
   "about": {
     "eyebrow": "Giới thiệu",
     "title": "Quá trình & cách tiếp cận",
-    "p1": "Xuất thân từ Kỹ thuật Điện tử - Viễn thông, tôi đã chuyển hướng và có hơn 4 năm kinh nghiệm chuyên sâu làm lập trình frontend. Tôi từng phát triển các ứng dụng React và Next.js cho nhiều dự án tại Việt Nam, Pháp, Canada và Hà Lan. Không chỉ dừng lại ở việc hiện thực hóa thiết kế Figma thành các giao diện (interface) pixel-perfect, tôi còn chú trọng vào tư duy UI/UX và tham gia xây dựng Design System để đảm bảo tính đồng bộ, dễ mở rộng của hệ thống. Cùng với đó, việc tối ưu Core Web Vitals, áp dụng lazy loading, code splitting và technical SEO luôn là tiêu chuẩn bắt buộc nhằm mang lại hiệu năng cao nhất.",
-    "p2": "Code review chéo là một phần cốt lõi trong cách tôi làm việc, không phải thủ tục cho có — giúp bắt lỗi và giữ quy ước code nhất quán ở mọi team tôi từng tham gia. Ngoài công việc frontend hằng ngày, tôi dùng Claude Code để định hướng và review một backend NestJS/Prisma/PostgreSQL — cách tiếp cận có cấu trúc để mở rộng sang backend, mà không nhận vơ là đã thành thạo thứ mình vẫn đang học.",
+    "intro": "Dù xuất thân từ chuyên ngành Kỹ thuật Điện tử - Viễn thông, tôi đã sớm rẽ hướng và gắn bó chuyên sâu với lập trình frontend trong hơn 4 năm qua. Quá trình phát triển các web app cho nhiều đối tác quốc tế và nội địa đã định hình phương pháp làm việc của tôi xoay quanh 3 trọng tâm:",
+    "highlights": [
+      {
+        "title": "Giao diện & Design System",
+        "description": "Không chỉ dừng lại ở việc hiện thực hóa thiết kế Figma thành giao diện pixel-perfect. Tôi chú trọng tư duy UI/UX, tích cực tham gia xây dựng Design System và viết tài liệu tương tác với Storybook nhằm đảm bảo tính đồng bộ, dễ mở rộng. Đồng thời, tôi áp dụng các thư viện như Jest và React Testing Library để kiểm thử component, đảm bảo hệ thống vận hành ổn định."
+      },
+      {
+        "title": "Hiệu năng & Tối ưu hóa",
+        "description": "Với tôi, tốc độ không phải là bước làm thêm cuối dự án. Việc đảm bảo điểm số Core Web Vitals, áp dụng lazy loading, code splitting và Technical SEO là tiêu chuẩn bắt buộc trong từng dòng code nhằm mang lại trải nghiệm mượt mà nhất."
+      },
+      {
+        "title": "Chất lượng Code & Sự minh bạch",
+        "description": "Code review chéo là văn hóa cốt lõi, không phải thủ tục cho có — giúp duy trì quy ước code nhất quán và hạn chế tối đa rủi ro. Song song đó, tôi chủ động đưa các công cụ AI Agent vào quy trình phát triển nhằm tự động hóa công việc, tăng độ chính xác và đẩy nhanh tốc độ thực thi dự án."
+      }
+    ],
     "stackLabel": "Công nghệ"
   },
   "focus": {

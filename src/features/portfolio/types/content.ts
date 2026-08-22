@@ -18,6 +18,11 @@ export interface ProjectMeta extends ProjectFrontmatter {
   slug: string;
 }
 
+export interface AboutHighlight {
+  title: string;
+  description: string;
+}
+
 export interface ExperienceEntry {
   company: string;
   role: string;
