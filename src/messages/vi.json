@@ -62,6 +62,9 @@
     "toggleDarkMode": "Bật/tắt chế độ tối",
     "switchToVietnamese": "Chuyển sang tiếng Việt",
     "switchToEnglish": "Chuyển sang tiếng Anh",
-    "viewSourceOnGithub": "Xem mã nguồn trên GitHub"
+    "viewSourceOnGithub": "Xem mã nguồn trên GitHub",
+    "availabilityOpen": "Đang mở nhận việc",
+    "availabilityLimited": "Nhận việc có giới hạn",
+    "availabilityUnavailable": "Hiện không nhận việc"
   }
 }

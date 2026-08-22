@@ -62,6 +62,9 @@
     "toggleDarkMode": "Toggle dark mode",
     "switchToVietnamese": "Switch to Vietnamese",
     "switchToEnglish": "Switch to English",
-    "viewSourceOnGithub": "View source on GitHub"
+    "viewSourceOnGithub": "View source on GitHub",
+    "availabilityOpen": "Open to work",
+    "availabilityLimited": "Limited availability",
+    "availabilityUnavailable": "Not available"
   }
 }
