@@ -35,6 +35,7 @@ export interface TechBadge {
   Icon: ComponentType<ComponentProps<"svg">>;
   bg: string;
   fg: string;
+  url: string;
 }
 
 export interface SocialLink {
