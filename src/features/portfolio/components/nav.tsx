@@ -52,7 +52,7 @@ export function Nav() {
         ) : (
           <Link className="font-mono font-semibold text-[0.95rem] tracking-[0.02em] flex items-center gap-2 no-underline" href="/#top">
             <span className="w-2 h-2 rounded-full bg-[var(--dot-color,var(--color-accent))] shadow-[0_0_0_4px_color-mix(in_srgb,var(--dot-color,var(--color-accent))_22%,transparent)]" style={dotStyle} title={availabilityLabel} role="img" aria-label={availabilityLabel} />
-            <span>NTHHUY</span>
+            <span title="NGUYỄN THANH HÀ HUY">NTTHUY</span>
           </Link>
         )}
         <nav aria-label={tA11y("primaryNav")}>
