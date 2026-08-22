@@ -38,7 +38,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </span>
           ))}
         </div>
-        <span className="absolute bottom-2.5 right-2.5 py-[7px] px-3.5 rounded-full font-mono text-[0.82rem] bg-[rgba(8,10,14,0.72)] text-white opacity-0 translate-y-2 transition-[opacity,transform,background-color,color] duration-[220ms] ease-[ease] backdrop-blur-[4px] motion-reduce:transition-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:bg-accent group-hover:text-[#1a0a02] group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:bg-accent group-focus-within:text-[#1a0a02]">
+        <span className="absolute bottom-2.5 right-2.5 py-[7px] px-3.5 rounded-full font-mono text-[0.82rem] bg-[rgba(8,10,14,0.72)] text-white opacity-0 translate-y-2 transition-[opacity,transform,background-color,color] duration-[380ms] ease-in-out backdrop-blur-[4px] motion-reduce:transition-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:bg-accent group-hover:text-[#1a0a02] group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:bg-accent group-focus-within:text-[#1a0a02]">
           {t("viewCaseStudy")} →
         </span>
       </Link>
