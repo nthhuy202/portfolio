@@ -23,7 +23,7 @@ export function Nav() {
   const t = useTranslations("nav");
   const tA11y = useTranslations("a11y");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const activeId = useScrollSpy(navSectionIds, "header.nav");
+  const activeId = useScrollSpy(navSectionIds, "header");
   const pathname = usePathname();
   const availabilityLabel = tA11y(AVAILABILITY_LABEL_KEYS[currentAvailability]);
   const dotStyle = { "--dot-color": availabilityColors[currentAvailability] } as CSSProperties;
