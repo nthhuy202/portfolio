@@ -6,21 +6,25 @@
     "contact": "Liên hệ"
   },
   "hero": {
-    "eyebrow": "Portfolio — 2026",
+    "eyebrow": "Frontend Developer",
+    "name": "Nguyễn Thanh Hà Huy",
     "hi": "Xin chào, tôi là",
-    "role": "Kỹ sư full-stack, xây phần mềm nhanh và gọn.",
-    "pitch": "Tôi thiết kế và triển khai sản phẩm web trọn vẹn — từ schema cơ sở dữ liệu đến từng pixel giao diện. Gần đây: công cụ cho developer, dashboard, và các hệ thống chịu tải thật tốt.",
+    "role": "Lập trình viên Frontend, xây giao diện nhanh và dễ tiếp cận với React & Next.js.",
+    "pitch": "4+ năm triển khai ứng dụng web production bằng React và Next.js cho khách hàng tại Canada, Pháp, Hà Lan và Việt Nam. Thành thạo cả hai router của Next.js, TypeScript và các thư viện quản lý state hiện đại — từ dựng UI chính xác từng pixel theo Figma đến tối ưu Core Web Vitals và SEO kỹ thuật.",
     "ctaProjects": "Xem dự án",
     "ctaContact": "Liên hệ ngay",
     "statYears": "năm kinh nghiệm",
-    "statProjects": "dự án đã ra mắt",
-    "statTeams": "đội đã dẫn dắt"
+    "statYearsValue": "4+",
+    "statProjects": "dự án đã triển khai",
+    "statProjectsValue": "10",
+    "statClients": "khách hàng đã phục vụ",
+    "statClientsValue": "4"
   },
   "about": {
     "eyebrow": "Giới thiệu",
     "title": "Quá trình & cách tiếp cận",
-    "p1": "Tôi bắt đầu bằng việc sửa theme WordPress cho bạn bè, rồi dần dẫn dắt đội platform tại hai startup giai đoạn Series-B. Tôi quan tâm đến những hệ thống \"nhàm chán đúng chỗ\" — deploy dễ đoán, code dễ đọc, dashboard không cần ai canh chừng.",
-    "p2": "Ngoài công việc, tôi viết ghi chú kỹ thuật ngắn về hệ thống phân tán và mentor các kỹ sư trẻ chuyển sang backend.",
+    "p1": "Xuất thân từ Kỹ thuật Điện tử - Viễn thông, tôi đã chuyển hướng và có hơn 4 năm kinh nghiệm chuyên sâu làm lập trình frontend. Tôi từng phát triển các ứng dụng React và Next.js cho nhiều dự án tại Việt Nam, Pháp, Canada và Hà Lan. Không chỉ dừng lại ở việc hiện thực hóa thiết kế Figma thành các giao diện (interface) pixel-perfect, tôi còn chú trọng vào tư duy UI/UX và tham gia xây dựng Design System để đảm bảo tính đồng bộ, dễ mở rộng của hệ thống. Cùng với đó, việc tối ưu Core Web Vitals, áp dụng lazy loading, code splitting và technical SEO luôn là tiêu chuẩn bắt buộc nhằm mang lại hiệu năng cao nhất.",
+    "p2": "Code review chéo là một phần cốt lõi trong cách tôi làm việc, không phải thủ tục cho có — giúp bắt lỗi và giữ quy ước code nhất quán ở mọi team tôi từng tham gia. Ngoài công việc frontend hằng ngày, tôi dùng Claude Code để định hướng và review một backend NestJS/Prisma/PostgreSQL — cách tiếp cận có cấu trúc để mở rộng sang backend, mà không nhận vơ là đã thành thạo thứ mình vẫn đang học.",
     "stackLabel": "Công nghệ"
   },
   "focus": {
@@ -41,10 +45,9 @@
   "contact": {
     "eyebrow": "Liên hệ",
     "title": "Cùng trao đổi nhé",
-    "blurb": "Sẵn sàng cho vị trí full-time và một số dự án freelance chọn lọc. Cách nhanh nhất để liên hệ là qua email."
+    "blurb": "Dù bạn có thắc mắc về các dự án tôi đã làm hay chỉ đơn giản là muốn giao lưu về chuyện nghề frontend, đừng ngần ngại gửi email cho tôi đặt phía bên dưới; tôi luôn đọc mọi tin nhắn và phản hồi nhanh nhất có thể."
   },
   "footer": {
-    "built": "xây dựng với Next.js & Tailwind",
     "top": "↑ về đầu trang"
   },
   "caseStudy": {
@@ -53,8 +56,8 @@
     "stack": "Công nghệ"
   },
   "meta": {
-    "title": "Alex Tran — Portfolio",
-    "description": "Kỹ sư full-stack, xây phần mềm nhanh và gọn."
+    "title": "Nguyễn Thanh Hà Huy — Portfolio",
+    "description": "Lập trình viên Frontend, xây giao diện nhanh và dễ tiếp cận với React & Next.js."
   },
   "a11y": {
     "primaryNav": "Điều hướng chính",
@@ -62,6 +65,9 @@
     "toggleDarkMode": "Bật/tắt chế độ tối",
     "switchToVietnamese": "Chuyển sang tiếng Việt",
     "switchToEnglish": "Chuyển sang tiếng Anh",
-    "viewSourceOnGithub": "Xem mã nguồn trên GitHub"
+    "viewSourceOnGithub": "Xem mã nguồn trên GitHub",
+    "availabilityOpen": "Đang mở nhận việc",
+    "availabilityLimited": "Nhận việc có giới hạn",
+    "availabilityUnavailable": "Hiện không nhận việc"
   }
 }

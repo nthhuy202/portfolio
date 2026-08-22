@@ -7,7 +7,7 @@ export function Hero() {
     <section className="hero shell">
       <p className="eyebrow">{t("eyebrow")}</p>
       <h1>
-        {t("hi")} <span className="accent">Alex Tran</span>.<br />
+        {t("hi")} <span className="accent">{t("name")}</span>.<br />
         {t("role")}
       </h1>
       <p className="pitch">{t("pitch")}</p>
@@ -21,16 +21,16 @@ export function Hero() {
       </div>
       <div className="hero-stats">
         <div className="stat">
-          <div className="n">6+</div>
+          <div className="n">{t("statYearsValue")}</div>
           <div className="l">{t("statYears")}</div>
         </div>
         <div className="stat">
-          <div className="n">24</div>
+          <div className="n">{t("statProjectsValue")}</div>
           <div className="l">{t("statProjects")}</div>
         </div>
         <div className="stat">
-          <div className="n">3</div>
-          <div className="l">{t("statTeams")}</div>
+          <div className="n">{t("statClientsValue")}</div>
+          <div className="l">{t("statClients")}</div>
         </div>
       </div>
     </section>

@@ -6,21 +6,25 @@
     "contact": "Contact"
   },
   "hero": {
-    "eyebrow": "Portfolio — 2026",
+    "eyebrow": "Frontend Developer",
+    "name": "Nguyễn Thanh Hà Huy",
     "hi": "Hi, I'm",
-    "role": "Full-stack engineer building fast, quiet software.",
-    "pitch": "I design and ship web products end to end — from database schema to the last pixel of the interface. Lately: developer tools, dashboards, and systems that stay fast under real load.",
+    "role": "Frontend Developer building fast, accessible interfaces with React & Next.js.",
+    "pitch": "4+ years shipping production web apps in React and Next.js for clients across Canada, France, the Netherlands and Vietnam. Comfortable across both Next.js routers, TypeScript and modern state management — from pixel-accurate Figma builds to Core Web Vitals and technical SEO.",
     "ctaProjects": "View projects",
     "ctaContact": "Get in touch",
     "statYears": "years shipping",
-    "statProjects": "projects launched",
-    "statTeams": "teams led"
+    "statYearsValue": "4+",
+    "statProjects": "projects shipped",
+    "statProjectsValue": "10",
+    "statClients": "clients served",
+    "statClientsValue": "4"
   },
   "about": {
     "eyebrow": "About",
     "title": "Background & approach",
-    "p1": "I started out fixing WordPress themes for friends and ended up leading platform teams at two Series-B startups. I care about systems that are boring in the right places — predictable deploys, readable code, dashboards nobody has to babysit.",
-    "p2": "Outside of work I write short technical notes on distributed systems and mentor junior engineers switching into backend roles.",
+    "p1": "Coming from an Electronics & Telecommunications Engineering background, I pivoted into software and have spent 4+ years specializing in frontend development — building React and Next.js applications for projects across Vietnam, France, Canada and the Netherlands. Beyond turning Figma designs into pixel-perfect interfaces, I focus on UI/UX thinking and contribute to design systems to keep the codebase consistent and easy to scale. Optimizing Core Web Vitals, applying lazy loading, code splitting and technical SEO are non-negotiable standards for getting the best performance.",
+    "p2": "Peer code review is a core part of how I work, not a formality — catching bugs and enforcing conventions across every team I've been on. Outside day-to-day frontend work, I've been using Claude Code to direct and review a NestJS/Prisma/PostgreSQL backend build — a structured way to grow into the backend side, without overclaiming skills I'm still building.",
     "stackLabel": "Tech stack"
   },
   "focus": {
@@ -41,10 +45,9 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Let's talk",
-    "blurb": "Open to full-time roles and select freelance work. Fastest way to reach me is email."
+    "blurb": "Whether you have questions about a project I've worked on or just want to talk shop about frontend, don't hesitate to email me below — I read every message and reply as fast as I can."
   },
   "footer": {
-    "built": "built with Next.js & Tailwind",
     "top": "↑ back to top"
   },
   "caseStudy": {
@@ -53,8 +56,8 @@
     "stack": "Stack"
   },
   "meta": {
-    "title": "Alex Tran — Portfolio",
-    "description": "Full-stack engineer building fast, quiet software."
+    "title": "Nguyễn Thanh Hà Huy — Portfolio",
+    "description": "Frontend Developer building fast, accessible interfaces with React & Next.js."
   },
   "a11y": {
     "primaryNav": "Primary",
@@ -62,6 +65,9 @@
     "toggleDarkMode": "Toggle dark mode",
     "switchToVietnamese": "Switch to Vietnamese",
     "switchToEnglish": "Switch to English",
-    "viewSourceOnGithub": "View source on GitHub"
+    "viewSourceOnGithub": "View source on GitHub",
+    "availabilityOpen": "Open to work",
+    "availabilityLimited": "Limited availability",
+    "availabilityUnavailable": "Not available"
   }
 }

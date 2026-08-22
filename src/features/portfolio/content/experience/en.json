@@ -1,31 +1,37 @@
 [
   {
-    "company": "Northlane",
-    "role": "Staff Software Engineer",
-    "period": "2023 — Present",
+    "company": "Ignisoft Co., Ltd.",
+    "role": "Frontend Developer",
+    "period": "Sep 2025 — Feb 2026",
     "bullets": [
-      "Lead a team of 5 across the checkout and fulfillment platform",
-      "Cut deploy time from 22min to 4min by rebuilding the CI pipeline",
-      "Set the technical direction for the realtime dashboard rewrite"
+      "Optimized Core Web Vitals in close collaboration with the UI/UX team for top-tier site performance",
+      "Designed and developed an internal CRM system to streamline HR management",
+      "Researched and implemented an open-source-based chat system for internal communication",
+      "Conducted cross-team code reviews with Project Leads to reduce bugs, improve security and system performance",
+      "Delivered within Agile/Scrum, iterating on feedback"
     ]
   },
   {
-    "company": "Fernbridge",
-    "role": "Senior Backend Engineer",
-    "period": "2020 — 2023",
+    "company": "Tekup JSC",
+    "role": "Frontend Developer",
+    "period": "Aug 2024 — Aug 2025",
     "bullets": [
-      "Owned the payments service processing ~$40M/year in volume",
-      "Migrated core services from monolith to a Go microservice split",
-      "Mentored 3 junior engineers, two promoted within a year"
+      "Built responsive client websites with user-friendly, UX-optimized interfaces",
+      "Applied SEO and performance techniques: page load, caching, lazy loading, code splitting",
+      "Conducted cross-code reviews, reducing production issues and enforcing conventions",
+      "Managed time and task estimation for on-time delivery",
+      "Git, source-code management, pull requests, basic CI/CD workflows"
     ]
   },
   {
-    "company": "Loop Studio",
-    "role": "Full-stack Developer",
-    "period": "2018 — 2020",
+    "company": "WIICAMP",
+    "role": "Frontend Developer",
+    "period": "Feb 2022 — Jun 2024",
     "bullets": [
-      "Built and shipped 12+ client web apps end to end",
-      "Introduced automated testing, reducing production bugs by ~30%"
+      "Implemented pixel-perfect interface components from Figma with UI/UX design teams",
+      "Applied SEO optimization to improve visibility and search rankings",
+      "Conducted cross-code reviews for quality and codebase consistency",
+      "Managed estimation to keep delivery on schedule"
     ]
   }
 ]

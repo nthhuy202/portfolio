@@ -1,3 +1,5 @@
+import type { ComponentProps, ComponentType } from "react";
+
 export interface ProjectFrontmatter {
   title: string;
   summary: string;
@@ -25,7 +27,14 @@ export interface ExperienceEntry {
 
 export interface TechBadge {
   name: string;
-  short: string;
+  Icon: ComponentType<ComponentProps<"svg">>;
   bg: string;
   fg: string;
+}
+
+export interface SocialLink {
+  Icon: ComponentType<ComponentProps<"svg">>;
+  href: string;
+  label: string;
+  brandColor: string;
 }

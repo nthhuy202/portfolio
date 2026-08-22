@@ -13,8 +13,8 @@ export function Contact() {
       <Reveal className="contact-box">
         <p className="lede contact-blurb">{t("blurb")}</p>
         <div className="contact-links">
-          <a className="btn btn-primary" href="mailto:alex.tran@example.com">
-            alex.tran@example.com
+          <a className="btn btn-primary" href="mailto:nthhuy202@gmail.com">
+            nthhuy202@gmail.com
           </a>
         </div>
       </Reveal>

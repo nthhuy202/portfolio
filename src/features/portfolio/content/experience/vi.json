@@ -1,31 +1,37 @@
 [
   {
-    "company": "Northlane",
-    "role": "Staff Software Engineer",
-    "period": "2023 — Hiện tại",
+    "company": "Ignisoft Co., Ltd.",
+    "role": "Frontend Developer",
+    "period": "09/2025 — 02/2026",
     "bullets": [
-      "Dẫn dắt đội 5 người phụ trách nền tảng checkout và xử lý đơn",
-      "Giảm thời gian deploy từ 22 phút xuống 4 phút nhờ xây lại CI pipeline",
-      "Định hướng kỹ thuật cho việc viết lại dashboard realtime"
+      "Tối ưu Core Web Vitals, phối hợp chặt chẽ với đội UI/UX để đạt hiệu năng site ở mức cao nhất",
+      "Thiết kế và phát triển hệ thống CRM nội bộ nhằm tinh gọn quản lý nhân sự",
+      "Nghiên cứu và triển khai hệ thống chat mã nguồn mở phục vụ giao tiếp nội bộ",
+      "Thực hiện code review chéo nhóm cùng Project Lead để giảm bug, tăng bảo mật và hiệu năng hệ thống",
+      "Triển khai theo quy trình Agile/Scrum, liên tục cải tiến theo phản hồi"
     ]
   },
   {
-    "company": "Fernbridge",
-    "role": "Senior Backend Engineer",
-    "period": "2020 — 2023",
+    "company": "Tekup JSC",
+    "role": "Frontend Developer",
+    "period": "08/2024 — 08/2025",
     "bullets": [
-      "Phụ trách payments service xử lý ~40 triệu USD/năm",
-      "Chuyển các service lõi từ monolith sang microservice bằng Go",
-      "Mentor 3 kỹ sư trẻ, hai người được thăng chức trong vòng một năm"
+      "Xây dựng website cho khách hàng với giao diện responsive, thân thiện và tối ưu UX",
+      "Áp dụng kỹ thuật SEO và tối ưu hiệu năng: tốc độ tải trang, caching, lazy loading, code splitting",
+      "Thực hiện code review chéo, giảm lỗi phát sinh khi lên production và duy trì quy ước code",
+      "Quản lý thời gian và ước lượng công việc để đảm bảo tiến độ bàn giao",
+      "Sử dụng Git, quản lý mã nguồn, pull request và quy trình CI/CD cơ bản"
     ]
   },
   {
-    "company": "Loop Studio",
-    "role": "Full-stack Developer",
-    "period": "2018 — 2020",
+    "company": "WIICAMP",
+    "role": "Frontend Developer",
+    "period": "02/2022 — 06/2024",
     "bullets": [
-      "Xây và triển khai trọn vẹn hơn 12 web app cho khách hàng",
-      "Đưa automated testing vào quy trình, giảm ~30% lỗi production"
+      "Hiện thực hóa các thành phần giao diện pixel-perfect từ thiết kế Figma, phối hợp với đội UI/UX",
+      "Áp dụng tối ưu SEO để cải thiện khả năng hiển thị và thứ hạng tìm kiếm",
+      "Thực hiện code review chéo để đảm bảo chất lượng và tính nhất quán của codebase",
+      "Ước lượng thời gian hiệu quả để đảm bảo tiến độ bàn giao"
     ]
   }
 ]
