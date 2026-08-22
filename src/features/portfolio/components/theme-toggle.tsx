@@ -21,7 +21,14 @@ export function ThemeToggle() {
   const isDark = isMounted && resolvedTheme === "dark";
 
   function handleToggleTheme() {
-    setTheme(isDark ? "light" : "dark");
+    const nextTheme = isDark ? "light" : "dark";
+
+    if (!document.startViewTransition) {
+      setTheme(nextTheme);
+      return;
+    }
+
+    document.startViewTransition(() => setTheme(nextTheme));
   }
 
   return (
