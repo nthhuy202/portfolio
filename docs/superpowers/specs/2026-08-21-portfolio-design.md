@@ -91,6 +91,11 @@ the repo as data/MDX files and is edited by hand.
    Interface, Frontend, Backend, Security, Scalability, Design Systems),
    translated per locale, looping continuously; pauses under
    `prefers-reduced-motion`.
+   > **Status: temporarily disabled.** `FocusMarquee` and its import are
+   > removed from `home-page.tsx` — the component file itself is kept
+   > (not deleted). Do not re-add the import/usage during a merge or
+   > when following this spec; re-enabling this section is a separate,
+   > deliberate decision.
 5. **Projects** — 2-column card grid (1 column on mobile). Each card:
    - Image area: real photo if the project has one, otherwise the
      project title itself rendered large as a stylized placeholder tile.
