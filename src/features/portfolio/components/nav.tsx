@@ -17,7 +17,7 @@ const AVAILABILITY_LABEL_KEYS = {
 } as const;
 
 const CHIP_BUTTON_CLASSNAME =
-  "font-mono text-[0.82rem] tracking-[0.04em] uppercase bg-bg-raised border border-line text-fg-muted rounded-full py-[7px] px-3 flex items-center gap-1.5 transition-[border-color,color] duration-150 ease-[ease] hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] cursor-pointer";
+  "font-mono text-[0.82rem] tracking-[0.04em] uppercase bg-bg-raised border border-line text-fg-muted rounded-full py-[0.4375rem] px-3 flex items-center gap-1.5 transition-[border-color,color] duration-150 ease-[ease] hover:text-fg hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] cursor-pointer";
 
 export function Nav() {
   const t = useTranslations("nav");
@@ -42,8 +42,8 @@ export function Nav() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line backdrop-blur-[7px] backdrop-saturate-[140%] bg-[color-mix(in_srgb,var(--color-bg)_78%,transparent)]">
-      <div className="flex items-center justify-between py-3.5 px-6 max-w-[1100px] mx-auto">
+    <header className="sticky top-0 z-40 border-b border-line backdrop-blur-[0.4375rem] backdrop-saturate-[140%] bg-[color-mix(in_srgb,var(--color-bg)_78%,transparent)]">
+      <div className="flex items-center justify-between py-3.5 px-6 max-w-[68.75rem] mx-auto">
         {isHomePage ? (
           <a className="font-mono font-semibold text-[0.95rem] tracking-[0.02em] flex items-center gap-2 no-underline" href="#top">
             <span className="w-2 h-2 rounded-full bg-[var(--dot-color,var(--color-accent))] shadow-[0_0_0_4px_color-mix(in_srgb,var(--dot-color,var(--color-accent))_22%,transparent)]" style={dotStyle} title={availabilityLabel} role="img" aria-label={availabilityLabel} />
@@ -58,9 +58,9 @@ export function Nav() {
         <nav aria-label={tA11y("primaryNav")}>
           <ul
             className={cn(
-              "flex items-center gap-7 list-none m-0 p-0 max-[760px]:hidden",
+              "flex items-center gap-7 list-none m-0 p-0 max-md:hidden",
               isMenuOpen &&
-                "max-[760px]:flex max-[760px]:absolute max-[760px]:top-full max-[760px]:left-0 max-[760px]:right-0 max-[760px]:flex-col max-[760px]:bg-bg-raised max-[760px]:border-b max-[760px]:border-line max-[760px]:py-4 max-[760px]:px-6 max-[760px]:gap-4"
+                "max-md:flex max-md:absolute max-md:top-full max-md:left-0 max-md:right-0 max-md:flex-col max-md:bg-bg-raised max-md:border-b max-md:border-line max-md:py-4 max-md:px-6 max-md:gap-4"
             )}
             id="navLinks"
           >
@@ -98,7 +98,7 @@ export function Nav() {
           <ThemeToggle />
           <button
             type="button"
-            className={cn(CHIP_BUTTON_CLASSNAME, "hidden max-[760px]:inline-flex")}
+            className={cn(CHIP_BUTTON_CLASSNAME, "hidden max-md:inline-flex")}
             aria-expanded={isMenuOpen}
             aria-controls="navLinks"
             aria-label={tA11y("toggleMenu")}

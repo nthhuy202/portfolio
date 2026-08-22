@@ -5,12 +5,12 @@ export function Contact() {
   const t = useTranslations("contact");
 
   return (
-    <section id="contact" className="py-24 relative max-w-[1100px] mx-auto px-6">
-      <Reveal className="mb-11 max-w-[640px]">
+    <section id="contact" className="py-24 relative max-w-[68.75rem] mx-auto px-6">
+      <Reveal className="mb-11 max-w-[40rem]">
         <p className="font-mono text-[0.8rem] tracking-[0.12em] uppercase text-accent flex items-center gap-[0.6em]">{t("eyebrow")}</p>
         <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-bold tracking-[-0.01em] mt-2.5">{t("title")}</h2>
       </Reveal>
-      <Reveal className="bg-bg-raised border border-line rounded-lg p-11 flex flex-col items-start gap-[26px]">
+      <Reveal className="bg-bg-raised border border-line rounded-lg p-11 flex flex-col items-start gap-[1.625rem]">
         <p className="text-fg-muted text-base leading-[1.65] max-w-none w-full m-0">{t("blurb")}</p>
         <div className="flex gap-4 flex-wrap">
           <a

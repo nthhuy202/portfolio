@@ -12,8 +12,8 @@ export function FocusMarquee() {
 
   return (
     <section id="focus" className="py-24 border-b border-line relative overflow-hidden">
-      <div className="max-w-[1100px] mx-auto px-6">
-        <Reveal className="mb-11 max-w-[640px]">
+      <div className="max-w-[68.75rem] mx-auto px-6">
+        <Reveal className="mb-11 max-w-[40rem]">
           <p className="font-mono text-[0.8rem] tracking-[0.12em] uppercase text-accent flex items-center gap-[0.6em]">{t("eyebrow")}</p>
           <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-bold tracking-[-0.01em] mt-2.5">{t("title")}</h2>
         </Reveal>

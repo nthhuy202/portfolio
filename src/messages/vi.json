@@ -6,19 +6,19 @@
     "contact": "Liên hệ"
   },
   "hero": {
-    "eyebrow": "Frontend Developer",
+    "eyebrow": "Lập trình viên Frontend · Đà Nẵng, Việt Nam",
     "name": "Nguyễn Thanh Hà Huy",
     "hi": "Xin chào, tôi là",
-    "role": "Lập trình viên Frontend, xây giao diện nhanh và dễ tiếp cận với React & Next.js.",
-    "pitch": "4+ năm triển khai ứng dụng web production bằng React và Next.js cho khách hàng tại Canada, Pháp, Hà Lan và Việt Nam. Thành thạo cả hai router của Next.js, TypeScript và các thư viện quản lý state hiện đại — từ dựng UI chính xác từng pixel theo Figma đến tối ưu Core Web Vitals và SEO kỹ thuật.",
+    "role": "Chuyên phát triển giao diện tối ưu hiệu năng, responsive và chuẩn a11y.",
+    "pitch": "Tôi xây dựng web với mục tiêu mang lại trải nghiệm toàn diện cho người dùng. Khởi điểm từ một kiến trúc ổn định, dễ bảo trì và mở rộng, cho đến việc tối ưu hóa khắt khe về tốc độ, hiệu năng và tính thân thiện — tất cả đều nhằm tạo ra một sản phẩm hoàn thiện nhất.",
     "ctaProjects": "Xem dự án",
-    "ctaContact": "Liên hệ ngay",
-    "statYears": "năm kinh nghiệm",
-    "statYearsValue": "4+",
-    "statProjects": "dự án đã triển khai",
+    "ctaContact": "Kết nối ngay",
+    "statYears": "Năm kinh nghiệm",
+    "statYearsValue": "04+",
+    "statProjects": "Sản phẩm thực tế",
     "statProjectsValue": "10",
-    "statClients": "khách hàng đã phục vụ",
-    "statClientsValue": "4"
+    "statClients": "Thị trường quốc tế",
+    "statClientsValue": "04"
   },
   "about": {
     "eyebrow": "Giới thiệu",
@@ -70,7 +70,7 @@
   },
   "meta": {
     "title": "Nguyễn Thanh Hà Huy — Portfolio",
-    "description": "Lập trình viên Frontend, xây giao diện nhanh và dễ tiếp cận với React & Next.js."
+    "description": "Frontend Developer với hơn 4 năm kinh nghiệm thực chiến. Chuyên sâu về React, Next.js và TypeScript, xây dựng giao diện chuẩn với khả năng phản hồi nhanh và dễ tiếp cận."
   },
   "a11y": {
     "primaryNav": "Điều hướng chính",

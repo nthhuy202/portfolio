@@ -65,7 +65,7 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   return (
     <main>
       <Nav />
-      <article className="pt-16 max-w-[1100px] mx-auto px-6">
+      <article className="pt-16 max-w-[68.75rem] mx-auto px-6">
         <Link className="font-mono text-[0.86rem] text-fg-muted no-underline inline-flex items-center gap-1.5 hover:text-fg" href="/#projects">
           {tProjects("back")}
         </Link>

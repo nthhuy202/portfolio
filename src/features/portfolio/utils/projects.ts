@@ -1,9 +1,16 @@
+import matter from "gray-matter";
 import fs from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
-import type { ProjectFrontmatter, ProjectMeta } from "@/features/portfolio/types/content";
 
-const PROJECTS_DIR = path.join(process.cwd(), "src/features/portfolio/content/projects");
+import type {
+  ProjectFrontmatter,
+  ProjectMeta,
+} from "@/features/portfolio/types/content";
+
+const PROJECTS_DIR = path.join(
+  process.cwd(),
+  "src/features/portfolio/content/projects",
+);
 
 export function getProjectSlugs(locale: string): string[] {
   const dir = path.join(PROJECTS_DIR, locale);

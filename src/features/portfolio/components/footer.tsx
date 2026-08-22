@@ -6,7 +6,7 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="pt-8 pb-[60px] max-w-[1100px] mx-auto px-6">
+    <footer className="pt-8 pb-[3.75rem] max-w-[68.75rem] mx-auto px-6">
       <div className="flex justify-between items-center flex-wrap gap-4">
         <p className="text-[0.86rem] text-fg-muted font-mono">© 2026 Nguyễn Thanh Hà Huy</p>
         <div className="flex items-center gap-5">
@@ -14,7 +14,7 @@ export function Footer() {
             {socialLinks.map(({ Icon, href, label, brandColor }) => (
               <a
                 key={label}
-                className="w-[34px] h-[34px] rounded-full border border-line flex items-center justify-center text-fg-muted no-underline transition-[color,border-color] duration-150 ease-[ease] hover:text-[var(--brand-color)] hover:border-[var(--brand-color)]"
+                className="w-[2.125rem] h-[2.125rem] rounded-full border border-line flex items-center justify-center text-fg-muted no-underline transition-[color,border-color] duration-150 ease-[ease] hover:text-[var(--brand-color)] hover:border-[var(--brand-color)]"
                 style={{ "--brand-color": brandColor } as CSSProperties}
                 href={href}
                 target="_blank"
