@@ -45,9 +45,9 @@
     "title": "Những điều tôi chú trọng"
   },
   "projects": {
-    "eyebrow": "Dự án tiêu biểu",
-    "title": "Dự án",
-    "lede": "Một vài sản phẩm tôi làm gần đây. Mở case study để xem đầy đủ.",
+    "eyebrow": "Dự án",
+    "title": "Sản phẩm tiêu biểu",
+    "lede": "Tổng hợp một số dự án thực tế tôi đã hoàn thiện. Khám phá chi tiết (case study) để hiểu rõ hơn về bài toán và giải pháp công nghệ.",
     "viewCaseStudy": "Xem case study",
     "back": "← Quay lại dự án"
   },
@@ -64,9 +64,14 @@
     "top": "↑ về đầu trang"
   },
   "caseStudy": {
+    "client": "Khách hàng",
     "role": "Vai trò",
-    "period": "Thời gian",
-    "stack": "Công nghệ"
+    "timeline": "Thời gian",
+    "team": "Đội nhóm",
+    "viewLiveProject": "Xem dự án thực tế",
+    "techstackTitle": "Công nghệ sử dụng",
+    "nextProject": "Dự án tiếp theo",
+    "contactCta": "Muốn biết thông tin chi tiết về dự án này? Hãy gửi email cho tôi — tôi luôn sẵn sàng chia sẻ thêm."
   },
   "meta": {
     "title": "Nguyễn Thanh Hà Huy — Frontend Developer",

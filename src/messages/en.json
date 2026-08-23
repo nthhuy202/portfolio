@@ -64,9 +64,14 @@
     "top": "↑ back to top"
   },
   "caseStudy": {
+    "client": "Client",
     "role": "Role",
-    "period": "Period",
-    "stack": "Stack"
+    "timeline": "Timeline",
+    "team": "Team",
+    "viewLiveProject": "View live project",
+    "techstackTitle": "Techstack",
+    "nextProject": "Next project",
+    "contactCta": "Want to know more about this project? Send me an email — I'm happy to walk through the details."
   },
   "meta": {
     "title": "Nguyen Thanh Ha Huy - Frontend Developer",

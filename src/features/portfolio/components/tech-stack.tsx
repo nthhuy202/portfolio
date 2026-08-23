@@ -5,10 +5,16 @@ import {
   techStack,
 } from "@/features/portfolio/constants/tech-stack";
 
-export function TechStack() {
+interface TechStackProps {
+  names?: string[];
+}
+
+export function TechStack({ names }: TechStackProps) {
+  const badges = names ? techStack.filter((tech) => names.includes(tech.name)) : techStack;
+
   return (
     <div className="grid grid-cols-4 gap-3 mt-4 max-md:grid-cols-2">
-      {techStack.map((tech, index) => (
+      {badges.map((tech, index) => (
         <Reveal
           key={tech.name}
           delay={index * TECH_BADGE_STAGGER_DELAY_SECONDS}

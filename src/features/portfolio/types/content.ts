@@ -8,14 +8,31 @@ export interface ProjectFrontmatter {
   demoUrl?: string;
   image?: string;
   periods: string[];
-  country: { flag: string; name: string };
+  country: string;
   role: string;
-  stack: string;
-  hasPhoto: boolean;
+  client?: string;
+  team?: string;
+  priority?: number;
 }
 
 export interface ProjectMeta extends ProjectFrontmatter {
   slug: string;
+}
+
+export interface CaseStudySectionHeadings {
+  problem: string;
+  responsibilities: string;
+  challengesAndSolutions: string;
+  result: string;
+  keyLearning: string;
+}
+
+export interface ProjectSections {
+  problem?: string;
+  responsibilities?: string;
+  challengesAndSolutions?: string;
+  result?: string;
+  keyLearning?: string;
 }
 
 export interface AboutHighlight {
