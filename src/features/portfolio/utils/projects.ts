@@ -18,6 +18,18 @@ const SECTION_HEADING_PATTERN = /^## (.+)$/gm;
 const ORDER_PREFIX_PATTERN = /^\d+-/;
 const MDX_FILE_PATTERN = /\.mdx$/;
 
+// Maps a `##` heading's text, in any locale, to the section it belongs to —
+// so a project file whose headings weren't translated into the current
+// locale still renders instead of silently dropping that section.
+const SECTION_KEY_BY_HEADING_TEXT = new Map<string, keyof ProjectSections>(
+  Object.values(SECTION_HEADINGS_BY_LOCALE).flatMap((headings) =>
+    (Object.keys(headings) as (keyof ProjectSections)[]).map((key) => [
+      headings[key],
+      key,
+    ]),
+  ),
+);
+
 function toPublicSlug(filename: string): string {
   return filename.replace(ORDER_PREFIX_PATTERN, "");
 }
@@ -64,31 +76,21 @@ export function getAllProjectsMeta(locale: string): ProjectMeta[] {
   );
 }
 
-export function splitProjectSections(
-  locale: string,
-  body: string,
-): ProjectSections {
-  const headings =
-    SECTION_HEADINGS_BY_LOCALE[locale] ?? SECTION_HEADINGS_BY_LOCALE.en;
+export function splitProjectSections(body: string): ProjectSections {
   const matches = [...body.matchAll(SECTION_HEADING_PATTERN)];
-  const rawByHeadingText = new Map<string, string>();
+  const sections: ProjectSections = {};
 
   matches.forEach((match, index) => {
+    const key = SECTION_KEY_BY_HEADING_TEXT.get(match[1].trim());
+    if (!key) return;
+
     const start = match.index ?? 0;
     const end =
       index + 1 < matches.length
         ? (matches[index + 1].index ?? body.length)
         : body.length;
-    rawByHeadingText.set(match[1].trim(), body.slice(start, end).trim());
+    sections[key] = body.slice(start, end).trim();
   });
 
-  return {
-    problem: rawByHeadingText.get(headings.problem),
-    responsibilities: rawByHeadingText.get(headings.responsibilities),
-    challengesAndSolutions: rawByHeadingText.get(
-      headings.challengesAndSolutions,
-    ),
-    result: rawByHeadingText.get(headings.result),
-    keyLearning: rawByHeadingText.get(headings.keyLearning),
-  };
+  return sections;
 }

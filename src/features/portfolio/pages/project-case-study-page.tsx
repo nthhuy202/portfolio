@@ -79,7 +79,7 @@ export async function ProjectCaseStudyPage({
 
   const frontmatter = projects[currentIndex];
   const { content: body } = matter(getProjectSource(locale, slug));
-  const sections = splitProjectSections(locale, body);
+  const sections = splitProjectSections(body);
 
   const [
     problemContent,
