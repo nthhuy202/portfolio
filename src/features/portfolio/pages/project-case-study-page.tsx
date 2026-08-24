@@ -32,11 +32,6 @@ interface GenerateProjectMetadataProps {
 
 export function generateProjectStaticParams() {
   return routing.locales.flatMap((locale) => {
-    console.log(
-      "getProjectSlugs(locale).map((slug) => ({ locale, slug }))",
-      getProjectSlugs(locale).map((slug) => ({ locale, slug })),
-    );
-
     return getProjectSlugs(locale).map((slug) => ({ locale, slug }));
   });
 }

@@ -7,6 +7,7 @@ country: "Canada"
 role: "Frontend Developer"
 team: "3 người"
 image: "/projects/mirakl.png"
+demoUrl: "https://mirakl.tekup.vn"
 ---
 
 ## Vấn đề
@@ -17,6 +18,14 @@ Xây dựng một hệ thống Dashboard quản trị dữ liệu quy mô lớn 
 
 Chịu trách nhiệm thiết kế toàn bộ kiến trúc Frontend, tối ưu hóa quá trình render dữ liệu (Data Visualization) và tích hợp hệ thống API.
 
+## Thách thức & Giải pháp
+
+- **Thiết kế Kiến trúc Network Layer:** Dự án yêu cầu hàng loạt các lời gọi API có cấu trúc tương đồng. Việc fetch data rời rạc sẽ dẫn đến lặp code và ác mộng bảo trì.
+  - **Giải pháp:** Thiết kế một Network Layer tập trung (Centralized API Wrapper). Lớp kiến trúc này giúp tôi xử lý lỗi (error handling), chuẩn hóa dữ liệu đầu vào/ra và cấu hình request một cách đồng nhất, giúp hệ thống cực kỳ dễ mở rộng.
+
+- **Tối ưu Core Web Vitals & Trải nghiệm tương tác:** Các thư viện biểu đồ (Chart) thường chiếm dung lượng rất lớn, gây ra tình trạng "nghẽn" luồng chính (Main thread blocking) và làm tăng chỉ số TBT (Total Blocking Time).
+  - **Giải pháp:** Áp dụng chiến lược Progressive Rendering. Tôi ưu tiên render bộ khung UI (Skeletons) ngay lập tức để người dùng có phản hồi thị giác (instant feedback). Các biểu đồ nặng được Code Splitting và Lazy Load bất đồng bộ ở background, mang lại trải nghiệm mượt mà dù phải xử lý khối lượng dữ liệu khổng lồ.
+
 ## Kết quả
 
-Bàn giao cùng team 3 người, mang lại cho khách hàng một dashboard duy nhất cho dữ liệu đơn hàng, doanh thu và tồn kho thay vì phải tự tổng hợp từ admin gốc của nền tảng.
+Bàn giao một Dashboard có tốc độ tải trang xuất sắc. Kiến trúc Frontend được quy hoạch rõ ràng ở tầng API, tạo tiền đề vững chắc cho việc scale-up dự án sau này.

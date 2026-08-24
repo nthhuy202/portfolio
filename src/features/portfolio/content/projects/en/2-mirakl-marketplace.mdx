@@ -7,16 +7,25 @@ country: "Canada"
 role: "Frontend Developer"
 team: "3 people"
 image: "/projects/mirakl.png"
+demoUrl: "https://mirakl.tekup.vn"
 ---
 
 ## Problem
 
-The client needed a way to see business performance on the Mirakl Marketplace platform — orders, revenue, inventory — without digging through the platform's native admin views.
+Building a large-scale data management dashboard to track inventory, cash flow, and sales metrics. The core challenge was ensuring the system could handle heavy data visualization with strict responsiveness requirements while remaining highly scalable for future modules.
 
 ## Responsibilities
 
-Built UI components from mockups, integrated APIs to manage the product lifecycle (variants, quantities), and rendered sales and inventory insights through dynamic ApexCharts visualizations.
+Architected the entire Frontend layer, taking ownership of data visualization performance and API integration strategies.
+
+## Challenges & Solutions
+
+- **Architecting a Centralized Network Layer:** The application required numerous similar API calls. Writing fragmented fetch logic would lead to code redundancy and maintenance nightmares.
+  - **Solution:** Engineered a Centralized Network Layer (API Wrapper). This architecture unified global error handling, request configurations, and data normalization, making the codebase highly robust and easily scalable.
+
+- **Core Web Vitals & Progressive Rendering:** Heavy chart libraries natively block the main thread, severely degrading Total Blocking Time (TBT) and user experience.
+  - **Solution:** Implemented a Progressive Rendering strategy. I prioritized rendering UI skeletons for instant visual feedback, while applying Code Splitting and Asynchronous Lazy Loading for heavy visualization modules. This eliminated UI blocking and ensured a buttery-smooth experience despite massive data payloads.
 
 ## Result
 
-Delivered as part of a 3-person team, giving the client a single dashboard for order, revenue and inventory data instead of piecing it together from the marketplace's own admin.
+Delivered a lightning-fast, highly responsive dashboard. The clean separation of concerns at the API layer established a rock-solid foundation for future feature expansions.

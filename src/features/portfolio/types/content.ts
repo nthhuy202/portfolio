@@ -49,14 +49,14 @@ export interface ExperienceEntry {
 
 export interface TechBadge {
   name: string;
-  Icon: ComponentType<ComponentProps<"svg">> | null;
+  Icon?: ComponentType<ComponentProps<"svg">> | null;
   bg?: string;
   fg?: string;
   url?: string;
 }
 
 export interface IconLink {
-  Icon?: ComponentType<ComponentProps<"svg">> ;
+  Icon?: ComponentType<ComponentProps<"svg">>;
   href: string;
   label: string;
   brandColor: string;

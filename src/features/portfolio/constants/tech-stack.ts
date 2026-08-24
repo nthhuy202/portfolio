@@ -105,7 +105,7 @@ export const techStack: TechBadge[] = [
     url: "https://zod.dev",
   },
   {
-    name: "Tailwind",
+    name: "Tailwind CSS",
     Icon: IconTailwindCss,
     bg: "#0ea5e9",
     fg: "#062a3d",
@@ -244,7 +244,8 @@ export const techStack: TechBadge[] = [
     fg: "#ffffff",
     url: "https://mui.com",
   },
-  { name: "Meteor", Icon: null },
-  { name: "MongoDB", Icon: null },
-  { name: "Stripe", Icon: null },
+  { name: "Meteor" },
+  { name: "MongoDB" },
+  { name: "HTML" },
+  { name: "CSS" },
 ];

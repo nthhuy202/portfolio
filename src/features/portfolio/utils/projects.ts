@@ -22,12 +22,13 @@ const MDX_FILE_PATTERN = /\.mdx$/;
 // so a project file whose headings weren't translated into the current
 // locale still renders instead of silently dropping that section.
 const SECTION_KEY_BY_HEADING_TEXT = new Map<string, keyof ProjectSections>(
-  Object.values(SECTION_HEADINGS_BY_LOCALE).flatMap((headings) =>
-    (Object.keys(headings) as (keyof ProjectSections)[]).map((key) => [
+  Object.values(SECTION_HEADINGS_BY_LOCALE).flatMap((headings) => {
+    console.log("headings", headings);
+    return (Object.keys(headings) as (keyof ProjectSections)[]).map((key) => [
       headings[key],
       key,
-    ]),
-  ),
+    ]);
+  }),
 );
 
 function toPublicSlug(filename: string): string {

@@ -1,22 +1,31 @@
 ---
 title: "Azy Solutions — Website Doanh nghiệp + Gói AI Chat Bot"
 summary: "Azy Suite là một nền tảng AI an toàn và dễ sử dụng, được thiết kế dành riêng cho các cá nhân làm việc độc lập (solopreneurs) và doanh nghiệp vừa và nhỏ (SME). Dự án cung cấp các trợ lý AI giao tiếp trực quan, hỗ trợ điều khiển bằng giọng nói, đồng thời bảo mật dữ liệu tuyệt đối theo tiêu chuẩn châu Âu (GDPR)."
-tech: ["VueJS", "Socket.IO", "AOS"]
+tech: ["Vue.js", "Socket.IO", "AOS", "HTML", "CSS"]
 periods: ["04/2025 - 05/2025"]
 country: "Pháp"
 role: "Frontend Developer"
 team: "4 người"
 image: "/projects/azy-solutions.png"
+demoUrl: "https://azy.solutions"
 ---
 
 ## Vấn đề
 
-Khách hàng muốn một website doanh nghiệp nhanh, kèm một chat bot có thể gắn vào codebase khác dưới dạng package, thay vì một tính năng riêng lẻ chỉ dùng cho đúng website này.
+Doanh nghiệp cần xây dựng một trang Landing Page quảng bá thương hiệu kết hợp hiệu ứng động (AOS animations), với yêu cầu tuân thủ khắt khe các tiêu chuẩn về Web Accessibility (a11y) và Semantic HTML. Đồng thời, sản phẩm cốt lõi của họ là một gói AI Chat Bot cần được phát triển thành một thư viện độc lập (Embeddable Widget), có khả năng nhúng vào bất kỳ hệ thống website nào của bên thứ ba.
 
 ## Trách nhiệm
 
-Xây dựng landing page nhẹ, hiệu năng cao bằng HTML/CSS thuần với hiệu ứng AOS, cùng các thuộc tính accessibility phục vụ SEO và công nghệ hỗ trợ người khuyết tật. Xây UI chat bot bằng Vue với Pinia quản lý state, kết nối nhắn tin real-time qua Socket.IO.
+Đảm nhiệm toàn bộ việc kiến trúc và phát triển Frontend cho cả hai hạng mục: Website tĩnh (HTML/CSS/AOS) và Đóng gói SDK AI Chat Bot (VueJS).
+
+## Thách thức & Giải pháp
+
+- **Tiêu chuẩn Web Accessibility (a11y) & Technical SEO Khắt khe:** Khách hàng yêu cầu một cấu trúc DOM hoàn hảo để tối ưu hóa công cụ tìm kiếm và thân thiện với các thiết bị đọc màn hình (Screen Readers).
+  - **Giải pháp:** Áp dụng triệt để kiến trúc Semantic HTML5. Tôi thiết lập hệ thống thẻ ARIA (Accessible Rich Internet Applications), quản lý tiêu điểm (Focus Management) và tối ưu hóa các hiệu ứng AOS để đảm bảo website không chỉ sống động về mặt thị giác mà còn đạt điểm tuyệt đối về tiêu chuẩn WCAG và Lighthouse SEO.
+
+- **Kiến trúc Embeddable Widget (Nhúng thư viện):** Ứng dụng chat bằng VueJS phải hoạt động như một module "Plug-and-Play". Khó khăn lớn nhất là rủi ro rò rỉ CSS (CSS bleed) hoặc xung đột biến toàn cục (Global scope conflicts) khi nhúng widget này vào một website bất kỳ của khách hàng (Host site).
+  - **Giải pháp:** Tôi đã cấu hình Bundler để đóng gói toàn bộ ứng dụng VueJS thành một SDK / Standalone Script duy nhất. Thiết lập cơ chế cô lập CSS (CSS Encapsulation) và cung cấp một hàm khởi tạo (Initialization API) cực kỳ gọn nhẹ. Điều này đảm bảo Chatbot hoạt động trơn tru trên mọi nền tảng mà không làm phá vỡ giao diện hay logic của website gốc.
 
 ## Kết quả
 
-Đóng gói thành component cài đặt được qua npm/yarn, giới thiệu và tóm tắt nội dung website — tái sử dụng được ở bất kỳ codebase nào, không chỉ riêng website ra mắt ban đầu.
+Bàn giao thành công một Landing Page chuẩn mực về a11y và SEO. Quan trọng hơn, gói AI Chat Bot được kiến trúc vững chắc dưới dạng thư viện độc lập, giúp doanh nghiệp dễ dàng phân phối và tích hợp sản phẩm cho các khách hàng B2B của họ.

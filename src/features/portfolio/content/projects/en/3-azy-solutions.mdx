@@ -1,22 +1,31 @@
 ---
 title: "Azy Solutions — Corporate Site + AI Chat Bot Package"
 summary: "Azy Suite is a secure and easy-to-use AI platform built for freelancers (solopreneurs) and small businesses (SMEs). The project provides friendly AI chat and voice agents, while strictly keeping user data safe and GDPR-compliant."
-tech: ["VueJS", "Socket.IO", "AOS"]
+tech: ["Vue.js", "Socket.IO", "AOS", "HTML", "CSS"]
 periods: ["Apr 2025 - May 2025"]
 country: "France"
 role: "Frontend Developer"
 team: "4 people"
 image: "/projects/azy-solutions.png"
+demoUrl: "https://azy.solutions"
 ---
 
 ## Problem
 
-The client wanted a fast corporate site plus a chat bot they could drop into other codebases as a package, rather than a one-off feature tied to this site alone.
+The client required a dynamic, animated promotional website (using AOS) that strictly adhered to Web Accessibility (a11y) and Semantic HTML standards. Simultaneously, their core product—an AI Chat Bot—needed to be engineered as an embeddable widget capable of being seamlessly integrated into any third-party host website.
 
 ## Responsibilities
 
-Built a lightweight, high-performance landing page in pure HTML/CSS with AOS animations, plus accessibility attributes for SEO and assistive tech. Built the chat bot UI in Vue with Pinia for state, wiring real-time messaging over Socket.IO.
+Led the Frontend architecture and development for both modules: the heavily optimized static landing page (HTML/CSS) and the VueJS-based Chat Bot SDK.
+
+## Challenges & Solutions
+
+- **Strict WCAG Compliance & Technical SEO:** The client demanded a flawless DOM structure that accommodated screen readers and maximized search engine visibility without compromising visual animations.
+  - **Solution:** Engineered a strict Semantic HTML5 architecture. I thoroughly implemented ARIA roles, robust focus management, and optimized AOS animation triggers to ensure the site was not only visually engaging but also achieved perfect Lighthouse scores for SEO and Accessibility.
+
+- **Architecting an Embeddable Widget (Plug-and-Play):** The VueJS chat application had to function as a standalone library. The major risk was CSS bleeding and global state conflicts when injecting the widget into unpredictable host environments.
+  - **Solution:** Packaged the VueJS application into a single, deployable SDK / Standalone Script. I implemented strict CSS encapsulation (preventing style leaks) and exposed a clean, minimal initialization API (window.AzyChat.init()). This ensured the chatbot integrated flawlessly into any external ecosystem without breaking the host site’s UI or logic.
 
 ## Result
 
-Shipped as an npm/yarn-installable component that introduces and summarizes site content — reusable in any codebase, not just the one it launched on.
+Delivered an a11y-compliant, SEO-optimized corporate website. Furthermore, successfully shipped the AI Chat Bot as a robust, embeddable SDK, empowering the client to easily distribute their product to B2B partners.
