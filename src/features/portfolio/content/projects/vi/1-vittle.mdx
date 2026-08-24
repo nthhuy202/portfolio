@@ -19,15 +19,15 @@ team: "3 người"
 image: "/projects/vittle-ca.png"
 ---
 
-## Problem
+## Vấn đề
 
 Khách hàng cần nâng cấp toàn diện UI/UX và logic đặt hàng của hệ thống, nhưng doanh nghiệp không có thời gian và ngân sách để đập đi xây lại (rewrite). Hệ thống hiện tại đang mang một khối lượng nợ kỹ thuật (technical debt) khổng lồ với Tech stack quá cũ (React 16 Class Component, Meteor) và kiến trúc code thiếu tổ chức.
 
-## Responsibilities
+## Trách nhiệm
 
 Đảm nhiệm vai trò Frontend chủ chốt, phối hợp với Backend và PM để hiện thực hóa các yêu cầu kinh doanh mới, đồng thời trực tiếp xử lý các vấn đề về kiến trúc của hệ thống Legacy.
 
-## Challenges & Solutions
+## Thách thức & Giải pháp
 
 - **Xử lý Technical Debt & Monolithic Component:** Màn hình cốt lõi của dự án bị nhồi nhét trong một file `.jsx` khổng lồ (trên 10.000 dòng), gây rủi ro cực cao khi thêm tính năng mới.
   - **Giải pháp:** Áp dụng chiến lược Incremental Refactoring (Tái cấu trúc cục bộ). Tôi bóc tách monolith này thành các component độc lập tuân thủ Single Responsibility Principle. File chính được thu gọn (~1.200 dòng) mà không làm gián đoạn luồng nghiệp vụ hiện tại, giúp giảm 80% rủi ro sinh bug ẩn và tiết kiệm thời gian bảo trì sau này.
@@ -35,6 +35,6 @@ Khách hàng cần nâng cấp toàn diện UI/UX và logic đặt hàng của h
 - **Bảo vệ tính toàn vẹn của CI/CD (Environment Mismatch):** Môi trường Dev chạy Node v14 nhưng server Production bị khóa cứng ở Node v8. Việc vô tình sử dụng cú pháp JS hiện đại (như Optional Chaining) sẽ làm sập server.
   - **Giải pháp:** Thiết lập các quy tắc fallback và transpile code chặt chẽ. Xử lý triệt để sự bất đồng bộ giữa các môi trường, đảm bảo quá trình deployment diễn ra trơn tru (zero-downtime) mà vẫn giữ được logic phức tạp của tính năng mới.
 
-## Result
+## Kết quả
 
 Kéo dài vòng đời (lifecycle) của một hệ thống Legacy. Bàn giao thành công toàn bộ tính năng mới đúng hạn, đồng thời để lại một codebase sạch sẽ và dễ thở hơn rất nhiều cho team maintain sau này.
