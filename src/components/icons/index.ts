@@ -33,3 +33,5 @@ export { IconGithub } from "./icon-github";
 export { IconLinkedin } from "./icon-linkedin";
 export { IconFacebook } from "./icon-facebook";
 export { IconMail } from "./icon-mail";
+export { IconCopy } from "./icon-copy";
+export { IconCheck } from "./icon-check";

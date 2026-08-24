@@ -86,6 +86,8 @@
     "viewSourceOnGithub": "View source on GitHub",
     "availabilityOpen": "Open to work",
     "availabilityLimited": "Limited availability",
-    "availabilityUnavailable": "Not available"
+    "availabilityUnavailable": "Not available",
+    "copyLink": "Copy {label}",
+    "linkCopied": "Copied {label}"
   }
 }
