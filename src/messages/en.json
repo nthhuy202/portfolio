@@ -56,9 +56,9 @@
     "title": "Work experience"
   },
   "contact": {
-    "eyebrow": "Contact",
-    "title": "Let's talk",
-    "blurb": "Whether you have questions about a project I've worked on or just want to talk shop about frontend, don't hesitate to email me below — I read every message and reply as fast as I can."
+    "eyebrow": "CONTACT ME",
+    "title": "Get In Touch",
+    "blurb": "Whether you have questions about my projects or want to discuss frontend development, feel free to reach out. I am always open to new opportunities and technical discussions."
   },
   "footer": {
     "top": "↑ back to top"
@@ -68,7 +68,7 @@
     "role": "Role",
     "timeline": "Timeline",
     "team": "Team",
-    "viewLiveProject": "View live project",
+    "tryItOut": "Try it out",
     "techstackTitle": "Techstack",
     "nextProject": "Next project",
     "contactCta": "Want to know more about this project? Send me an email — I'm happy to walk through the details."

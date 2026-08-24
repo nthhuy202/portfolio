@@ -10,7 +10,9 @@ interface TechStackProps {
 }
 
 export function TechStack({ names }: TechStackProps) {
-  const badges = names ? techStack.filter((tech) => names.includes(tech.name)) : techStack;
+  const badges = names
+    ? techStack.filter((tech) => names.includes(tech.name))
+    : techStack.filter((tech) => tech.Icon && tech.bg && tech.fg && tech.url);
 
   return (
     <div className="grid grid-cols-4 gap-3 mt-4 max-md:grid-cols-2">
@@ -28,13 +30,15 @@ export function TechStack({ names }: TechStackProps) {
               { "--tech-bg": tech.bg, "--tech-fg": tech.fg } as CSSProperties
             }
           >
-            <span className="w-8 h-8 rounded-[0.4375rem] flex-none flex items-center justify-center border border-line bg-fg-muted/10 text-fg-muted transition-colors duration-200 ease-[ease] group-hover:bg-[var(--tech-bg)] group-hover:text-[var(--tech-fg)] group-hover:border-transparent">
-              <tech.Icon
-                className="w-[1.125rem] h-[1.125rem]"
-                aria-hidden="true"
-              />
-            </span>
-            <span className="font-mono text-[0.86rem] tracking-[0.02em] uppercase text-fg">
+            {tech.Icon && (
+              <span className="size-6 rounded-[0.4375rem] flex-none flex items-center justify-center border border-line bg-fg-muted/10 text-fg-muted transition-colors duration-200 ease-[ease] group-hover:bg-[var(--tech-bg)] group-hover:text-[var(--tech-fg)] group-hover:border-transparent">
+                <tech.Icon
+                  className="w-[1.125rem] h-[1.125rem]"
+                  aria-hidden="true"
+                />
+              </span>
+            )}
+            <span className="font-mono text-[0.86rem] tracking-[0.02em] text-fg">
               {tech.name}
             </span>
           </a>

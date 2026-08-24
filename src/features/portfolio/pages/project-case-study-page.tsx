@@ -1,10 +1,10 @@
 import matter from "gray-matter";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { evaluate } from "next-mdx-remote-client/rsc";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Nav } from "@/features/portfolio/components/nav";
 import { Footer } from "@/features/portfolio/components/footer";
 import { TechStack } from "@/features/portfolio/components/tech-stack";
@@ -31,10 +31,19 @@ interface GenerateProjectMetadataProps {
 }
 
 export function generateProjectStaticParams() {
-  return routing.locales.flatMap((locale) => getProjectSlugs(locale).map((slug) => ({ locale, slug })));
+  return routing.locales.flatMap((locale) => {
+    console.log(
+      "getProjectSlugs(locale).map((slug) => ({ locale, slug }))",
+      getProjectSlugs(locale).map((slug) => ({ locale, slug })),
+    );
+
+    return getProjectSlugs(locale).map((slug) => ({ locale, slug }));
+  });
 }
 
-export async function generateProjectMetadata({ params }: GenerateProjectMetadataProps): Promise<Metadata> {
+export async function generateProjectMetadata({
+  params,
+}: GenerateProjectMetadataProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const project = getAllProjectsMeta(locale).find((meta) => meta.slug === slug);
 
@@ -57,7 +66,10 @@ async function evaluateSection(source?: string): Promise<ReactNode> {
   return content;
 }
 
-export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPageProps) {
+export async function ProjectCaseStudyPage({
+  locale,
+  slug,
+}: ProjectCaseStudyPageProps) {
   const projects = getAllProjectsMeta(locale);
   const currentIndex = projects.findIndex((project) => project.slug === slug);
 
@@ -69,7 +81,13 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
   const { content: body } = matter(getProjectSource(locale, slug));
   const sections = splitProjectSections(locale, body);
 
-  const [problemContent, responsibilitiesContent, challengesContent, resultContent, keyLearningContent] = await Promise.all([
+  const [
+    problemContent,
+    responsibilitiesContent,
+    challengesContent,
+    resultContent,
+    keyLearningContent,
+  ] = await Promise.all([
     evaluateSection(sections.problem),
     evaluateSection(sections.responsibilities),
     evaluateSection(sections.challengesAndSolutions),
@@ -86,24 +104,33 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
     <main>
       <Nav />
       <article className="pt-16 max-w-[68.75rem] mx-auto px-6 pb-20">
-        <Link className="font-mono text-[0.86rem] text-fg-muted no-underline inline-flex items-center gap-1.5 hover:text-fg" href="/#projects">
+        <Link
+          className="font-mono text-[0.86rem] text-fg-muted no-underline inline-flex items-center gap-1.5 hover:text-fg"
+          href="/#projects"
+        >
           {tProjects("back")}
         </Link>
-        <h1 className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-[-0.02em] mt-5">{frontmatter.title}</h1>
-        <p className="text-fg-muted text-base leading-[1.65] mt-4 max-w-[60ch]">{frontmatter.summary}</p>
+        <div className="w-full flex items-center gap-8 mt-5">
+          <h1 className="flex-1 text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-[-0.02em]">
+            {frontmatter.title}
+          </h1>
+
+          {frontmatter.demoUrl && (
+            <a
+              className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-transparent transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-accent text-[#1a0a02] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-accent)_88%,white_12%)]"
+              href={frontmatter.demoUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("tryItOut")} ↗
+            </a>
+          )}
+        </div>
+        <p className="text-fg-muted text-base leading-[1.65] mt-4">
+          {frontmatter.summary}
+        </p>
 
         <ProjectMetaGrid frontmatter={frontmatter} />
-
-        {frontmatter.demoUrl && (
-          <a
-            className="inline-flex items-center justify-center gap-2 mb-10 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-transparent transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-accent text-[#1a0a02] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-accent)_88%,white_12%)]"
-            href={frontmatter.demoUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t("viewLiveProject")} ↗
-          </a>
-        )}
 
         {frontmatter.image && (
           <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden border border-line mb-10">
@@ -120,21 +147,26 @@ export async function ProjectCaseStudyPage({ locale, slug }: ProjectCaseStudyPag
         <div className="flex flex-col gap-10">
           <ProjectSection content={problemContent} />
           <ProjectSection content={responsibilitiesContent} />
-          {frontmatter.tech.length > 0 && (
-            <div>
-              <h2 className="text-[1.2rem] font-bold mb-3">{t("techstackTitle")}</h2>
-              <TechStack names={frontmatter.tech} />
-            </div>
-          )}
           <ProjectSection content={challengesContent} />
           <ProjectSection content={resultContent} />
           <ProjectSection content={keyLearningContent} />
+
+          {frontmatter.tech.length > 0 && (
+            <div>
+              <h2 className="text-[1.2rem] font-bold mb-3">
+                {t("techstackTitle")}
+              </h2>
+              <TechStack names={frontmatter.tech} />
+            </div>
+          )}
         </div>
       </article>
 
-      <Footer />
       {nextProject.slug !== slug && <NextProject project={nextProject} />}
+
       <ProjectContactCta />
+
+      <Footer />
     </main>
   );
 }

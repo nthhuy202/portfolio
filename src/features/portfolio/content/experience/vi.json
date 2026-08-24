@@ -4,11 +4,10 @@
     "role": "Frontend Developer",
     "period": "09/2025 — 02/2026",
     "bullets": [
-      "Tối ưu Core Web Vitals, phối hợp chặt chẽ với đội UI/UX để đạt hiệu năng site ở mức cao nhất",
-      "Thiết kế và phát triển hệ thống CRM nội bộ nhằm tinh gọn quản lý nhân sự",
-      "Nghiên cứu và triển khai hệ thống chat mã nguồn mở phục vụ giao tiếp nội bộ",
-      "Thực hiện code review chéo nhóm cùng Project Lead để giảm bug, tăng bảo mật và hiệu năng hệ thống",
-      "Triển khai theo quy trình Agile/Scrum, liên tục cải tiến theo phản hồi"
+      "Chuyển đổi bản thiết kế thành các ứng dụng web pixel-perfect, đảm bảo responsive mượt mà trên mọi thiết bị. Tối ưu hóa hiệu suất và độ tiếp cận bằng các công cụ đo lường chuyên sâu. Phối hợp chặt chẽ với Designer để tinh chỉnh UI/UX, ưu tiên các component đơn giản, hiệu quả thay vì các thiết kế rườm rà, khó sử dụng",
+      "Cùng team nghiên cứu và xây dựng ứng dụng nhắn tin nội bộ dựa trên mã nguồn mở Element IO. Bên cạnh đó, tham gia thảo luận và phát triển hệ thống quản lý nhân sự - CRM nội bộ cho công ty",
+      "Tham gia họp daily để báo cáo tiến độ, xử lý triệt để các vấn đề (blockers) nhằm tránh đình trệ công việc. Đóng góp vào việc ước lượng thời gian (estimate) nhằm đảm bảo tiến độ bàn giao minh bạch và rõ ràng cho cả team lẫn khách hàng",
+      "Chủ động review code để đảm bảo tính đồng bộ với các quy chuẩn chung của dự án. Giảm thiểu tối đa rủi ro phát sinh bug và nợ kỹ thuật, qua đó đẩy nhanh thời gian bàn giao dự án"
     ]
   },
   {
@@ -28,10 +27,9 @@
     "role": "Frontend Developer",
     "period": "02/2022 — 06/2024",
     "bullets": [
-      "Hiện thực hóa các thành phần giao diện pixel-perfect từ thiết kế Figma, phối hợp với đội UI/UX",
-      "Áp dụng tối ưu SEO để cải thiện khả năng hiển thị và thứ hạng tìm kiếm",
-      "Thực hiện code review chéo để đảm bảo chất lượng và tính nhất quán của codebase",
-      "Ước lượng thời gian hiệu quả để đảm bảo tiến độ bàn giao"
+      "Trực tiếp tham gia phát triển các dự án có độ phức tạp cao như hệ thống E-Commerce và Booking, chú trọng đặc biệt vào việc tối ưu hóa tốc độ và hiệu suất hoạt động của ứng dụng.",
+      "Áp dụng các kỹ thuật SEO chuẩn mực nhằm cải thiện thứ hạng trên công cụ tìm kiếm, qua đó gia tăng lượng truy cập (traffic) và mức độ tiếp cận người dùng cho dự án.",
+      "Thực thi quy trình review code chéo và đồng bộ hóa các template khi commit/tạo pull request. Việc này giúp tăng cường bảo mật, hạn chế tối đa lỗi (bugs) phát sinh và đảm bảo tiến độ bàn giao dự án đúng hạn."
     ]
   }
 ]

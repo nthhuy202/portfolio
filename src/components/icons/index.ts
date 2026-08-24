@@ -32,3 +32,4 @@ export { IconMui } from "./icon-mui";
 export { IconGithub } from "./icon-github";
 export { IconLinkedin } from "./icon-linkedin";
 export { IconFacebook } from "./icon-facebook";
+export { IconMail } from "./icon-mail";

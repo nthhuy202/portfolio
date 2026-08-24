@@ -19,13 +19,13 @@ export function Hero() {
       <Reveal delay={0.2}>
         <div className="flex gap-3.5 mt-[2.125rem] flex-wrap max-sm:flex-nowrap">
           <a
-            className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-transparent transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-accent text-[#1a0a02] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-accent)_88%,white_12%)] max-sm:flex-1"
+            className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-16 rounded-[var(--radius)] border border-transparent transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-accent text-[#1a0a02] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-accent)_88%,white_12%)] max-sm:flex-1 max-sm:px-5"
             href="#projects"
           >
             {t("ctaProjects")}
           </a>
           <a
-            className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-5 rounded-[var(--radius)] border border-line transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-transparent text-fg hover:-translate-y-px hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] max-sm:flex-1"
+            className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold py-3 px-20 rounded-[var(--radius)] border border-line transition-[transform,background,border-color] duration-150 ease-[ease] cursor-pointer no-underline bg-transparent text-fg hover:-translate-y-px hover:border-[color-mix(in_srgb,var(--color-accent)_50%,var(--color-line))] max-sm:flex-1 max-sm:px-5"
             href="#contact"
           >
             {t("ctaContact")}

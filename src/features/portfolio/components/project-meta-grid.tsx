@@ -10,7 +10,7 @@ export function ProjectMetaGrid({ frontmatter }: ProjectMetaGridProps) {
   const t = useTranslations("caseStudy");
 
   const items = [
-    { label: t("client"), value: frontmatter.client ?? EMPTY_META_VALUE_PLACEHOLDER },
+    { label: t("client"), value: frontmatter.country ?? EMPTY_META_VALUE_PLACEHOLDER },
     { label: t("role"), value: frontmatter.role },
     { label: t("timeline"), value: frontmatter.periods.join(" · ") },
     { label: t("team"), value: frontmatter.team ?? EMPTY_META_VALUE_PLACEHOLDER },

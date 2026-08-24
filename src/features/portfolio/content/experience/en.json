@@ -4,11 +4,10 @@
     "role": "Frontend Developer",
     "period": "Sep 2025 — Feb 2026",
     "bullets": [
-      "Optimized Core Web Vitals in close collaboration with the UI/UX team for top-tier site performance",
-      "Designed and developed an internal CRM system to streamline HR management",
-      "Researched and implemented an open-source-based chat system for internal communication",
-      "Conducted cross-team code reviews with Project Leads to reduce bugs, improve security and system performance",
-      "Delivered within Agile/Scrum, iterating on feedback"
+      "Translated designs into pixel-perfect, highly responsive web applications across all breakpoints. Utilized performance profiling tools to optimize loading speeds and web accessibility. Collaborated closely with Designers to streamline complex UI/UX elements, trading off convoluted designs for clean, user-friendly, and maintainable components.",
+      "Researched and co-developed an internal chat application leveraging the Element IO open-source ecosystem. Additionally, collaborated with the team to architect and build an internal Human Resources Management (CRM) system.",
+      "Actively participated in daily stand-ups to report progress, highlight blockers, and mitigate risks of delayed deliverables. Contributed to sprint planning by providing accurate time estimates to ensure transparent delivery timelines for both the team and clients.",
+      "Conducted thorough code reviews to ensure strict adherence to predefined templates, coding standards, and architectural rules. Minimized potential bugs and technical debt, thereby significantly accelerating the project's overall delivery time."
     ]
   },
   {
@@ -16,22 +15,22 @@
     "role": "Frontend Developer",
     "period": "Aug 2024 — Aug 2025",
     "bullets": [
-      "Built responsive client websites with user-friendly, UX-optimized interfaces",
-      "Applied SEO and performance techniques: page load, caching, lazy loading, code splitting",
-      "Conducted cross-code reviews, reducing production issues and enforcing conventions",
-      "Managed time and task estimation for on-time delivery",
-      "Git, source-code management, pull requests, basic CI/CD workflows"
+      "Translated UI/UX designs into pixel-perfect, cross-platform responsive web applications. Evaluated and optimized web performance using profiling tools. Collaborated with designers to refine complex UI features into user-friendly and practical implementations.",
+      "Architected scalable and maintainable project structures and source code bases for company-wide adoption. Implemented cross-code review workflows to ensure code quality and significantly reduce bugs.",
+      "Contributed to external client projects (both remote and onsite) to accelerate project delivery. Acquired industry best practices from these external collaborations and integrated them into the company’s internal workflows.",
+      "Actively participated in brainstorming sessions to share new technical insights, which improved development speed, workflow efficiency, and team connectivity.",
+      "Applied SEO best practices and advanced optimization techniques to enhance web visibility and overall application performance.",
+      "Managed task timelines effectively by providing accurate estimations, ensuring on-time project delivery, and preventing costly delays."
     ]
   },
   {
-    "company": "WIICAMP",
+    "company": "Wiicamp Ltd.",
     "role": "Frontend Developer",
     "period": "Feb 2022 — Jun 2024",
     "bullets": [
-      "Implemented pixel-perfect interface components from Figma with UI/UX design teams",
-      "Applied SEO optimization to improve visibility and search rankings",
-      "Conducted cross-code reviews for quality and codebase consistency",
-      "Managed estimation to keep delivery on schedule"
+      "Developed and optimized complex, high-traffic web applications, including E-Commerce and Booking platforms, with a strict focus on fast loading speeds and optimal performance.",
+      "Implemented effective SEO techniques to improve search engine rankings, thereby increasing user reach and organic traffic for the web applications.",
+      "Enforced cross-code review practices and standardized commit/pull request templates. This approach enhanced code security, minimized bugs, and ensured timely project delivery without unexpected delays."
     ]
   }
 ]

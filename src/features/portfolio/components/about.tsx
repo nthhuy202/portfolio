@@ -12,7 +12,7 @@ export function About() {
       id="about"
       className="py-24 border-b border-line relative max-w-[68.75rem] mx-auto px-6"
     >
-      <Reveal className="mb-11 max-w-[40rem]">
+      <Reveal className="mb-11">
         <p className="font-mono text-[0.8rem] tracking-[0.12em] uppercase text-accent flex items-center gap-[0.6em]">
           {t("eyebrow")}
         </p>
@@ -20,11 +20,11 @@ export function About() {
           {t("title")}
         </h2>
       </Reveal>
-      <Reveal className="max-w-[68ch]">
-        <p className="text-fg-muted text-base leading-[1.65] mt-3.5 max-w-[56ch]">
+      <Reveal >
+        <p className="text-fg-muted text-base leading-[1.65] mt-3.5 ">
           {t("intro")}
         </p>
-        <ul className="mt-5 space-y-4 max-lg:max-w-[unset] max-w-[56ch] list-disc ml-5">
+        <ul className="mt-5 space-y-4  list-disc ml-5">
           {highlights.map((highlight) => (
             <li
               key={highlight.title}

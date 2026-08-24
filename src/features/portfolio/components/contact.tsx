@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/features/portfolio/components/reveal";
 import { EmailCtaButton } from "@/features/portfolio/components/email-cta-button";
-import { CONTACT_EMAIL } from "@/features/portfolio/constants/social-links";
+import { IconLinkButton } from "@/features/portfolio/components/icon-link-button";
+import { CONTACT_EMAIL, socialLinks } from "@/features/portfolio/constants/social-links";
 
 export function Contact() {
   const t = useTranslations("contact");
@@ -14,8 +15,11 @@ export function Contact() {
       </Reveal>
       <Reveal className="bg-bg-raised border border-line rounded-lg p-11 flex flex-col items-start gap-[1.625rem]">
         <p className="text-fg-muted text-base leading-[1.65] max-w-none w-full m-0">{t("blurb")}</p>
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-8 flex-wrap items-center">
           <EmailCtaButton email={CONTACT_EMAIL} />
+          {socialLinks.map((socialLink) => (
+            <IconLinkButton key={socialLink.label} iconLink={socialLink} />
+          ))}
         </div>
       </Reveal>
     </section>

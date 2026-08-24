@@ -1,0 +1,40 @@
+---
+title: "Vittle — User & Admin"
+summary: "A daily/weekly meal planning and ordering platform. It allows users to view and customize meal ingredients, featuring an integrated calorie calculator."
+tech:
+  [
+    "React",
+    "Meteor",
+    "MongoDB",
+    "Node.js",
+    "Redux Thunk",
+    "Stripe",
+    "Formik",
+    "Zod",
+  ]
+periods: ["Jun 2025 - Aug 2025"]
+country: "Canada"
+role: "Frontend Developer"
+team: "3 people"
+image: "/projects/vittle-ca.png"
+demoUrl: "https://vittle.ca"
+---
+
+## Problem
+
+The client needed a comprehensive overhaul of the UI and ordering logic. However, constrained by budget and time, a full rewrite was out of the question. The challenge was to implement modern business requirements on top of a fragile legacy system (React 16 Class Components, Meteor) heavily burdened with technical debt.
+
+## Responsibilities
+
+Acted as the core Frontend Developer, collaborating with the BE and PM to ship new business features while actively tackling the architectural flaws of the legacy codebase.
+
+## Challenges & Solutions
+
+- **Tackling Technical Debt & Monolithic Components:** The core ordering screen was a massive (~ 10.000 lines), making feature additions highly risky.
+  - **Solution:** Executed a strict Incremental Refactoring strategy. I decoupled this monolith into isolated, single-responsibility components, reducing the main file to ~1,200 lines without breaking existing business logic. This drastically minimized hidden bug risks and improved future maintainability.
+- **Ensuring CI/CD Integrity (Environment Mismatch):** The local dev environment ran Node v14, while production was locked to Node v8, causing modern JS syntax to crash the server.
+  - **Solution:** Engineered robust transpile and fallback mechanisms to bridge the environment gap. I ensured cross-environment compatibility, guaranteeing stable, zero-downtime deployments while fully supporting the new feature logic.
+
+## Result
+
+Successfully extended the lifecycle of a legacy application. Delivered all new features on schedule while leaving behind a significantly cleaner, more maintainable codebase for future iterations.

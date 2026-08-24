@@ -9,7 +9,7 @@
     "eyebrow": "Lập trình viên Frontend · Đà Nẵng, Việt Nam",
     "name": "Nguyễn Thanh Hà Huy",
     "hi": "Xin chào, tôi là",
-    "role": "Chuyên phát triển giao diện tối ưu hiệu năng, responsive và chuẩn a11y.",
+    "role": "Chuyên phát triển giao diện với hiệu năng cao, responsive và chuẩn a11y.",
     "pitch": "Tôi xây dựng web với mục tiêu mang lại trải nghiệm toàn diện cho người dùng. Khởi điểm từ một kiến trúc ổn định, dễ bảo trì và mở rộng, cho đến việc tối ưu hóa khắt khe về tốc độ, hiệu năng và tính thân thiện — tất cả đều nhằm tạo ra một sản phẩm hoàn thiện nhất.",
     "ctaProjects": "Xem dự án",
     "ctaContact": "Kết nối ngay",
@@ -56,9 +56,9 @@
     "title": "Kinh nghiệm làm việc"
   },
   "contact": {
-    "eyebrow": "Liên hệ",
-    "title": "Cùng trao đổi nhé",
-    "blurb": "Dù bạn có thắc mắc về các dự án tôi đã làm hay chỉ đơn giản là muốn giao lưu về chuyện nghề frontend, đừng ngần ngại gửi email cho tôi đặt phía bên dưới; tôi luôn đọc mọi tin nhắn và phản hồi nhanh nhất có thể."
+    "eyebrow": "THÔNG TIN LIÊN HỆ",
+    "title": "Hãy kết nối với tôi",
+    "blurb": "Dù bạn có câu hỏi về các dự án tôi đã thực hiện hay chỉ đơn thuần muốn trao đổi chuyên môn về Frontend, đừng ngần ngại liên hệ nhé. Tôi luôn sẵn sàng đón nhận những cơ hội hợp tác mới cũng như các buổi thảo luận về kỹ thuật."
   },
   "footer": {
     "top": "↑ về đầu trang"
@@ -68,7 +68,7 @@
     "role": "Vai trò",
     "timeline": "Thời gian",
     "team": "Đội nhóm",
-    "viewLiveProject": "Xem dự án thực tế",
+    "tryItOut": "Truy cập trang",
     "techstackTitle": "Công nghệ sử dụng",
     "nextProject": "Dự án tiếp theo",
     "contactCta": "Muốn biết thông tin chi tiết về dự án này? Hãy gửi email cho tôi — tôi luôn sẵn sàng chia sẻ thêm."
