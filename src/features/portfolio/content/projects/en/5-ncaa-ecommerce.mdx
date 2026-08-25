@@ -4,7 +4,7 @@ summary: "An E-commerce platform specializing in 'college touchdown' merchandise
 tech:
   [
     "Next.js",
-    "Tailwind CSS",
+    "Tailwind",
     "Redux Toolkit",
     "Shadcn/ui",
     "React Hook Form",
@@ -21,12 +21,20 @@ image: "/projects/ncaa.png"
 
 ## Problem
 
-The client needed a storefront that could handle products with multiple variants (size, color, quantity) and dynamic pricing, plus an internal system non-technical staff could use to manage that catalog without engineering help.
+The client needed a niche E-commerce platform targeting "College Touchdown" sports fans, featuring merchandise categorized by specific teams. The system required complex storefront logic (SKU variants, dynamic pricing, Flash Sales) alongside a robust Admin CMS, empowering the Marketing team to independently manage collections and control SEO structures without developer intervention.
 
 ## Responsibilities
 
-Built the storefront UI from Figma, including variant-based product pages, team-specific collections and cart checkout, and added social login (Google, Facebook). Configured and optimized technical SEO end to end — robots.txt, sitemap.xml, meta tags, structured data and PageSpeed — alongside the customer-facing admin system for product CRUD and page metadata.
+Acted as the core Frontend Developer, responsible for delivering pixel-perfect UI from design specs, handling complex Cart/Checkout states, and architecting the entire Technical SEO layer.
+
+## Challenges & Solutions
+
+- **Technical SEO & Organic Discoverability:** For an E-commerce site, high visibility on search engines is critical for revenue. The challenge was making highly dynamic product content deeply SEO-friendly while giving full control to the admin.
+  - **Solution:** The team engineered a Dynamic SEO Injection layer linked to the Admin panel, allowing real-time metadata updates. Furthermore, rigorous JSON-LD Structured Data (Product, Breadcrumb, and Offer schemas) was implemented across the platform. This directly enabled Google to generate Rich Snippets (displaying real-time prices, availability, and variants on search results), drastically improving organic Click-Through Rates (CTR)
+
+- **Complex State Management & Cross-platform Fluidity:** Handling multi-variant products (SKUs) and high-urgency Flash Sales required a flawless, highly responsive UI to prevent cart abandonment.
+  - **Solution:** Engineered a robust, fluid responsive architecture ensuring a seamless shopping experience across all mobile and desktop devices. I implemented strict state management for the Cart and Variant selection logic, guaranteeing data consistency and zero UI-blocking during high-traffic Flash Sale events.
 
 ## Result
 
-Shipped both the storefront and the admin system as part of a 6-person team, with SEO groundwork in place before launch instead of bolted on after.
+Successfully built a highly responsive, heavily SEO-optimized E-commerce platform. Delivered a frictionless shopping experience for users while providing the Marketing team with a powerful, decoupled CMS tool for SEO and campaign management.

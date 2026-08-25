@@ -1,22 +1,31 @@
 ---
-title: "HOTSPOTTER Landing Page"
-summary: "Landing page cho app mobile khám phá địa điểm, hiển thị danh sách địa điểm yêu thích do người dùng chia sẻ, lấy trực tiếp từ app — thực hiện cùng team 4 người."
-tech: ["Next.js", "CSS Module", "MapBox API"]
+title: "HOTSPOTTER"
+summary: "Landing page cho app mobile khám phá địa điểm, hiển thị danh sách địa điểm yêu thích do người dùng chia sẻ, lấy trực tiếp từ app"
+tech: ["Next.js", "CSS", "MapBox API"]
 periods: ["07/2023 - 02/2024"]
 country: "Hà Lan"
 role: "Frontend Developer"
 team: "4 người"
 image: "/projects/hotspotter.png"
+demoUrl: "https://hotspotter.io/"
 ---
 
 ## Vấn đề
 
-App mobile cần một landing page hướng tới người dùng công khai, có thể xếp hạng tốt trên tìm kiếm và hiển thị nội dung thật do người dùng tạo ra — danh sách địa điểm yêu thích — thay vì chỉ nội dung marketing tĩnh.
+Xây dựng một trang web quảng bá (Landing Page/Web view) cho ứng dụng di động Hotspotter (iOS/Android) – nơi người dùng tạo, lưu trữ và chia sẻ các địa điểm yêu thích. Yêu cầu quan trọng nhất là phải mô phỏng lại trải nghiệm cốt lõi của app ngay trên nền web thông qua một bản đồ tương tác trực quan, nhằm thu hút người dùng và thúc đẩy tỷ lệ tải ứng dụng (User Acquisition).
 
 ## Trách nhiệm
 
-Xây UI từ Figma với slider hình ảnh giới thiệu app, dùng server-side rendering của Next.js để hiển thị danh sách yêu thích do người dùng chia sẻ lấy trực tiếp từ app mobile, và tích hợp MapBox API để hiển thị vị trí.
+Đội ngũ phát triển đảm nhận việc xây dựng nền tảng web với Next.js, tích hợp hệ thống bản đồ số (MapBox API) để hiển thị danh sách địa điểm (User-generated content), và tối ưu hóa UI/UX để tương thích hoàn hảo trên các thiết bị.
+
+## Thách thức & Giải pháp
+
+- **Hiệu năng hiển thị Bản đồ Tương tác (Spatial Data Visualization):** MapBox sử dụng WebGL nên rất ngốn tài nguyên. Nếu tích hợp không khéo vào React/Next.js, mỗi lần người dùng thao tác sẽ kích hoạt re-render toàn bộ component, gây ra tình trạng tràn bộ nhớ (memory leaks) và giật lag (UI stuttering).
+  - **Giải pháp:** Đội phát triển (Team) đã áp dụng kỹ thuật quản lý trạng thái (State Management) độc lập cho thẻ bản đồ. Chúng tôi tách biệt hoàn toàn instance của MapBox ra khỏi vòng đời render của React (React Render Lifecycle). Bằng cách sử dụng các tham chiếu (Refs) và kỹ thuật Memoization, bản đồ chỉ cập nhật dữ liệu điểm đến (GeoJSON markers) khi cần thiết mà không phải vẽ lại toàn bộ DOM, giúp thao tác vuốt/chạm cực kỳ mượt mà.
+
+- **Cân bằng giữa Trải nghiệm tương tác và SEO:** Các thành phần biểu đồ/bản đồ nặng thường cản trở việc lập chỉ mục của các công cụ tìm kiếm, trong khi một trang Landing Page thì đặc biệt cần SEO để tiếp cận người dùng.
+  - **Giải pháp:** Tận dụng triệt để sức mạnh của Next.js. Team đã cấu trúc kiến trúc Hybrid: Sử dụng Server-Side Rendering (SSR) / Static Site Generation (SSG) cho phần nội dung văn bản, tiêu đề và Meta SEO để Google bot có thể index ngay lập tức. Ngược lại, khối component chứa MapBox được cấu hình để tải động (Dynamic Import / Lazy Load) hoàn toàn ở phía Client, giải quyết dứt điểm bài toán SEO mà vẫn giữ được tính năng tương tác.
 
 ## Kết quả
 
-Bàn giao cùng team 4 người; SSR giúp trang marketing vừa được index nhanh trên công cụ tìm kiếm, vừa luôn hiển thị nội dung mới nhất thay vì một trang tĩnh phải cập nhật thủ công.
+Xây dựng hoàn thiện một trang giới thiệu sinh động, tốc độ tải trang cao. Việc tích hợp mượt mà bản đồ MapBox đã giúp trực quan hóa giá trị cốt lõi của sản phẩm, tạo ra một công cụ đắc lực hỗ trợ chiến dịch Marketing và tăng tỷ lệ chuyển đổi tải App.

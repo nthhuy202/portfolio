@@ -4,7 +4,7 @@ summary: "Nền tảng thương mại điện tử chuyên phân phối các s�
 tech:
   [
     "Next.js",
-    "Tailwind CSS",
+    "Tailwind",
     "Redux Toolkit",
     "Shadcn/ui",
     "React Hook Form",
@@ -21,12 +21,20 @@ image: "/projects/ncaa.png"
 
 ## Vấn đề
 
-Khách hàng cần một storefront xử lý được sản phẩm có nhiều biến thể (size, màu, số lượng) và giá tính động, cùng hệ thống nội bộ để nhân sự không rành kỹ thuật vẫn quản lý được catalog mà không cần đội dev hỗ trợ.
+Doanh nghiệp cần xây dựng một hệ thống E-commerce nhắm tới tệp fan hâm mộ thể thao "College Touchdown", chuyên phân phối quần áo và phụ kiện theo từng đội tuyển (Team Collections). Hệ thống đòi hỏi khả năng xử lý logic E-commerce phức tạp (Variants, SKUs, Flash Sales) cùng một nền tảng Admin CMS mạnh mẽ để đội ngũ Marketing có thể chủ động kiểm soát hoàn toàn các chiến dịch bán hàng và cấu trúc SEO mà không cần can thiệp code.
 
 ## Trách nhiệm
 
-Xây UI storefront từ Figma, gồm trang sản phẩm theo biến thể, bộ sưu tập riêng theo team và luồng thanh toán giỏ hàng, thêm đăng nhập mạng xã hội (Google, Facebook). Cấu hình và tối ưu SEO kỹ thuật toàn diện — robots.txt, sitemap.xml, meta tags, structured data, PageSpeed — song song với hệ thống admin quản lý CRUD sản phẩm và metadata trang.
+Đảm nhiệm vai trò Frontend Developer, chịu trách nhiệm hiện thực hóa giao diện (pixel-perfect) từ bản design, xử lý logic giỏ hàng (Cart/Checkout) và kiến trúc toàn bộ lớp Technical SEO cho cả hệ thống.
+
+## Thách thức & Giải pháp
+
+- **Technical SEO & Khả năng hiển thị (Organic Discoverability):** Đối với thương mại điện tử, việc sản phẩm xuất hiện nổi bật trên Search Engine (Google, Bing, ...) là sống còn. Tuy nhiên, nội dung sản phẩm thay đổi liên tục và hệ thống yêu cầu SEO phải linh hoạt.
+  - **Giải pháp:** Đội phát triển (Team) đã xây dựng một kiến trúc Dynamic SEO Injection kết nối trực tiếp với Admin Dashboard, cho phép team Marketing tùy chỉnh Title, Meta tags theo thời gian thực. Đặc biệt, hệ thống dữ liệu có cấu trúc JSON-LD (Structured Data) (Product, Breadcrumbs, Offers schemas) cũng được triển khai đồng bộ. Điều này giúp Google dễ dàng đọc hiểu sản phẩm và hiển thị dạng Rich Snippets (có giá, rating, tình trạng còn hàng) ngay trên trang kết quả tìm kiếm, góp phần tăng mạnh tỷ lệ CTR (Click-through Rate).
+
+- **Quản lý Trạng thái Phức tạp & Giao diện Đa nền tảng:** Hệ thống có cấu trúc sản phẩm đa biến thể (Variants/SKUs) và các chiến dịch Flash Sale đòi hỏi UI phải phản hồi mượt mà, chính xác trên mọi kích thước màn hình để không làm rớt tỷ lệ chuyển đổi (Drop-off rate).
+  - **Giải pháp:** Tối ưu hóa kiến trúc Responsive, đảm bảo trải nghiệm mua sắm xuyên suốt (fluid experience) từ Mobile đến Desktop. Tôi xử lý chặt chẽ logic quản lý trạng thái (State Management) cho Giỏ hàng (Cart) và tính năng chọn Variant, đảm bảo sự đồng bộ dữ liệu ngay cả khi người dùng thao tác nhanh trong các sự kiện Flash Sale có lưu lượng truy cập cao.
 
 ## Kết quả
 
-Triển khai cả storefront lẫn hệ thống admin cùng team 6 người, với nền tảng SEO được chuẩn bị sẵn từ trước khi ra mắt thay vì bổ sung sau.
+Xây dựng hoàn thiện một nền tảng E-commerce tối ưu hóa cao cho bộ máy tìm kiếm (SEO-friendly). Giao diện mượt mà, thân thiện tạo tiền đề tốt để tăng tỷ lệ chuyển đổi, đồng thời giải phóng hoàn toàn sự phụ thuộc của team Marketing vào team Dev trong các chiến dịch vận hành SEO.

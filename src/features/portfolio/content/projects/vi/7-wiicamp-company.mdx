@@ -7,16 +7,25 @@ country: "Việt Nam"
 role: "Frontend Developer"
 team: "3 người"
 image: "/projects/wiicamp.png"
+demoUrl: "https://wiicamp.com"
 ---
 
 ## Vấn đề
 
-The client needed a way to see business performance on the Mirakl Marketplace platform — orders, revenue, inventory — without digging through the platform's native admin views.
+Bài toán đặt ra là xây dựng trang thông tin doanh nghiệp (Corporate Website) để giới thiệu dịch vụ và quảng bá thương hiệu tới đối tác. Yêu cầu then chốt là trang web phải đạt tốc độ tải trang cực cao, tối ưu hóa tuyệt đối cho SEO và tiết kiệm tối đa chi phí vận hành/bảo trì, đòi hỏi một hướng tiếp cận tinh gọn thay vì lạm dụng các framework nặng nề không cần thiết.
 
 ## Trách nhiệm
 
-Built UI components from mockups, integrated APIs to manage the product lifecycle (variants, quantities), and rendered sales and inventory insights through dynamic ApexCharts visualizations.
+Cùng đội ngũ phát triển kiến trúc và xây dựng toàn bộ giao diện Frontend theo hướng tối giản (Minimalist Architecture), sử dụng HTML/CSS và Vanilla JS, tập trung mạnh vào tối ưu hóa Core Web Vitals và Technical SEO.
+
+## Thách thức & Giải pháp
+
+- **Tránh "Over-engineering" (Phức tạp hóa hệ thống) & Tối ưu tốc độ:** Việc sử dụng các công nghệ như React hay Vue cho một trang web thuần hiển thị thông tin là sự lãng phí tài nguyên, làm tăng kích thước bundle, giảm tốc độ load và đội chi phí hosting.
+  - **Giải pháp:** Đội phát triển (Team) đã quyết định áp dụng kiến trúc Zero-dependency (Không phụ thuộc framework lớn). Bằng cách khai thác tối đa sức mạnh của HTML5 Semantic và Vanilla JS (kết hợp jQuery tinh giản), hệ thống loại bỏ hoàn toàn rác code (framework bloat). Sự lựa chọn này mang lại tốc độ tải trang gần như tức thì, đạt điểm số tuyệt đối về hiệu năng (Performance) và giúp doanh nghiệp tiết kiệm đáng kể chi phí duy trì server.
+
+- **Tối đa hóa khả năng tiếp cận khách hàng tự nhiên (Organic Reach):** Một trang hồ sơ công ty (Company Profile) cần phải được các công cụ tìm kiếm ưu tiên lập chỉ mục (index) nhanh và chính xác nhất.
+  - **Giải pháp:** Đội ngũ triển khai các kỹ thuật On-page SEO khắt khe ở mức mã nguồn nguyên bản. Thay vì phải chờ JavaScript render (như các hệ thống Single Page Application), cấu trúc HTML thuần giúp các web crawlers (bot tìm kiếm của Google) đọc hiểu cấu trúc thẻ tag và thu thập dữ liệu (crawlability) ngay lập tức, từ đó thúc đẩy thứ hạng tự nhiên của doanh nghiệp trên trang kết quả tìm kiếm.
 
 ## Kết quả
 
-Delivered as part of a 3-person team, giving the client a single dashboard for order, revenue and inventory data instead of piecing it together from the marketplace's own admin.
+Xây dựng hoàn thiện một trang web doanh nghiệp siêu tốc độ và tối ưu chi phí. Dự án là minh chứng cho tư duy chọn đúng công nghệ để giải quyết đúng bài toán kinh doanh, mang lại giá trị Marketing lớn mà không sinh ra nợ kỹ thuật (technical debt).

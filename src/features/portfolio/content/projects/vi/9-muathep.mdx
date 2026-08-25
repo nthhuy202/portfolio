@@ -1,5 +1,5 @@
 ---
-title: "MUATHEP"
+title: "Mua Thép"
 summary: "Hệ thống cơ sở dữ liệu tra cứu giá thép theo thời gian thực (real-time). Dự án tích hợp biểu đồ trực quan giúp theo dõi biến động giá hàng ngày, đồng thời hỗ trợ tính năng nhận báo giá nhằm đảm bảo tính minh bạch tối đa cho người mua."
 tech: ["Next.js", "CSS Module", "Zustand", "Axios", Chart.js]
 periods: ["01/2023 - 05/2023"]
@@ -7,16 +7,25 @@ country: "Việt Nam"
 role: "Frontend Developer"
 team: "4 người"
 image: "/projects/muathep.png"
+demoUrl: "https://muathep.vn/"
 ---
 
 ## Vấn đề
 
-The mobile app needed a public-facing landing page that could rank well in search and show real user-generated content — shared favourite places — rather than static marketing copy alone.
+Doanh nghiệp cần xây dựng một cổng thông tin tra cứu giá thép B2B theo thời gian thực nhằm đảm bảo tính minh bạch tối đa cho khách hàng. Hệ thống yêu cầu khả năng trực quan hóa biến động giá (chuỗi dữ liệu thời gian) thông qua biểu đồ để khách hàng dễ dàng so sánh, kết hợp với luồng "Nhận báo giá" để chuyển đổi (convert) người dùng thành khách hàng tiềm năng. Đồng thời, nền tảng phải có khả năng SEO xuất sắc qua hệ thống Blog tin tức để thu hút lượng truy cập tự nhiên (organic traffic) từ thị trường.
 
 ## Trách nhiệm
 
-Built the UI from Figma with app-intro image sliders, used Next.js server-side rendering to display user-shared favourites pulled live from the mobile app, and integrated the MapBox API for location display.
+Đội ngũ phát triển đảm nhận việc thiết kế và xây dựng kiến trúc Frontend với Next.js, quản lý trạng thái luồng dữ liệu thời gian thực bằng Zustand, tích hợp Chart.js để biểu diễn dữ liệu tài chính/vật tư, và thiết lập cấu trúc Technical SEO toàn diện cho hệ thống.
+
+## Thách thức & Giải pháp
+
+- **Xử lý State Dữ liệu lớn & Hiệu năng Biểu đồ (Data Visualization):** Việc hiển thị, lọc và so sánh nhiều loại thép khác nhau trên biểu đồ theo các mốc thời gian đòi hỏi hệ thống phải xử lý lượng dữ liệu (time-series data) rất lớn. Nếu quản lý state không khéo, giao diện sẽ bị đơ (UI blocking) mỗi khi người dùng đổi bộ lọc.
+  - **Giải pháp:** Đội phát triển (Team) quyết định sử dụng Zustand thay cho các thư viện cồng kềnh (như Redux) để quản lý trạng thái. Kiến trúc của Zustand giúp chia nhỏ store, tách biệt hoàn toàn luồng dữ liệu của biểu đồ ra khỏi vòng đời render của giao diện chính. Kết hợp với Chart.js và các kỹ thuật Memoization, hệ thống cho phép người dùng thay đổi bộ lọc, so sánh giá các loại thép chéo nhau với tốc độ phản hồi ngay lập tức mà không gặp bất kỳ độ trễ nào.
+
+- **Bài toán SEO cho Dữ liệu Động & Tin tức Thị trường:** Giá thép biến động liên tục nhưng vẫn cần Google lập chỉ mục (index) nhanh chóng, trong khi phần Blog cần tốc độ tải trang cực nhanh để giữ chân người đọc.
+  - **Giải pháp:** Tận dụng tối đa sức mạnh của Next.js. Team đã triển khai kiến trúc ISR (Incremental Static Regeneration) cho các trang tra cứu giá, giúp trang web luôn cập nhật dữ liệu mới nhất mà vẫn giữ được tốc độ load của một trang tĩnh (static page). Đối với hệ thống Blog, kỹ thuật SSG (Static Site Generation) và JSON-LD (Article Schema) được áp dụng triệt để, giúp các bài phân tích thị trường dễ dàng đạt thứ hạng cao trên công cụ tìm kiếm, từ đó kéo về lượng lớn leads (yêu cầu báo giá) cho doanh nghiệp.
 
 ## Kết quả
 
-Delivered as part of a 4-person team; SSR gave the marketing page both fast search indexing and always-current content instead of a manually updated static page.
+Xây dựng hoàn thiện một cổng thông tin B2B minh bạch, hiệu năng cao. Hệ thống biểu đồ hoạt động mượt mà giúp đối tác dễ dàng ra quyết định, trong khi kiến trúc chuẩn SEO đã biến nền tảng thành một kênh thu hút khách hàng tiềm năng (Lead Generation) đắc lực cho công ty.

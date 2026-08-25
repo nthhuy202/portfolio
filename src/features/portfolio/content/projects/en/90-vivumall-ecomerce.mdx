@@ -10,12 +10,20 @@ team: "4 people"
 
 ## Problem
 
-The mobile app needed a public-facing landing page that could rank well in search and show real user-generated content — shared favourite places — rather than static marketing copy alone.
+The business required a robust, dedicated e-commerce platform for sporting goods, encompassing the complete end-to-end customer journey. The system needed to handle everything from complex product cataloging (Categories, SKUs, Variants) and high-concurrency Flash Sales, to intricate post-purchase workflows including order tracking, product reviews, returns, and refunds.
 
 ## Responsibilities
 
-Built the UI from Figma with app-intro image sliders, used Next.js server-side rendering to display user-shared favourites pulled live from the mobile app, and integrated the MapBox API for location display.
+Collaborated with the engineering team to architect and build the full frontend infrastructure using Next.js (Page Router). Led the implementation of the global state management layer utilizing Redux Saga to orchestrate the complex, asynchronous business logic inherent to e-commerce pipelines.
+
+## Challenges & Solutions
+
+- **Orchestrating Complex Async Side Effects & Race Conditions:** Managing a multi-step checkout pipeline, cart synchronization, and complex post-purchase flows (return/refund requests) involves highly interdependent API calls. Mishandling these could lead to critical race conditions, especially during high-urgency Flash Sale events where users make rapid UI interactions.
+  - **Solution:** The team implemented a rigorous Redux Saga architecture to cleanly decouple asynchronous side effects from UI components. By leveraging Generator Functions, we exerted precise control over complex async flows—such as gracefully handling payment API retries, or canceling outdated fetch requests when users rapidly switched SKUs. This guaranteed data integrity, prevented duplicate transactions, and ensured the UI always reflected the accurate inventory state.
+
+- **Balancing SEO Requirements with a Frictionless UX:** The platform demanded aggressive SEO for product discoverability, while simultaneously requiring a buttery-smooth client-side experience for interactions like SKU selection, cart updates, and Flash Sale timers.
+  - **Solution:** Maximized the Server-Side Rendering (SSR) capabilities of the Next.js Page Router, ensuring Product Detail Pages (PDP) and Product Listing Pages (PLP) were instantly crawlable with rich metadata. Coupled with Optimistic UI Updates for cart and review interactions, the team delivered a frictionless, lag-free shopping experience that significantly drove user engagement and conversion rates.
 
 ## Result
 
-Delivered as part of a 4-person team; SSR gave the marketing page both fast search indexing and always-current content instead of a manually updated static page.
+Successfully built a highly scalable, full-lifecycle e-commerce platform. The robust frontend architecture gracefully managed high-traffic sales events while seamlessly executing complex transactions and post-purchase operations.

@@ -1,5 +1,5 @@
 ---
-title: "MUATHEP"
+title: "Mua Thep"
 summary: "A real-time steel price tracking and database system. The project integrates interactive charts to monitor daily price fluctuations and features a quote generation tool to ensure complete pricing transparency for buyers."
 tech: ["Next.js", "CSS Module", "Zustand", "Axios", Chart.js]
 periods: ["Jan 2023 - May 2023"]
@@ -7,16 +7,25 @@ country: "Viet Nam"
 role: "Frontend Developer"
 team: "4 people"
 image: "/projects/muathep.png"
+demoUrl: "https://muathep.vn/"
 ---
 
 ## Problem
 
-The mobile app needed a public-facing landing page that could rank well in search and show real user-generated content — shared favourite places — rather than static marketing copy alone.
+The enterprise required a real-time B2B steel pricing portal to maximize pricing transparency for corporate buyers. The system needed robust data visualization (time-series charts) for historical price comparisons, seamlessly integrated with a "Quote Request" flow for lead generation. Furthermore, the platform demanded an aggressive SEO strategy, anchored by a market news Blog, to drive organic inbound traffic.
 
 ## Responsibilities
 
-Built the UI from Figma with app-intro image sliders, used Next.js server-side rendering to display user-shared favourites pulled live from the mobile app, and integrated the MapBox API for location display.
+The engineering team architected the frontend infrastructure using Next.js, managed global states with the lightweight Zustand library, integrated Chart.js for commodity data visualization, and constructed a highly optimized Technical SEO foundation.
+
+## Challenges & Solutions
+
+- **High-Frequency Data State & Chart Performance:** Filtering and cross-comparing multiple steel variants over various timeframes involves processing dense time-series datasets. Poor state management would lead to UI freezing and sluggish chart re-rendering.
+  - **Solution:** The team adopted Zustand over heavier alternatives (like Redux) for lean, decentralized state management. By isolating the chart's data streams from the main UI component tree and leveraging precise Memoization with Chart.js, the system enabled instant, lag-free cross-filtering and historical data comparison for end-users.
+
+- **SEO for Highly Dynamic Data & Market Content:** Steel prices update frequently, yet they must be rapidly indexed by search engines. Meanwhile, the Blog module required lightning-fast load times to retain readership.
+  - **Solution:** Maximized Next.js’s rendering capabilities. The team implemented ISR (Incremental Static Regeneration) for the pricing pages, ensuring data remained real-time while retaining the TTFB (Time to First Byte) speed of static pages. For the Blog section, SSG (Static Site Generation) combined with JSON-LD (Article Schema) was strictly applied, propelling market analysis articles to high search rankings and significantly boosting inbound B2B quote requests.
 
 ## Result
 
-Delivered as part of a 4-person team; SSR gave the marketing page both fast search indexing and always-current content instead of a manually updated static page.
+Successfully built a highly transparent, performant B2B commodity portal. The fluid charting experience empowered buyers to make data-driven decisions, while the robust SEO architecture transformed the platform into a powerful lead-generation engine for the business.

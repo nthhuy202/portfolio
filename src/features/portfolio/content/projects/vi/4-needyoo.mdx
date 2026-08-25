@@ -15,18 +15,26 @@ tech:
 periods: ["03/2025 - 05/2025"]
 country: "Pháp"
 role: "Frontend Developer"
-team: "6 người"
+team: "9 người"
 image: "/projects/needyoo.png"
 ---
 
 ## Vấn đề
 
-Ứng viên phải đánh giá một vị trí chỉ qua tin tuyển dụng dạng văn bản, còn nhà tuyển dụng không có cách nào tiếp cận nhanh ứng viên ngay trong app sau khi match.
+Needyoo là nền tảng kết nối minh bạch giữa ứng viên và nhà tuyển dụng thông qua định dạng video ngắn (tương tự TikTok/Reels). Bài toán kinh doanh cốt lõi là làm sao mang lại trải nghiệm lướt video mượt mà, không độ trễ (zero-latency) nhưng phải kiểm soát cực kỳ chặt chẽ chi phí lưu trữ (S3) và hóa đơn băng thông (bandwidth) khổng lồ do dữ liệu video tạo ra.
 
 ## Trách nhiệm
 
-Xây dựng UI chính từ Figma với các component chia theo vai trò để nhà tuyển dụng và ứng viên thấy giao diện khác nhau sau khi đăng nhập. Phát triển danh sách công việc/ứng viên có tìm kiếm và phân trang, trang video reels kiểu TikTok để khám phá việc làm, và chat real-time giữa nhà tuyển dụng - ứng viên qua Socket.IO. Cấu hình push notification qua Firebase để cả hai bên luôn cập nhật hoạt động mới.
+Đảm nhiệm vị trí Lead Frontend Developer, dẫn dắt team gồm 3 thành viên Frontend trong tổng đội ngũ 9 người. Chịu trách nhiệm thiết kế kiến trúc codebase, quản lý tiến độ, ước lượng thời gian (sprint estimation), thiết lập văn hóa code review chéo và trực tiếp phát triển các luồng xử lý video cốt lõi.
+
+## Thách thức & Giải pháp
+
+- **Bài toán Chi phí Băng thông & Hiệu năng Streaming Video:** Tính năng lướt video liên tục (infinite scroll) rất ngốn tài nguyên. Nếu tải video định dạng .mp4 thông thường sẽ gây nghẽn mạng và đội chi phí S3 lên mức không thể kiểm soát.
+  - **Giải pháp:** Tôi quyết định chuyển đổi sang giao thức HLS (sử dụng định dạng .m3u8) để stream video theo từng phân mảnh nhỏ (chunks). Thiết kế một thuật toán Smart Preloading: chỉ tải trước 5-10 giây đầu tiên của 5 video tiếp theo. Kết hợp sức mạnh của Intersection Observer API, hệ thống sẽ chủ động theo dõi viewport, tự động ngắt kết nối và giải phóng bộ nhớ của các video nằm ngoài màn hình. Điều này triệt tiêu hoàn toàn việc lãng phí băng thông, tối ưu hóa đáng kể chi phí hạ tầng mà vẫn giữ được trải nghiệm lướt mượt mà như TikTok.
+
+- **Phân quyền Phức tạp & Vận hành Team (Leadership):** Hệ thống yêu cầu luồng nghiệp vụ hoàn toàn tách biệt giữa Nhà tuyển dụng và Ứng viên. Đồng thời, việc đồng bộ chất lượng code của 3 kỹ sư Frontend đòi hỏi sự kiểm soát chặt chẽ.
+  - **Giải pháp:** Tôi kiến trúc một hệ thống Role-Based Access Control (RBAC) linh hoạt ở tầng Frontend để xử lý gọn gàng các logic phân quyền. Ở góc độ quản lý, tôi thiết lập quy trình làm việc chuẩn mực: chia nhỏ task, phân bổ hợp lý, và áp dụng văn hóa Cross-Code Review khắt khe. Nhờ đó, team luôn duy trì được chất lượng mã nguồn cao và bàn giao đúng tiến độ cam kết.
 
 ## Kết quả
 
-Triển khai trên cả web và mobile cùng team 6 người. Định dạng video reels giúp ứng viên đánh giá vị trí nhanh hơn trước khi ứng tuyển, và vòng lặp chat cùng push notification giữ cuộc trò chuyện tiếp diễn mà không cần rời khỏi app.
+Xây dựng được nền tảng với hiệu năng streaming video xuất sắc, giải quyết triệt để bài toán tối ưu hóa chi phí AWS S3.

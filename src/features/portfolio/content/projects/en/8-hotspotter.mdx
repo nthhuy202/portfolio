@@ -1,22 +1,31 @@
 ---
 title: "HOTSPOTTER"
-summary: "Landing page for a venue-discovery mobile app, surfacing user-shared favourite-place lists pulled live from the app, built with a team of 4."
-tech: ["Next.js", "CSS Module", "MapBox API"]
+summary: "Landing page for a venue-discovery mobile app, surfacing user-shared favourite-place lists pulled live from the app"
+tech: ["Next.js", "CSS", "MapBox API"]
 periods: ["07/2023 - 02/2024"]
 country: "Netherlands"
 role: "Frontend Developer"
 team: "4 people"
 image: "/projects/hotspotter.png"
+demoUrl: "https://hotspotter.io/"
 ---
 
 ## Problem
 
-The mobile app needed a public-facing landing page that could rank well in search and show real user-generated content — shared favourite places — rather than static marketing copy alone.
+The objective was to build a promotional web platform for Hotspotter, a mobile app (iOS/Android) focused on discovering and sharing user-generated places. The core business goal was to drive user acquisition (app downloads) by offering a highly interactive, visual preview of the app's core feature—a dynamic spatial map—directly on the web.
 
 ## Responsibilities
 
-Built the UI from Figma with app-intro image sliders, used Next.js server-side rendering to display user-shared favourites pulled live from the mobile app, and integrated the MapBox API for location display.
+The engineering team architected the web application using Next.js, integrated the MapBox API for interactive spatial data visualization, and ensured a fluid, responsive UI across all device sizes.
+
+## Challenges & Solutions
+
+- **Interactive Map Performance (Spatial Data Visualization):** MapBox relies on WebGL, which is heavily resource-intensive. Improper integration within a React/Next.js environment often triggers redundant re-renders, causing memory leaks and severe UI jank when panning or zooming.
+  - **Solution:** The team implemented isolated state management for the map instance, decoupling the MapBox WebGL context from the standard React render lifecycle. By leveraging React Refs and precise Memoization, we ensured that only the specific GeoJSON markers updated upon user interaction, preventing full DOM re-renders and guaranteeing a buttery-smooth mapping experience.
+
+- **Balancing Heavy Interactivity with SEO:** Heavy client-side map integrations typically degrade SEO performance, which is detrimental to a landing page heavily reliant on organic discoverability.
+  - **Solution:** Capitalized on Next.js’s Hybrid architecture. The team utilized Server-Side Rendering (SSR) / Static Site Generation (SSG) for all critical textual content and SEO metadata, ensuring immediate search engine indexing. Conversely, the heavy MapBox component was dynamically imported (Lazy Loaded) strictly on the client side. This cleanly resolved the SEO vs. Performance trade-off.
 
 ## Result
 
-Delivered as part of a 4-person team; SSR gave the marketing page both fast search indexing and always-current content instead of a manually updated static page.
+Successfully built a highly engaging, performant promotional platform. The flawless MapBox integration provided users with an intuitive preview of the app's value proposition, directly supporting marketing campaigns and driving app installation conversions.

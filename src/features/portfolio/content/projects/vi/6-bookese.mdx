@@ -1,22 +1,31 @@
 ---
 title: "Bookese"
 summary: "Nền tảng đặt phòng khách sạn trực tuyến cung cấp trải nghiệm toàn diện tương tự Agoda hay Booking.com. Hệ thống cho phép người dùng dễ dàng tìm kiếm, so sánh các lựa chọn lưu trú và thực hiện quy trình đặt phòng (booking) nhanh chóng cho mọi chuyến đi."
-tech: ["Next.js", "SCSS Module", "Redux Saga", "Yup", "Formik", "Axios"]
+tech: ["Next.js", "Sass/CSS", "Redux Saga", "Yup", "Formik", "Axios"]
 periods: ["07/2022 - 02/2023", "09/2023 - 06/2024"]
 country: "Việt Nam"
 role: "Frontend Developer"
 team: "4 người"
 image: "/projects/bookese.png"
+demoUrl: "https://bookese.com"
 ---
 
 ## Vấn đề
 
-The client wanted a fast corporate site plus a chat bot they could drop into other codebases as a package, rather than a one-off feature tied to this site alone.
+Xây dựng một nền tảng OTA (Online Travel Agent) hỗ trợ người dùng tìm kiếm, so sánh và đặt phòng lưu trú. Bài toán kỹ thuật cốt lõi là phát triển một bộ lọc tìm kiếm đa chiều (giá, khu vực, hạng sao, tiện ích, ngày tháng) xử lý lượng dữ liệu lớn, cùng với một luồng thanh toán (checkout flow) bảo mật, liền mạch nhằm tối đa hóa tỷ lệ chuyển đổi (booking conversion rate).
 
 ## Trách nhiệm
 
-Built a lightweight, high-performance landing page in pure HTML/CSS with AOS animations, plus accessibility attributes for SEO and assistive tech. Built the chat bot UI in Vue with Pinia for state, wiring real-time messaging over Socket.IO.
+Cùng đội ngũ phát triển đảm nhận việc thiết kế kiến trúc Frontend, hiện thực hóa UI đa nền tảng, xử lý logic quản lý trạng thái (State Management) phức tạp cho bộ lọc tìm kiếm và tối ưu hóa chiến lược Technical SEO.
+
+## Thách thức & Giải pháp
+
+- **Quản lý Trạng thái Bộ lọc Phức tạp & Tối ưu Hiệu năng:** Hệ thống bộ lọc chéo (cross-filtering) với hàng loạt tham số tạo ra các truy vấn rất nặng. Việc xử lý không khéo sẽ dẫn đến tình trạng gọi API liên tục, re-render dư thừa và tràn bộ nhớ (memory bloat), gây giật lag toàn bộ giao diện tìm kiếm.
+  - **Giải pháp:** Đội phát triển (Team) đã thiết lập một kiến trúc State Management đồng bộ trực tiếp với URL parameters (giúp người dùng dễ dàng chia sẻ link và tối ưu cho công cụ tìm kiếm). Các kỹ thuật tối ưu hóa như Debouncing, Throttling và Memoization được áp dụng triệt để để kiểm soát các luồng tương tác liên tục. Nhờ đó, giao diện (UI) luôn giữ được độ phản hồi tức thì (instant feedback) và mượt mà dù phải xử lý các tổ hợp lọc cực kỳ phức tạp.
+
+- **Trải nghiệm Thanh toán Liền mạch (Frictionless Checkout) & SEO:** Cần cân bằng giữa việc kiểm duyệt bảo mật thông tin khắt khe ở bước thanh toán và một trải nghiệm người dùng đủ mượt để không làm rớt đơn (drop-off). Song song đó, các trang công khai phải thu hút được lượng truy cập tự nhiên.
+  - **Giải pháp:** Xây dựng một luồng thanh toán đa bước (multi-step checkout) với kiến trúc validation chặt chẽ ở tầng client, xử lý an toàn thông tin người dùng theo chuẩn bảo mật. Đồng thời, các trang thông tin khách sạn và danh sách tìm kiếm được triển khai kiến trúc Technical SEO toàn diện (Semantic HTML, Meta tags động), giúp tăng cường khả năng hiển thị tự nhiên (organic visibility) của nền tảng.
 
 ## Kết quả
 
-Shipped as an npm/yarn-installable component that introduces and summarizes site content — reusable in any codebase, not just the one it launched on.
+Xây dựng hoàn thiện một nền tảng đặt phòng trực quan, tốc độ phản hồi cao. Hệ thống search/filter hoạt động bền bỉ, không độ trễ và luồng thanh toán an toàn, mang lại trải nghiệm tối ưu nhất để thúc đẩy tỷ lệ đặt phòng thành công.

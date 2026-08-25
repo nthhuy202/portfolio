@@ -248,4 +248,7 @@ export const techStack: TechBadge[] = [
   { name: "MongoDB" },
   { name: "HTML" },
   { name: "CSS" },
+  { name: "Javascript" },
+  { name: "jQuery" },
+  { name: "MapBox API" },
 ];

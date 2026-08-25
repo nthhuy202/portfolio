@@ -1,22 +1,31 @@
 ---
 title: "Bookese"
 summary: "An online hotel booking platform offering a comprehensive experience similar to Agoda or Booking.com. The system allows users to seamlessly search, compare accommodation options, and complete fast bookings for their trips or vacations."
-tech: ["Next.js", "SCSS Module", "Redux Saga", "Yup", "Formik", "Axios"]
+tech: ["Next.js", "Sass/CSS", "Redux Saga", "Yup", "Formik", "Axios"]
 periods: ["Jul 2022 - Feb 2023", "Sep 2023 - Jun 2024"]
 country: "Viet Nam"
 role: "Frontend Developer"
 team: "8 people"
 image: "/projects/bookese.png"
+demoUrl: "https://bookese.com"
 ---
 
 ## Problem
 
-The client wanted a fast corporate site plus a chat bot they could drop into other codebases as a package, rather than a one-off feature tied to this site alone.
+The objective was to build a robust OTA (Online Travel Agent) platform. The system required a highly complex, multi-dimensional search and filtering engine (by price, location, amenities, dates) handling heavy datasets, paired with a highly secure, frictionless checkout flow to maximize booking conversion rates.
 
 ## Responsibilities
 
-Built a lightweight, high-performance landing page in pure HTML/CSS with AOS animations, plus accessibility attributes for SEO and assistive tech. Built the chat bot UI in Vue with Pinia for state, wiring real-time messaging over Socket.IO.
+Collaborated with the engineering team to architect the frontend infrastructure, develop responsive cross-platform UIs, manage complex filter states, and drive Technical SEO initiatives.
+
+## Challenges & Solutions
+
+- **Complex Filter State Management & Performance Bottlenecks:** The extensive cross-filtering system generated massive parameter combinations. A naive implementation would lead to excessive API calls, redundant re-renders, and memory bloat, causing severe UI stuttering.
+  - **Solution:** The team engineered a robust State Management architecture synchronized directly with URL parameters (enhancing both shareability and SEO value). Advanced performance optimization techniques—such as Debouncing, Throttling, and Memoization—were strictly applied to handle continuous data streams. This ensured the UI remained buttery-smooth and highly responsive even during rapid, complex filter adjustments by the user.
+
+- **Secure Frictionless Checkout & Organic Discoverability:** Balancing strict client-side security with a seamless booking flow is critical to preventing cart abandonment. Simultaneously, public-facing pages needed aggressive SEO strategies to acquire users.
+  - **Solution:** Constructed a secure, multi-step checkout pipeline with robust client-side validation to minimize drop-off rates and ensure safe handling of sensitive user data. Concurrently, dynamic Technical SEO strategies (Semantic HTML, dynamic meta routing) were implemented across hotel detail and search pages to boost organic search rankings and drive inbound traffic.
 
 ## Result
 
-Shipped as an npm/yarn-installable component that introduces and summarizes site content — reusable in any codebase, not just the one it launched on.
+Successfully built a high-performance, visually intuitive accommodation booking platform. Delivered a powerful, lag-free search experience and a secure checkout architecture tailored to drive business conversions.

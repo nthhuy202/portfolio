@@ -10,12 +10,20 @@ team: "4 người"
 
 ## Vấn đề
 
-The mobile app needed a public-facing landing page that could rank well in search and show real user-generated content — shared favourite places — rather than static marketing copy alone.
+Doanh nghiệp cần xây dựng một sàn thương mại điện tử chuyên biệt cho đồ thể thao, đáp ứng đầy đủ vòng đời mua sắm của khách hàng (End-to-End Customer Journey). Nền tảng không chỉ phục vụ các nghiệp vụ hiển thị, tìm kiếm (Category, Variant/SKU) và chịu tải cao trong các sự kiện Flash Sale, mà còn phải xử lý trơn tru các luồng hậu mãi phức tạp như theo dõi đơn hàng, đánh giá, hoàn trả (Returns) và hoàn tiền (Refunds).
 
 ## Trách nhiệm
 
-Built the UI from Figma with app-intro image sliders, used Next.js server-side rendering to display user-shared favourites pulled live from the mobile app, and integrated the MapBox API for location display.
+Cùng đội ngũ phát triển đảm nhận việc kiến trúc và xây dựng toàn bộ hệ thống Frontend sử dụng Next.js (Page Router). Chịu trách nhiệm thiết kế lớp quản lý trạng thái (State Management) với Redux Saga để xử lý các logic kinh doanh bất đồng bộ phức tạp của luồng E-commerce.
+
+## Thách thức & Giải pháp
+
+- **Luồng Nghiệp vụ Bất đồng bộ Phức tạp (Complex Async Side Effects):** Việc xử lý luồng thanh toán (Checkout pipeline), đồng bộ giỏ hàng, và các nghiệp vụ hậu mãi (Yêu cầu hoàn tiền/trả hàng) bao gồm rất nhiều bước gọi API phụ thuộc lẫn nhau. Nếu quản lý không tốt, hệ thống rất dễ gặp lỗi Race Condition (xung đột dữ liệu khi user thao tác quá nhanh, đặc biệt trong lúc giật deal Flash Sale).
+  - **Giải pháp:** Đội phát triển (Team) đã thiết lập kiến trúc Redux Saga để cô lập hoàn toàn các logic bất đồng bộ (side effects) khỏi UI Components. Nhờ sử dụng Generator Functions, team dễ dàng kiểm soát các luồng phức tạp (như tự động retry khi gọi API thanh toán thất bại, hoặc hủy request cũ khi user đổi Variant liên tục). Điều này giúp UI luôn phản hồi chính xác, ngăn chặn triệt để các lỗi sai lệch dữ liệu tồn kho hoặc thanh toán trùng lặp.
+
+- **Tối ưu SEO và Trải nghiệm Mua sắm Liền mạch:** Sản phẩm thể thao cần độ phủ SEO cao, nhưng đồng thời giao diện (như chọn SKU, thêm vào giỏ, Flash Sale timer) phải cực kỳ mượt mà, không bị giật lag khi re-render.
+  - **Giải pháp:** Tận dụng tối đa khả năng Server-Side Rendering (SSR) của Next.js Page Router, hệ thống đảm bảo các trang Chi tiết sản phẩm (PDP) và Danh mục (PLP) luôn được các công cụ tìm kiếm cào dữ liệu nhanh chóng với thẻ Meta chuẩn xác. Kết hợp với các kỹ thuật Optimistic UI Update (cập nhật giao diện trước khi API trả về) cho tính năng Giỏ hàng và Đánh giá, trải nghiệm mua sắm của người dùng được đẩy lên mức tối ưu, giúp tăng cường tỷ lệ chuyển đổi (Conversion Rate).
 
 ## Kết quả
 
-Delivered as part of a 4-person team; SSR gave the marketing page both fast search indexing and always-current content instead of a manually updated static page.
+Xây dựng hoàn thiện một nền tảng E-commerce mạnh mẽ, có khả năng mở rộng cao. Hệ thống giải quyết thành công các bài toán phức tạp của vòng đời mua sắm, từ SEO thu hút khách hàng, chịu tải Flash Sale, cho đến vận hành trơn tru các luồng thanh toán và hậu mãi.
