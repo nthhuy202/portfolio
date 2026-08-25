@@ -86,6 +86,8 @@
     "viewSourceOnGithub": "Xem mã nguồn trên GitHub",
     "availabilityOpen": "Đang mở nhận việc",
     "availabilityLimited": "Nhận việc có giới hạn",
-    "availabilityUnavailable": "Hiện không nhận việc"
+    "availabilityUnavailable": "Hiện không nhận việc",
+    "copyLink": "Sao chép {label}",
+    "linkCopied": "Đã sao chép {label}"
   }
 }
