@@ -71,7 +71,8 @@
     "tryItOut": "Try it out",
     "techstackTitle": "Techstack",
     "nextProject": "Next project",
-    "contactCta": "Want to know more about this project? Send me an email — I'm happy to walk through the details."
+    "contactCta": "Want to know more about this project? Send me an email — I'm happy to walk through the details.",
+    "ogEyebrow": "Case Study"
   },
   "meta": {
     "title": "Nguyen Thanh Ha Huy - Frontend Developer",
@@ -89,5 +90,11 @@
     "availabilityUnavailable": "Not available",
     "copyLink": "Copy {label}",
     "linkCopied": "Copied {label}"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to home"
   }
 }

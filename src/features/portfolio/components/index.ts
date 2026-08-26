@@ -1,4 +1,5 @@
 export { ThemeProvider } from "./theme-provider";
+export { PersonJsonLd } from "./person-json-ld";
 export { ThemeToggle } from "./theme-toggle";
 export { AnimatedBackground } from "./animated-background";
 export { Reveal } from "./reveal";

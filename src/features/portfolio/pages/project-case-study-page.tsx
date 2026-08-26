@@ -46,7 +46,30 @@ export async function generateProjectMetadata({
     return {};
   }
 
-  return { title: project.title, description: project.summary };
+  const path = `/${locale}/projects/${slug}`;
+
+  return {
+    title: project.title,
+    description: project.summary,
+    alternates: {
+      canonical: path,
+      languages: Object.fromEntries(
+        routing.locales.map((altLocale) => [altLocale, `/${altLocale}/projects/${slug}`]),
+      ),
+    },
+    openGraph: {
+      type: "article",
+      locale,
+      url: path,
+      title: project.title,
+      description: project.summary,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.summary,
+    },
+  };
 }
 
 async function evaluateSection(source?: string): Promise<ReactNode> {
