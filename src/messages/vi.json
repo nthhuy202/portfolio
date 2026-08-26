@@ -71,7 +71,8 @@
     "tryItOut": "Truy cập trang",
     "techstackTitle": "Công nghệ sử dụng",
     "nextProject": "Dự án tiếp theo",
-    "contactCta": "Muốn biết thông tin chi tiết về dự án này? Hãy gửi email cho tôi — tôi luôn sẵn sàng chia sẻ thêm."
+    "contactCta": "Muốn biết thông tin chi tiết về dự án này? Hãy gửi email cho tôi — tôi luôn sẵn sàng chia sẻ thêm.",
+    "ogEyebrow": "Case Study"
   },
   "meta": {
     "title": "Nguyễn Thanh Hà Huy — Frontend Developer",
@@ -89,5 +90,11 @@
     "availabilityUnavailable": "Hiện không nhận việc",
     "copyLink": "Sao chép {label}",
     "linkCopied": "Đã sao chép {label}"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn đang tìm không tồn tại hoặc đã được chuyển đi.",
+    "backHome": "Về trang chủ"
   }
 }

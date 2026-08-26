@@ -27,8 +27,8 @@ export function CopyButton({ value, label }: CopyButtonProps) {
     <button
       type="button"
       className={cn(
-        "inline-flex items-center justify-center w-[2.125rem] h-[2.125rem] flex-none rounded-full border border-line text-fg-muted transition-colors duration-150 ease-[ease] hover:text-fg hover:border-[var(--color-accent)] focus-visible:text-fg focus-visible:border-[var(--color-accent)]",
-        isCopied && "text-[var(--color-accent)] border-[var(--color-accent)]",
+        "inline-flex items-center justify-center w-7 h-7 flex-none rounded-full text-fg-muted transition-colors duration-150 ease-[ease] hover:text-fg hover:bg-bg-raised-2 focus-visible:text-fg focus-visible:bg-bg-raised-2",
+        isCopied && "text-[var(--color-accent)]",
       )}
       onClick={handleCopy}
       aria-label={isCopied ? t("linkCopied", { label }) : t("copyLink", { label })}
