@@ -15,11 +15,12 @@
     "role": "Frontend Developer",
     "period": "08/2024 — 08/2025",
     "bullets": [
-      "Xây dựng website cho khách hàng với giao diện responsive, thân thiện và tối ưu UX",
-      "Áp dụng kỹ thuật SEO và tối ưu hiệu năng: tốc độ tải trang, caching, lazy loading, code splitting",
-      "Thực hiện code review chéo, giảm lỗi phát sinh khi lên production và duy trì quy ước code",
-      "Quản lý thời gian và ước lượng công việc để đảm bảo tiến độ bàn giao",
-      "Sử dụng Git, quản lý mã nguồn, pull request và quy trình CI/CD cơ bản"
+      "Trực tiếp chuyển đổi thiết kế UI/UX thành các ứng dụng web với độ chuẩn xác cao (pixel-perfect), tối ưu hóa trải nghiệm trên mọi nền tảng. Sử dụng các công cụ đo lường để tinh chỉnh hiệu năng. Phối hợp với Designer để tinh giản các thiết kế phức tạp, đảm bảo tính thực tiễn và dễ sử dụng.",
+      "Xây dựng nền tảng source code và cấu trúc dự án chuẩn hóa, đảm bảo tính mở rộng (scalable) và dễ bảo trì (maintainable) để áp dụng nội bộ. Áp dụng quy trình review code chéo (cross-review) để kiểm soát chất lượng và giảm thiểu lỗi.",
+      "Tham gia hỗ trợ các dự án đối tác bên ngoài (remote/onsite) nhằm đẩy nhanh tiến độ bàn giao. Tiếp thu các quy trình làm việc tối ưu từ đối tác để áp dụng và cải tiến quy trình làm việc nội bộ của công ty.",
+      "Tích cực tham gia các buổi Brainstorm, chia sẻ kiến thức công nghệ mới nhằm cải thiện tốc độ làm việc, tối ưu quy trình và tăng cường sự gắn kết giữa các thành viên.",
+      "Áp dụng các tiêu chuẩn SEO và kỹ thuật tối ưu hóa để nâng cao mức độ tiếp cận (visibility) và hiệu năng tổng thể của ứng dụng web.",
+      "Quản lý thời gian và tiến độ chặt chẽ, đưa ra các ước lượng (estimate) chính xác cho từng task để đảm bảo bàn giao đúng hạn, tránh tình trạng trễ deadline gây thiệt hại cho dự án."
     ]
   },
   {
