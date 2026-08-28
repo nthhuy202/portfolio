@@ -70,7 +70,7 @@ export const techStack: TechBadge[] = [
     url: "https://ui.shadcn.com",
   },
   {
-    name: "Sass/CSS",
+    name: "SCSS Module",
     Icon: IconSass,
     bg: "#cc6699",
     fg: "#ffffff",
@@ -251,4 +251,5 @@ export const techStack: TechBadge[] = [
   { name: "Javascript" },
   { name: "jQuery" },
   { name: "MapBox API" },
+  { name: "Three.js" },
 ];

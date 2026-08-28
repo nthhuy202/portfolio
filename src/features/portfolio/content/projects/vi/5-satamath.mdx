@@ -1,0 +1,32 @@
+---
+title: "Satamath"
+summary: "Nền tảng giáo dục toán học 3D (sử dụng Three.js) mô phỏng trường học ảo dành cho học sinh từ tiểu học đến trung học cơ sở, nhằm rèn luyện tư duy logic và phản biện. Ứng dụng cung cấp không gian 3D sinh động để học tập, thực hành và kiểm tra trực tiếp, kết hợp cùng hệ thống quản trị (Admin Site) giúp thiết lập lớp học, giao bài tập và quản lý đề thi."
+tech: ["React", "Three.js", "Ant Design", "Axios", "Socket.IO", "I18n"]
+periods: ["02/2025 - 06/2025"]
+country: "Việt Nam"
+role: "Frontend Developer"
+team: "6 người"
+---
+
+## Vấn đề
+
+Xây dựng một không gian học tập ảo (Virtual Campus) nền tảng web hướng đến học sinh tiểu học và THCS, tập trung rèn luyện tư duy logic toán học. Thách thức lớn nhất là mang lại trải nghiệm học tập, làm bài và kiểm tra trực tiếp trong không gian 3D sinh động, đồng thời giải quyết triệt để bài toán hiệu năng (performance) khi chạy WebGL/Three.js và đồng bộ dữ liệu nhiều người chơi (multiplayer) trên các thiết bị máy tính phổ thông của học sinh.
+
+## Trách nhiệm
+
+Cùng đội ngũ phát triển kiến trúc toàn bộ hệ thống Frontend, xử lý tích hợp WebGL (Three.js), thiết lập luồng đồng bộ trạng thái thời gian thực qua WebSockets và tối ưu hóa luồng tải tài nguyên (asset streaming).
+
+## Thách thức & Giải pháp
+
+- **Quản lý Tài nguyên 3D Nặng & Tối ưu WebGL FPS:** Khối lượng tài nguyên 3D (mô hình nhân vật, lớp học) rất lớn. Nếu tải đồng loạt sẽ gây tràn bộ nhớ, tụt FPS và khiến trình duyệt bị treo (crash).
+  - **Giải pháp:** Đội phát triển (Team) đã xây dựng một cơ chế Asset Streaming qua API để tải bất đồng bộ (lazy-load) các gói tài nguyên 3D theo từng khu vực (chunk). Đồng thời, tiến hành can thiệp tối ưu hóa trực tiếp các mô hình 3D đã triển khai (giảm polygon, tối ưu draw calls, nén texture). Điều này giúp hệ thống duy trì mức FPS cao và ổn định, mang lại trải nghiệm di chuyển 3D cực kỳ mượt mà.
+
+- **Kiến trúc Không gian Thời gian thực (Real-time Spatial Sync):** Để tạo cảm giác "lớp học thực", vị trí và hành động của hàng chục học sinh trong cùng một phòng cần được đồng bộ liên tục cho tất cả mọi người mà không bị giật (latency).
+  - **Giải pháp:** Đội ngũ đã kiến trúc và triển khai hệ thống kết nối WebSockets, xử lý luồng truyền phát tọa độ không gian (spatial coordinates) và trạng thái nhân vật theo thời gian thực. Cấu trúc dữ liệu gửi qua Socket được nén và tối ưu hóa kích thước (payload optimization) để giảm thiểu độ trễ mạng, đảm bảo nhân vật di chuyển trơn tru trên màn hình của tất cả người dùng.
+
+- **Luồng Xác thực Đa người dùng (Sub-Account Architecture):** Nền tảng giáo dục đòi hỏi phụ huynh có thể quản lý nhiều con cái trên cùng một thiết bị.
+  - **Giải pháp:** Thiết kế và đập đi xây lại luồng định danh (Authentication flow) để hỗ trợ cơ chế Sub-Account. Kiến trúc này giúp quản lý phiên hoạt động (session) và phân quyền (RBAC) chặt chẽ giữa tài khoản Parent và các tài khoản Student ngay từ bước khởi tạo, bảo mật tuyệt đối luồng dữ liệu học tập.
+
+## Kết quả
+
+Xây dựng hoàn thiện một nền tảng EdTech tiên phong, kết hợp xuất sắc giữa Gamification và Giáo dục. Cung cấp trải nghiệm học tập tương tác 3D mượt mà, đồng bộ thời gian thực tuyệt đối, tạo hứng thú mạnh mẽ cho học sinh và mang lại công cụ quản trị linh hoạt cho nhà trường.
