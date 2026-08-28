@@ -1,0 +1,32 @@
+---
+title: "Satamath"
+summary: "A 3D educational platform built with Three.js that simulates a virtual school for elementary and middle school students to develop logical and critical thinking through math. The application features interactive 3D classrooms for in-game learning, practice, and testing, alongside a comprehensive Admin dashboard for managing classes, assignments, and exams."
+tech: ["React", "Three.js", "Ant Design", "Axios", "Socket.IO", "I18n"]
+periods: ["Feb 2025 - Jun 2025"]
+country: "Viet Nam"
+role: "Frontend Developer"
+team: "6 people"
+---
+
+## Problem
+
+The objective was to build a web-based Virtual Campus targeting elementary and middle school students to foster logical and critical mathematical thinking. The core challenge was delivering a highly engaging, gamified 3D environment (where studying, practicing, and testing happen spatially) while overcoming strict WebGL/Three.js performance bottlenecks and real-time multiplayer synchronization on standard consumer devices.
+
+## Responsibilities
+
+Collaborated with the engineering team to architect the Frontend ecosystem, integrate WebGL (Three.js) rendering, engineer real-time WebSocket synchronization, and optimize the 3D asset streaming pipeline.
+
+## Challenges & Solutions
+
+- **Heavy 3D Asset Streaming & WebGL Optimization:** Loading massive 3D models (characters, environments) natively causes severe memory bloat, FPS drops, and browser crashes.
+  - **Solution:** The team engineered an optimized, API-driven Asset Streaming pipeline to asynchronously lazy-load 3D resource bundles. Concurrently, deployed 3D models were heavily optimized at the engine level (reducing poly-counts, optimizing draw calls, and compressing textures). This guaranteed a stable, high frame rate (FPS), ensuring a buttery-smooth spatial experience across varied hardware.
+
+- **Real-time Spatial Synchronization (Multiplayer):** To simulate a live classroom, the spatial coordinates and actions of numerous concurrent students needed seamless, lag-free synchronization across all active clients.
+  - **Solution:** Architected and deployed a robust WebSocket infrastructure, handling the real-time broadcasting of spatial coordinates and character states. Network payloads were strictly minified and optimized to drastically reduce network latency, ensuring fluid and continuous character movements on all screens without server congestion.
+
+- **EdTech Sub-Account Authentication Architecture:** Educational platforms require a structure where a single parent can manage multiple student profiles on the same device.
+  - **Solution:** Re-engineered the authentication gateway to support a complex Sub-Account mechanism. This architecture ensured strict session management and Role-Based Access Control (RBAC) between Parent and Student entities right from initialization, securing the learning data pipeline.
+
+## Result
+
+Successfully built a pioneering 3D EdTech platform that seamlessly merges Gamification with Education. Delivered a lag-free, real-time multiplayer learning experience that maximizes student engagement while providing educators with a robust, scalable administrative toolset.
